@@ -1,0 +1,702 @@
+{
+  "n1b06bda207e5": {
+    "article": {
+      "title": "「現存データのまとめ」と「未来予測」：AI時代の情報活用をまちがえないために",
+      "url": "https://note.com/magic_guppy1164/n/n1b06bda207e5",
+      "slug": "n1b06bda207e5",
+      "date": "2025年10月19日",
+      "date_obj": "2025-10-19T10:44:04+09:00",
+      "excerpt": "情報過多の時代、データドリブンな意思決定は競争力の源泉です。とくに生成AIや機械学習の普及により、企業はこれまで以上にデータを集約・分析し、将来を読む力を求められています。ところが、「現存データのまとめ」と「未来予測」という異なるアプローチを混同すると、判断を誤りがちです。本稿では両者の違いを明確化し、ハルシネーション対策や予測の活かし方まで、実務で役立つ視点を整理します。続きをみる",
+      "thumbnail": null
+    },
+    "content": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "「現存データのまとめ」と「未来予測」：AI時代の情報活用をまちがえないために"
+        },
+        {
+          "level": 2,
+          "text": "現存データのまとめとは？（いま起きている事実を正しく掴む）"
+        },
+        {
+          "level": 2,
+          "text": "未来予測とは？（仮説と確率で未来を扱う）"
+        },
+        {
+          "level": 2,
+          "text": "決定的な違い（対象／ゴール／誤りの性質／検証／正確性）"
+        },
+        {
+          "level": 2,
+          "text": "よくある失敗と対策"
+        },
+        {
+          "level": 2,
+          "text": "実務に効くワークフロー（7ステップ）"
+        },
+        {
+          "level": 2,
+          "text": "ハルシネーションを抑える運用チェックリスト"
+        },
+        {
+          "level": 2,
+          "text": "まとめ：事実と仮説を分けて、強い意思決定へ"
+        }
+      ],
+      "paragraphs": [
+        "情報過多の時代、データドリブンな意思決定は競争力の源泉です。とくに生成AIや機械学習の普及により、企業はこれまで以上にデータを集約・分析し、将来を読む力を求められています。ところが、「現存データのまとめ」と「未来予測」という異なるアプローチを混同すると、判断を誤りがちです。本稿では両者の違いを明確化し、ハルシネーション対策や予測の活かし方まで、実務で役立つ視点を整理します。",
+        "「現存データのまとめ」は、売上・在庫・顧客行動ログ・センサー値など、過去〜現在に実在する記録を整え、現状把握の精度を高める行為です。KPIの定義、データクレンジング、欠損・外れ値の処理、計測設計の見直しといった地道な整備が成果を左右します。最大の落とし穴はハルシネーション（Hallucination）。AIが「それらしく」補完した事実無根の値を現状データに混入させると、レポートは瞬時に信頼を失います。一次情報の照合（ログ/帳票/ソースDB）と人手によるファクトチェックは、生成AI活用時の必須ガードレールです。",
+        "「未来予測」は、統計モデルや機械学習、シナリオ分析を用いて、将来の傾向を確率的に推定します。需要予測、離反予測、設備故障予知などが代表例。重要なのは、予測はあくまで仮説であり、外れること自体は誤りではないという理解です。外れは前提条件の変化や未知の要因に起因し、学び直しや特徴量の更新、モデル再学習につながる改善のヒントになります。",
+        "項目現存データのまとめ未来予測対象実在する事実・記録まだ起きていない未来ゴール現状の正確な把握意思決定のための仮説提示誤りの性質ハルシネーション（虚構混入）予測外れ（確率の範囲内）検証方法事実照合・監査ログ事後検証・バックテスト正確性の基準整合率・再現性妥当性・説明力・指標（MAE/MAPE など）",
+        "両者は役割も評価軸も別物。現状把握の精度を上げるほど、予測の入力品質が高まり、意思決定が強くなります。",
+        "失敗①：現状レポートに推定値を混ぜる→ ダッシュボードは実測/推定を明確にラベル分離。色や凡例で一目区別。",
+        "失敗②：AI出力の鵜呑み→検証用サンプルと監査ログを常設。「誰が・いつ・何を根拠に」出力したかを追跡。",
+        "失敗③：評価指標の未定義→ 現状は整合率/欠損率、予測はMAE・MAPE・AUC等を事前合意。改善サイクルを設計。",
+        "失敗④：データ辞書なし→ カラムの意味・単位・粒度・更新頻度を記したデータ辞書を運用。仕様変更は版管理。",
+        "意思決定の問いを定義（何を決めたいのか／成功指標は何か）",
+        "現存データの品質確保（スキーマ整備、欠損/外れ値処理、重複排除）",
+        "計測設計の見直し（KPIの計測点・粒度・更新周期を最適化）",
+        "生成AIの安全活用（要約や可視化はOK、数値は原本照合を必須化）",
+        "予測モデルの選定（ベースライン→説明可能性→運用容易性の順に評価）",
+        "オフライン評価とバックテスト（期間分割、リーク防止、指標の合意）",
+        "本番運用と継続学習（ドリフト監視、特徴量/モデルの定期更新、アラート）",
+        "出所の明記：実測データはソースと取得日時を付与",
+        "境界の明確化：「事実」と「生成・推定」をUIで分ける",
+        "二重検証：重要指標は人の目＋自動テストでWチェック",
+        "失敗の記録：外れ／誤りのケースをナレッジ化し再発防止",
+        "現存データのまとめ＝事実の整備。ハルシネーション排除とファクトチェックが命。",
+        "未来予測＝仮説の提示。外れは学習材料であり、指標合意と運用改善が肝。",
+        "両者を厳密に切り分ける設計と運用が、AI時代の堅牢なデータドリブン経営を実現します。",
+        "最後に。AIは魔法ではありません。事実を磨き、仮説を試し、学び続ける組織こそが、不確実性の高い市場で勝ち続けます。今日から、レポートと予測のラベル分離、評価指標の事前合意、監査ログの整備という3つの小さな改善を始めましょう。それが、AIを“使いこなす”第一歩です。"
+      ],
+      "lists": [
+        [
+          "失敗①：現状レポートに推定値を混ぜる→ ダッシュボードは実測/推定を明確にラベル分離。色や凡例で一目区別。",
+          "失敗②：AI出力の鵜呑み→検証用サンプルと監査ログを常設。「誰が・いつ・何を根拠に」出力したかを追跡。",
+          "失敗③：評価指標の未定義→ 現状は整合率/欠損率、予測はMAE・MAPE・AUC等を事前合意。改善サイクルを設計。",
+          "失敗④：データ辞書なし→ カラムの意味・単位・粒度・更新頻度を記したデータ辞書を運用。仕様変更は版管理。"
+        ],
+        [
+          "意思決定の問いを定義（何を決めたいのか／成功指標は何か）",
+          "現存データの品質確保（スキーマ整備、欠損/外れ値処理、重複排除）",
+          "計測設計の見直し（KPIの計測点・粒度・更新周期を最適化）",
+          "生成AIの安全活用（要約や可視化はOK、数値は原本照合を必須化）",
+          "予測モデルの選定（ベースライン→説明可能性→運用容易性の順に評価）",
+          "オフライン評価とバックテスト（期間分割、リーク防止、指標の合意）",
+          "本番運用と継続学習（ドリフト監視、特徴量/モデルの定期更新、アラート）"
+        ],
+        [
+          "出所の明記：実測データはソースと取得日時を付与",
+          "境界の明確化：「事実」と「生成・推定」をUIで分ける",
+          "二重検証：重要指標は人の目＋自動テストでWチェック",
+          "失敗の記録：外れ／誤りのケースをナレッジ化し再発防止"
+        ],
+        [
+          "現存データのまとめ＝事実の整備。ハルシネーション排除とファクトチェックが命。",
+          "未来予測＝仮説の提示。外れは学習材料であり、指標合意と運用改善が肝。",
+          "両者を厳密に切り分ける設計と運用が、AI時代の堅牢なデータドリブン経営を実現します。"
+        ]
+      ],
+      "images": [
+        "../img/blog/rectangle_large_type_2_00691f99e0e394a463304e1afd913825.png"
+      ],
+      "html": "<div class=\"p-article__content pb-4\" data-v-0e32a970=\"\"><div data-note-id=\"130479354\" data-note-key=\"n1b06bda207e5\" data-v-0e32a970=\"\"><div class=\"o-noteContentText o-noteContentText--font_sansserif o-noteContentText--device_windows\" data-v-7db6ac5e=\"\"><figure class=\"o-noteEyecatch\" data-v-1811b4ec=\"\" data-v-7db6ac5e=\"\"><img alt=\"見出し画像\" class=\"a-image o-noteEyecatch__image\" data-v-1811b4ec=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"674\" loading=\"lazy\" src=\"../img/blog/rectangle_large_type_2_00691f99e0e394a463304e1afd913825.png\" width=\"1288\"/> <!-- --> <!-- --></figure> <div class=\"o-noteContentHeader o-noteContentText__header\" data-v-03d2631f=\"\" data-v-7db6ac5e=\"\"><div class=\"o-noteContentHeader__titleContainer o-noteContentHeader__titleContainer--font_sansserif o-noteContentHeader__titleContainer--device_windows\" data-v-03d2631f=\"\"><h1 class=\"o-noteContentHeader__title\" data-v-03d2631f=\"\">\n      「現存データのまとめ」と「未来予測」：AI時代の情報活用をまちがえないために\n    </h1> <div class=\"o-noteContentHeader__titleAttachment\" data-v-03d2631f=\"\"><div class=\"flex\" data-v-03d2631f=\"\"><span class=\"o-noteLikeV3\" data-v-03d2631f=\"\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainer\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainerInner\" data-v-5259bb13=\"\"><button aria-label=\"スキ\" aria-pressed=\"false\" class=\"o-noteLikeV3__iconButton leading-none flex items-center\" data-v-5259bb13=\"\"><i aria-hidden=\"true\" class=\"o-noteLikeV3__icon a-icon a-icon--heart a-icon--size_mediumSmall\" data-disable-focus=\"true\" data-fill=\"lightGray\" data-tooltip=\"スキ\" data-v-5259bb13=\"\"><!-- --></i> </button> <!-- --></span></span> <!-- --> <button aria-label=\"3スキ この記事にスキをつけたユーザーを見る\" class=\"o-noteLikeV3__count o-noteLikeV3__count--mediumSmall text-text-secondary\" data-v-5259bb13=\"\">\n    3\n  </button></span> <!-- --></div> <div class=\"flex items-center gap-2 justify-center flex-wrap shrink grow-0\" data-v-03d2631f=\"\"><!-- --> <!-- --> <!-- --> <!-- --></div></div></div> <div class=\"o-noteContentHeader__creatorInfo\" data-v-03d2631f=\"\"><a aria-hidden=\"true\" class=\"o-noteContentHeader__avatar a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\"><span class=\"m-avatar m-avatar--medium\" data-v-03d2631f=\"\" data-v-3153a960=\"\"><img alt=\"株式会社Cosmico 代表/生成AI\" class=\"a-image m-avatar__image lazyload\" data-src=\"https://assets.st-note.com/production/uploads/images/209172942/profile_63735566a1e3c6bca33c05399cb7b782.jpeg?width=60\" data-v-3153a960=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"56\" loading=\"lazy\" src=\"data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23fff%22%2F%3E%3Cstop%20offset%3D%2267%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3CanimateTransform%20attributeName%3D%22gradientTransform%22%20type%3D%22translate%22%20from%3D%22-1%200%22%20to%3D%221%200%22%20begin%3D%220s%22%20dur%3D%221.5s%22%20repeatCount%3D%22indefinite%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20class%3D%22rect%22%20fill%3D%22url(%23a)%22%20d%3D%22M-100-100h300v300h-300z%22%2F%3E%3C%2Fsvg%3E\" width=\"56\"/></span></a> <div class=\"o-noteContentHeader__info\" data-v-03d2631f=\"\"><div class=\"o-noteContentHeader__name\" data-v-03d2631f=\"\"><a class=\"a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\">\n          株式会社Cosmico 代表/生成AI\n        </a></div> <span class=\"o-noteContentHeader__date\" data-v-03d2631f=\"\"><time data-v-03d2631f=\"\" datetime=\"2025-10-19T10:44:04.000+09:00\">2025年10月19日 10:44</time></span> <!-- --></div> <!-- --> <div class=\"o-noteContentHeader__status\" data-v-03d2631f=\"\"> <!-- --></div></div></div> <div class=\"note-common-styles__textnote-body\" data-name=\"body\" data-v-7db6ac5e=\"\"><table-of-contents id=\"993c23e4-123b-4f71-9beb-50b5eb1e91f8\" name=\"993c23e4-123b-4f71-9beb-50b5eb1e91f8\"><br/></table-of-contents><p id=\"d482e53a-9c31-4429-9a49-37393864ccf8\" name=\"d482e53a-9c31-4429-9a49-37393864ccf8\">情報過多の時代、<strong>データドリブンな意思決定</strong>は競争力の源泉です。とくに生成AIや機械学習の普及により、企業はこれまで以上にデータを集約・分析し、将来を読む力を求められています。ところが、<strong>「現存データのまとめ」と「未来予測」という異なるアプローチを混同すると、判断を誤りがちです。本稿では両者の違いを明確化し、ハルシネーション対策や予測の活かし方</strong>まで、実務で役立つ視点を整理します。</p><hr id=\"5d823011-97e3-4bce-bd54-6c76f1d020b4\" name=\"5d823011-97e3-4bce-bd54-6c76f1d020b4\"/><h2 id=\"018b7b8f-9ddc-4193-b570-4cc72fe20d8b\" name=\"018b7b8f-9ddc-4193-b570-4cc72fe20d8b\">現存データのまとめとは？（いま起きている事実を正しく掴む）</h2><p id=\"d61a448f-b832-4a7a-b5e9-eff552a13e5f\" name=\"d61a448f-b832-4a7a-b5e9-eff552a13e5f\">「現存データのまとめ」は、売上・在庫・顧客行動ログ・センサー値など、<strong>過去〜現在に実在する記録</strong>を整え、<strong>現状把握の精度</strong>を高める行為です。KPIの定義、データクレンジング、欠損・外れ値の処理、計測設計の見直しといった地道な整備が成果を左右します。<br/>最大の落とし穴は<strong>ハルシネーション（Hallucination）</strong>。AIが「それらしく」補完した<strong>事実無根の値</strong>を現状データに混入させると、レポートは瞬時に信頼を失います。<strong>一次情報の照合（ログ/帳票/ソースDB）と人手によるファクトチェック</strong>は、生成AI活用時の必須ガードレールです。</p><hr id=\"d76b2a23-80ee-4b3b-85d2-928c4309c8f1\" name=\"d76b2a23-80ee-4b3b-85d2-928c4309c8f1\"/><h2 id=\"d38545fe-d4f0-4b5c-ba51-5750dd6af532\" name=\"d38545fe-d4f0-4b5c-ba51-5750dd6af532\">未来予測とは？（仮説と確率で未来を扱う）</h2><p id=\"b1d5744a-5f22-4983-96c8-52efa9eb891d\" name=\"b1d5744a-5f22-4983-96c8-52efa9eb891d\">「未来予測」は、統計モデルや機械学習、シナリオ分析を用いて、<strong>将来の傾向を確率的に推定</strong>します。需要予測、離反予測、設備故障予知などが代表例。重要なのは、<strong>予測はあくまで仮説</strong>であり、<strong>外れること自体は誤りではない</strong>という理解です。外れは前提条件の変化や未知の要因に起因し、学び直しや特徴量の更新、モデル再学習につながる<strong>改善のヒント</strong>になります。</p><hr id=\"5d7b7d3b-317b-43f8-a8c3-ac25511165bf\" name=\"5d7b7d3b-317b-43f8-a8c3-ac25511165bf\"/><h2 id=\"14c8127b-4eb0-449e-81f8-0a30eeede62f\" name=\"14c8127b-4eb0-449e-81f8-0a30eeede62f\">決定的な違い（対象／ゴール／誤りの性質／検証／正確性）</h2><p id=\"067cdedc-85e7-4f22-ad13-59760e0c5f29\" name=\"067cdedc-85e7-4f22-ad13-59760e0c5f29\">項目現存データのまとめ未来予測<strong>対象</strong>実在する事実・記録まだ起きていない未来<strong>ゴール</strong>現状の正確な把握意思決定のための仮説提示<strong>誤りの性質ハルシネーション</strong>（虚構混入）<strong>予測外れ</strong>（確率の範囲内）<strong>検証方法</strong>事実照合・監査ログ事後検証・バックテスト<strong>正確性の基準</strong>整合率・再現性妥当性・説明力・指標（MAE/MAPE など）</p><p id=\"404cf85f-35db-48ec-9a9e-fc6066c46b4f\" name=\"404cf85f-35db-48ec-9a9e-fc6066c46b4f\">両者は<strong>役割も評価軸も別物</strong>。現状把握の精度を上げるほど、予測の入力品質が高まり、意思決定が強くなります。</p><hr id=\"7c04f6f4-74b7-47e6-af50-926305100ef9\" name=\"7c04f6f4-74b7-47e6-af50-926305100ef9\"/><h2 id=\"a93bdea9-5cf3-4b6b-9be1-48115c4c2bcd\" name=\"a93bdea9-5cf3-4b6b-9be1-48115c4c2bcd\">よくある失敗と対策</h2><ul id=\"c7eabc57-800d-4b34-83e6-79bf3cf17043\" name=\"c7eabc57-800d-4b34-83e6-79bf3cf17043\"><li><p id=\"97ff9d01-8623-4155-8710-e516ddd63d96\" name=\"97ff9d01-8623-4155-8710-e516ddd63d96\"><strong>失敗①：現状レポートに推定値を混ぜる</strong><br/>→ ダッシュボードは<strong>実測/推定を明確にラベル分離</strong>。色や凡例で一目区別。</p></li><li><p id=\"7a1bed43-4036-45b7-b99a-9f1d46a9cefd\" name=\"7a1bed43-4036-45b7-b99a-9f1d46a9cefd\"><strong>失敗②：AI出力の鵜呑み</strong><br/>→ <strong>検証用サンプルと監査ログ</strong>を常設。「誰が・いつ・何を根拠に」出力したかを追跡。</p></li><li><p id=\"e3a437db-e68b-471c-b98c-df5561e5b1d5\" name=\"e3a437db-e68b-471c-b98c-df5561e5b1d5\"><strong>失敗③：評価指標の未定義</strong><br/>→ 現状は<strong>整合率/欠損率</strong>、予測は<strong>MAE・MAPE・AUC</strong>等を事前合意。改善サイクルを設計。</p></li><li><p id=\"c1198469-ae66-48b3-91ad-725afa5eed7f\" name=\"c1198469-ae66-48b3-91ad-725afa5eed7f\"><strong>失敗④：データ辞書なし</strong><br/>→ カラムの意味・単位・粒度・更新頻度を記した<strong>データ辞書</strong>を運用。仕様変更は版管理。</p></li></ul><hr id=\"863347bd-8a59-48d2-b19f-4abd1d1f55c9\" name=\"863347bd-8a59-48d2-b19f-4abd1d1f55c9\"/><h2 id=\"180aaa03-b043-4287-9f4c-376f040f28c4\" name=\"180aaa03-b043-4287-9f4c-376f040f28c4\">実務に効くワークフロー（7ステップ）</h2><ol id=\"130c882b-4c76-43d8-bd90-d62917d81c03\" name=\"130c882b-4c76-43d8-bd90-d62917d81c03\"><li><p id=\"665274b5-3f12-4cee-a9b9-5a463a2e6d55\" name=\"665274b5-3f12-4cee-a9b9-5a463a2e6d55\"><strong>意思決定の問いを定義</strong>（何を決めたいのか／成功指標は何か）</p></li><li><p id=\"fd34abdc-6d24-4ad0-b7ec-17c480f8f259\" name=\"fd34abdc-6d24-4ad0-b7ec-17c480f8f259\"><strong>現存データの品質確保</strong>（スキーマ整備、欠損/外れ値処理、重複排除）</p></li><li><p id=\"4d1f75aa-7c72-4ce9-a22c-ee447a3fe98e\" name=\"4d1f75aa-7c72-4ce9-a22c-ee447a3fe98e\"><strong>計測設計の見直し</strong>（KPIの計測点・粒度・更新周期を最適化）</p></li><li><p id=\"914551ad-640b-4b89-8a64-3ac825d8ffce\" name=\"914551ad-640b-4b89-8a64-3ac825d8ffce\"><strong>生成AIの安全活用</strong>（要約や可視化はOK、数値は<strong>原本照合</strong>を必須化）</p></li><li><p id=\"61c07469-54be-44dc-9521-2029f7fa417c\" name=\"61c07469-54be-44dc-9521-2029f7fa417c\"><strong>予測モデルの選定</strong>（ベースライン→説明可能性→運用容易性の順に評価）</p></li><li><p id=\"06e42552-1f71-4109-a617-e3196e4a742a\" name=\"06e42552-1f71-4109-a617-e3196e4a742a\"><strong>オフライン評価とバックテスト</strong>（期間分割、リーク防止、指標の合意）</p></li><li><p id=\"da4e2296-a4a4-49d3-b492-ce193cefbcb0\" name=\"da4e2296-a4a4-49d3-b492-ce193cefbcb0\"><strong>本番運用と継続学習</strong>（ドリフト監視、特徴量/モデルの定期更新、アラート）</p></li></ol><hr id=\"42c2b478-b6fb-4654-b69c-9417c11f7096\" name=\"42c2b478-b6fb-4654-b69c-9417c11f7096\"/><h2 id=\"f370be81-ab9e-420d-8e96-a90f69cba49f\" name=\"f370be81-ab9e-420d-8e96-a90f69cba49f\">ハルシネーションを抑える運用チェックリスト</h2><ul id=\"3e9dc9bd-0fdf-4dad-82ba-a1f57056a876\" name=\"3e9dc9bd-0fdf-4dad-82ba-a1f57056a876\"><li><p id=\"acd928df-2d78-47d0-a02a-ed9d0ba927b6\" name=\"acd928df-2d78-47d0-a02a-ed9d0ba927b6\"><strong>出所の明記</strong>：実測データはソースと取得日時を付与</p></li><li><p id=\"d4bc0df4-1cea-4062-859f-c9d5489978fe\" name=\"d4bc0df4-1cea-4062-859f-c9d5489978fe\"><strong>境界の明確化</strong>：「事実」と「生成・推定」をUIで分ける</p></li><li><p id=\"1cdb6687-e79b-462a-9336-d7668b98f19a\" name=\"1cdb6687-e79b-462a-9336-d7668b98f19a\"><strong>二重検証</strong>：重要指標は<strong>人の目＋自動テスト</strong>でWチェック</p></li><li><p id=\"811e7e37-a8ce-4005-8abe-96bfc01b979c\" name=\"811e7e37-a8ce-4005-8abe-96bfc01b979c\"><strong>失敗の記録</strong>：外れ／誤りのケースをナレッジ化し再発防止</p></li></ul><hr id=\"b2e97894-dda3-462e-bebd-621a57a77007\" name=\"b2e97894-dda3-462e-bebd-621a57a77007\"/><h2 id=\"d04635b6-42ee-4523-abb8-4132c4304e9b\" name=\"d04635b6-42ee-4523-abb8-4132c4304e9b\">まとめ：事実と仮説を分けて、強い意思決定へ</h2><ul id=\"0d8f949b-0556-4a56-a2ef-1d16ecb6ff35\" name=\"0d8f949b-0556-4a56-a2ef-1d16ecb6ff35\"><li><p id=\"ae096344-acb0-4195-9db1-c36469b4b0d0\" name=\"ae096344-acb0-4195-9db1-c36469b4b0d0\"><strong>現存データのまとめ＝事実の整備</strong>。ハルシネーション排除とファクトチェックが命。</p></li><li><p id=\"2405bb36-1fdc-4a43-a16a-32c9811c6802\" name=\"2405bb36-1fdc-4a43-a16a-32c9811c6802\"><strong>未来予測＝仮説の提示</strong>。外れは学習材料であり、指標合意と運用改善が肝。</p></li><li><p id=\"44fe52b4-3ac6-4f09-b9af-d07a1fdfefcd\" name=\"44fe52b4-3ac6-4f09-b9af-d07a1fdfefcd\">両者を<strong>厳密に切り分ける設計と運用</strong>が、AI時代の<strong>堅牢なデータドリブン経営</strong>を実現します。</p></li></ul><p id=\"ee439d9b-c043-40ee-9086-2ab39d4458c3\" name=\"ee439d9b-c043-40ee-9086-2ab39d4458c3\">最後に。AIは魔法ではありません。<strong>事実を磨き、仮説を試し、学び続ける組織</strong>こそが、不確実性の高い市場で勝ち続けます。今日から、レポートと予測のラベル分離、評価指標の事前合意、監査ログの整備という<strong>3つの小さな改善</strong>を始めましょう。それが、AIを“使いこなす”第一歩です。</p></div> <!-- --> <!-- --> <!-- --> <div data-v-7db6ac5e=\"\" style=\"display:none;\"><button class=\"a-button\" data-disable-focus=\"false\" data-file-widget=\"fileDownloadButton\" data-size=\"small\" data-type=\"primary\" data-v-4f14eb04=\"\" data-width=\"fit\" type=\"button\" undefined=\"\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><i aria-hidden=\"true\" class=\"a-icon a-icon--fileDownload a-icon--size_small\"><!-- --></i>\n    ダウンロード\n  </div></button></div> <!-- --> <button aria-label=\"コードをコピー\" class=\"a-button m-copyCodeButton m-iconButton\" data-disable-focus=\"false\" data-size=\"small\" data-type=\"none\" data-v-4f14eb04=\"\" data-v-80ab2cbc=\"\" style=\"display:none;\" type=\"button\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><span data-v-80ab2cbc=\"\"><span class=\"visually-hidden\" data-v-80ab2cbc=\"\">\n  copy\n</span> <i aria-hidden=\"true\" class=\"a-icon a-icon--copy a-icon--size_small\" data-v-80ab2cbc=\"\"><!-- --></i></span> <!-- --></div></button> <!-- --><!-- --><!-- --></div></div> <!-- --></div>",
+      "image_map": {
+        "https://assets.st-note.com/production/uploads/images/223274188/rectangle_large_type_2_00691f99e0e394a463304e1afd913825.png?width=1280": "../img/blog/rectangle_large_type_2_00691f99e0e394a463304e1afd913825.png"
+      }
+    }
+  },
+  "n47dabbdb0d3c": {
+    "article": {
+      "title": "AIを使いこなすなら本を読もう",
+      "url": "https://note.com/magic_guppy1164/n/n47dabbdb0d3c",
+      "slug": "n47dabbdb0d3c",
+      "date": "2025年10月01日",
+      "date_obj": "2025-10-01T19:17:36+09:00",
+      "excerpt": "〜読書とマネジメントが未来を切り拓く〜続きをみる",
+      "thumbnail": null
+    },
+    "content": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "AIを使いこなすなら本を読もう"
+        },
+        {
+          "level": 3,
+          "text": "〜読書とマネジメントが未来を切り拓く〜"
+        },
+        {
+          "level": 3,
+          "text": "AI時代は「指示力」がすべて"
+        },
+        {
+          "level": 3,
+          "text": "私の読書体験が教えてくれたこと"
+        },
+        {
+          "level": 3,
+          "text": "SEとして培った「翻訳力」"
+        },
+        {
+          "level": 3,
+          "text": "AI進化の5段階フェーズ"
+        },
+        {
+          "level": 3,
+          "text": "AI時代に求められる「人間の役割」"
+        },
+        {
+          "level": 3,
+          "text": "本を通じて「ディレクター」になる6ステップ"
+        },
+        {
+          "level": 3,
+          "text": "まとめ：本を読む人が未来を制する"
+        },
+        {
+          "level": 2,
+          "text": "ジャンル別おすすめ読書リスト"
+        },
+        {
+          "level": 3,
+          "text": "ビジネス書"
+        },
+        {
+          "level": 3,
+          "text": "小説"
+        },
+        {
+          "level": 3,
+          "text": "伝記"
+        }
+      ],
+      "paragraphs": [
+        "生成AIが生活や仕事のあらゆる場面に浸透し、もはや単なる“チャットボット”ではなくなろうとしています。ただし、AIの能力を引き出せるかどうかは、使う人間側の「指示の質」にかかっています。",
+        "的確で論理的なプロンプトを出せる人は、AIを“最強の相棒”にできます。逆に、曖昧な指示しか出せない人は、AIに振り回され、時間や労力を失ってしまいます。",
+        "だからこそ今、読書を通じて「言葉を操る力」を鍛えることが、AI時代を生き抜く最大の鍵になるのです。",
+        "私は理系出身で、学生時代は本にほとんど触れてきませんでした。しかし、ある日友人に勧められて読んだ物理の本から、「文字で学ぶことの楽しさ」を知りました。そこから少しずつ、活字の世界に入り込んでいったのです。",
+        "社会人になってからは、新人時代の理不尽な扱いに対抗するために、心理学やビジネス書を貪るように読み、論理武装を整えました。さらに、出張の合間には土地ゆかりの小説にもハマりました。",
+        "例えば、愛媛では「坊ちゃん」や「坂の上の雲」、兵庫では「孤高の人」や「べっぴんさん」。そうした作品から、その土地に息づく文化や人々の想いを学び、自分自身の視野を広げていきました。",
+        "この読書体験のすべてが、いま私がAIに指示を出すときの「言語化力」や「理解力」の土台になっています。",
+        "システムエンジニアとして私は長年、「お客様の要望を聞き取り → プログラマーに正確に伝える」という役割を担ってきました。これはまさに、人間同士の“プロンプトエンジニアリング”です。",
+        "顧客の曖昧な要求を整理し、論理的に仕様へ変換する。その経験があるからこそ、AIに対しても的確な指示を与えられるのです。",
+        "AI時代において、こうした“翻訳力”を持つ人はますます重宝されるでしょう。",
+        "AIは、明確なステップを踏みながら進化しています。",
+        "チャットボット：現在のChatGPTやClaudeなど。質問に答えるが、あくまで“受け身”。",
+        "推論者：論理的に状況を分析し、課題を解決できるAI。",
+        "エージェント：自ら行動を起こし、情報を収集・実行できる。2025年は「AIエージェント元年」と呼ばれる見込み。",
+        "革新者：新しいアイデアや発明を生み出すAI。人間の思考を補完し、革新を推進する存在。",
+        "組織マネジメントAI：CEOやマネージャーのように戦略から実務までを統括できる未来像。",
+        "私たちが今触れているのはまだレベル3ですが、既にレベル4、そしてすぐにレベル5に到達していくでしょう。そのとき、私たちに求められるのは「AIを使いこなす力」ではなく、「AIを導く力」になっているはずです。",
+        "レベル4もすでに作り上げている人も出てきています。",
+        "AIが進化すればするほど、人間に求められるのは「正しい指示を出す力」です。",
+        "すでにこうした肩書を持つAIが登場し始めています。近い将来、AIは人間と対等に組織を運営する存在になるでしょう。",
+        "（なんなら、私もAI-CEO としてホームページに載せています。Heygen というサービスを使っていますが、本当に簡単に作成できます。良かったら遊んでみてください。いまは特にログは取っていませんのでご安心を。）",
+        "では、人間はどうすべきか？答えはひとつ──AIを導く“ディレクター”になることです。",
+        "指示力を磨く最強の方法は「読書」です。本を読むことで、AIを導くディレクターとしての力を段階的に鍛えられます。",
+        "基礎を学ぶ本を読む（論理と思考の土台づくり）ジャンル：論理学、心理学、クリティカルシンキング目的：体系的に理解し、論理的に説明する力を養う実践：学んだフレームをAIに説明してみる",
+        "伝える力を高める本を読む（コミュニケーション力）ジャンル：ビジネス書、プレゼン術、ストーリーテリング目的：AIにわかりやすく指示する力を学ぶ実践：本で得た表現をそのままプロンプトに応用する",
+        "問題解決の本を読む（AIに任せるテーマを見つける）ジャンル：経営学、プロジェクトマネジメント、ケーススタディ目的：課題を分解し、解決プロセスを設計する力を得る実践：「このケースをAIならどう解決する？」と試す",
+        "創造性を刺激する本を読む（革新の土台）ジャンル：小説、歴史書、伝記、科学啓蒙書目的：想像力を広げ、AIと共に新しい発想を生み出す実践：小説や歴史から得た視点をAIに投げかける",
+        "読んだ本をAIと“共同作業”にする本の要約をAIに解説させる章ごとの要点をAIと議論する読後感をAIと比較して整理する👉 「読む → 考える → 対話する」の循環が生まれます",
+        "AIの進化段階を意識して本を活用する読んだ知識を「この段階のAIと組み合わせられるか？」と考えることで、知識が未来の武器になります。",
+        "AI時代を生き抜くには、次の力が必要です。",
+        "論理的に整理して伝える力",
+        "心理や人間性を理解する力",
+        "指示を的確に出すマネジメント力",
+        "そして、それらを養うのが読書です。ジャンルを問わず本を読み、言葉を磨くことこそが、AIを最大のパートナーに変える方法です。",
+        "AIが「組織を動かす存在」になる未来はすぐそこにあります。あなたはそのとき、指示を出す側に立ちますか？それとも、AIの指示を受ける側に立ちますか？",
+        "さぁ、本を開いて未来を切り拓きましょう🌟",
+        "イシューからはじめよ ― 知的生産の「シンプルな本質」（安宅和人）",
+        "自分を「ごきげん」にする方法（辻 秀一）",
+        "思考は現実化する（ナポレオン・ヒル）",
+        "アマテラスの暗号（伊勢谷 武）",
+        "イーロン・マスク（ウォルター・アイザックソン）",
+        "E＝MC² ― 世界一有名な方程式の「伝記」（デイヴィッド・ボダニス 著、訳：伊藤文英・高橋知子・吉田三知世）"
+      ],
+      "lists": [
+        [
+          "チャットボット：現在のChatGPTやClaudeなど。質問に答えるが、あくまで“受け身”。",
+          "推論者：論理的に状況を分析し、課題を解決できるAI。",
+          "エージェント：自ら行動を起こし、情報を収集・実行できる。2025年は「AIエージェント元年」と呼ばれる見込み。",
+          "革新者：新しいアイデアや発明を生み出すAI。人間の思考を補完し、革新を推進する存在。",
+          "組織マネジメントAI：CEOやマネージャーのように戦略から実務までを統括できる未来像。"
+        ],
+        [
+          "AI顧問",
+          "AI CEO",
+          "AIマネージャー"
+        ],
+        [
+          "基礎を学ぶ本を読む（論理と思考の土台づくり）ジャンル：論理学、心理学、クリティカルシンキング目的：体系的に理解し、論理的に説明する力を養う実践：学んだフレームをAIに説明してみる",
+          "伝える力を高める本を読む（コミュニケーション力）ジャンル：ビジネス書、プレゼン術、ストーリーテリング目的：AIにわかりやすく指示する力を学ぶ実践：本で得た表現をそのままプロンプトに応用する",
+          "問題解決の本を読む（AIに任せるテーマを見つける）ジャンル：経営学、プロジェクトマネジメント、ケーススタディ目的：課題を分解し、解決プロセスを設計する力を得る実践：「このケースをAIならどう解決する？」と試す",
+          "創造性を刺激する本を読む（革新の土台）ジャンル：小説、歴史書、伝記、科学啓蒙書目的：想像力を広げ、AIと共に新しい発想を生み出す実践：小説や歴史から得た視点をAIに投げかける",
+          "読んだ本をAIと“共同作業”にする本の要約をAIに解説させる章ごとの要点をAIと議論する読後感をAIと比較して整理する👉 「読む → 考える → 対話する」の循環が生まれます",
+          "AIの進化段階を意識して本を活用する読んだ知識を「この段階のAIと組み合わせられるか？」と考えることで、知識が未来の武器になります。"
+        ],
+        [
+          "語彙力・表現力",
+          "論理的に整理して伝える力",
+          "心理や人間性を理解する力",
+          "指示を的確に出すマネジメント力"
+        ],
+        [
+          "イシューからはじめよ ― 知的生産の「シンプルな本質」（安宅和人）",
+          "自分を「ごきげん」にする方法（辻 秀一）",
+          "思考は現実化する（ナポレオン・ヒル）"
+        ],
+        [
+          "孤高の人（井上靖）",
+          "アマテラスの暗号（伊勢谷 武）",
+          "蜜蜂と遠雷（恩田陸）"
+        ],
+        [
+          "イーロン・マスク（ウォルター・アイザックソン）",
+          "E＝MC² ― 世界一有名な方程式の「伝記」（デイヴィッド・ボダニス 著、訳：伊藤文英・高橋知子・吉田三知世）"
+        ]
+      ],
+      "images": [
+        "../img/blog/rectangle_large_type_2_afd8241d2eb43928e063c076fa52005c.png",
+        "../img/blog/1759312633-OjNIH94ks8mfEp1XSqT25rKb.png"
+      ],
+      "html": "<div class=\"p-article__content pb-4\" data-v-0e32a970=\"\"><div data-note-id=\"128205610\" data-note-key=\"n47dabbdb0d3c\" data-v-0e32a970=\"\"><div class=\"o-noteContentText o-noteContentText--font_sansserif o-noteContentText--device_windows\" data-v-7db6ac5e=\"\"><figure class=\"o-noteEyecatch\" data-v-1811b4ec=\"\" data-v-7db6ac5e=\"\"><img alt=\"見出し画像\" class=\"a-image o-noteEyecatch__image\" data-v-1811b4ec=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"808\" loading=\"lazy\" src=\"../img/blog/rectangle_large_type_2_afd8241d2eb43928e063c076fa52005c.png\" width=\"1544\"/> <!-- --> <!-- --></figure> <div class=\"o-noteContentHeader o-noteContentText__header\" data-v-03d2631f=\"\" data-v-7db6ac5e=\"\"><div class=\"o-noteContentHeader__titleContainer o-noteContentHeader__titleContainer--font_sansserif o-noteContentHeader__titleContainer--device_windows\" data-v-03d2631f=\"\"><h1 class=\"o-noteContentHeader__title\" data-v-03d2631f=\"\">\n      AIを使いこなすなら本を読もう\n    </h1> <div class=\"o-noteContentHeader__titleAttachment\" data-v-03d2631f=\"\"><div class=\"flex\" data-v-03d2631f=\"\"><span class=\"o-noteLikeV3\" data-v-03d2631f=\"\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainer\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainerInner\" data-v-5259bb13=\"\"><button aria-label=\"スキ\" aria-pressed=\"false\" class=\"o-noteLikeV3__iconButton leading-none flex items-center\" data-v-5259bb13=\"\"><i aria-hidden=\"true\" class=\"o-noteLikeV3__icon a-icon a-icon--heart a-icon--size_mediumSmall\" data-disable-focus=\"true\" data-fill=\"lightGray\" data-tooltip=\"スキ\" data-v-5259bb13=\"\"><!-- --></i> </button> <!-- --></span></span> <!-- --> <button aria-label=\"7スキ この記事にスキをつけたユーザーを見る\" class=\"o-noteLikeV3__count o-noteLikeV3__count--mediumSmall text-text-secondary\" data-v-5259bb13=\"\">\n    7\n  </button></span> <!-- --></div> <div class=\"flex items-center gap-2 justify-center flex-wrap shrink grow-0\" data-v-03d2631f=\"\"><!-- --> <!-- --> <!-- --> <!-- --></div></div></div> <div class=\"o-noteContentHeader__creatorInfo\" data-v-03d2631f=\"\"><a aria-hidden=\"true\" class=\"o-noteContentHeader__avatar a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\"><span class=\"m-avatar m-avatar--medium\" data-v-03d2631f=\"\" data-v-3153a960=\"\"><img alt=\"株式会社Cosmico 代表/生成AI\" class=\"a-image m-avatar__image lazyload\" data-src=\"https://assets.st-note.com/production/uploads/images/209172942/profile_63735566a1e3c6bca33c05399cb7b782.jpeg?width=60\" data-v-3153a960=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"56\" loading=\"lazy\" src=\"data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23fff%22%2F%3E%3Cstop%20offset%3D%2267%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3CanimateTransform%20attributeName%3D%22gradientTransform%22%20type%3D%22translate%22%20from%3D%22-1%200%22%20to%3D%221%200%22%20begin%3D%220s%22%20dur%3D%221.5s%22%20repeatCount%3D%22indefinite%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20class%3D%22rect%22%20fill%3D%22url(%23a)%22%20d%3D%22M-100-100h300v300h-300z%22%2F%3E%3C%2Fsvg%3E\" width=\"56\"/></span></a> <div class=\"o-noteContentHeader__info\" data-v-03d2631f=\"\"><div class=\"o-noteContentHeader__name\" data-v-03d2631f=\"\"><a class=\"a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\">\n          株式会社Cosmico 代表/生成AI\n        </a></div> <span class=\"o-noteContentHeader__date\" data-v-03d2631f=\"\"><time data-v-03d2631f=\"\" datetime=\"2025-10-01T19:17:36.000+09:00\">2025年10月1日 19:17</time></span> <!-- --></div> <!-- --> <div class=\"o-noteContentHeader__status\" data-v-03d2631f=\"\"> <!-- --></div></div></div> <div class=\"note-common-styles__textnote-body\" data-name=\"body\" data-v-7db6ac5e=\"\"><p id=\"5ad3e976-6ff7-4f20-ae74-4105109fb6f8\" name=\"5ad3e976-6ff7-4f20-ae74-4105109fb6f8\"><br/></p><h3 id=\"19712ebb-c19a-4802-afd4-1e7664c2a374\" name=\"19712ebb-c19a-4802-afd4-1e7664c2a374\">〜読書とマネジメントが未来を切り拓く〜</h3><h3 id=\"58527477-90cd-40ec-bcd0-f072f29cdd87\" name=\"58527477-90cd-40ec-bcd0-f072f29cdd87\">AI時代は「指示力」がすべて</h3><p id=\"0a98136b-6aed-4f21-923e-91397b1b8a9b\" name=\"0a98136b-6aed-4f21-923e-91397b1b8a9b\">生成AIが生活や仕事のあらゆる場面に浸透し、もはや単なる“チャットボット”ではなくなろうとしています。<br/>ただし、AIの能力を引き出せるかどうかは、使う人間側の「指示の質」にかかっています。</p><p id=\"de75bd71-0c42-472d-8650-9446c9eb646e\" name=\"de75bd71-0c42-472d-8650-9446c9eb646e\">的確で論理的なプロンプトを出せる人は、AIを“最強の相棒”にできます。<br/>逆に、曖昧な指示しか出せない人は、AIに振り回され、時間や労力を失ってしまいます。</p><p id=\"3a96fd16-894b-414f-8704-08623b10ce0c\" name=\"3a96fd16-894b-414f-8704-08623b10ce0c\">だからこそ今、読書を通じて「言葉を操る力」を鍛えることが、AI時代を生き抜く最大の鍵になるのです。</p><hr id=\"62888284-74d5-40da-9030-fec4d9f6c9d5\" name=\"62888284-74d5-40da-9030-fec4d9f6c9d5\"/><h3 id=\"88d7ea74-1f10-4711-80f2-af520ee908ac\" name=\"88d7ea74-1f10-4711-80f2-af520ee908ac\">私の読書体験が教えてくれたこと</h3><p id=\"f25a1ee6-3b97-4619-b5c9-c0c5cb368199\" name=\"f25a1ee6-3b97-4619-b5c9-c0c5cb368199\">私は理系出身で、学生時代は本にほとんど触れてきませんでした。<br/>しかし、ある日友人に勧められて読んだ物理の本から、「文字で学ぶことの楽しさ」を知りました。<br/>そこから少しずつ、活字の世界に入り込んでいったのです。</p><p id=\"2e486907-855c-40f1-bc24-1d18cdae51ce\" name=\"2e486907-855c-40f1-bc24-1d18cdae51ce\">社会人になってからは、新人時代の理不尽な扱いに対抗するために、心理学やビジネス書を貪るように読み、論理武装を整えました。さらに、出張の合間には土地ゆかりの小説にもハマりました。</p><p id=\"e4b90e27-de59-4a4d-8447-bc2e1489b25f\" name=\"e4b90e27-de59-4a4d-8447-bc2e1489b25f\">例えば、愛媛では「坊ちゃん」や「坂の上の雲」、兵庫では「孤高の人」や「べっぴんさん」。<br/>そうした作品から、その土地に息づく文化や人々の想いを学び、自分自身の視野を広げていきました。</p><p id=\"f57f5604-4186-4bb1-b7de-4023701f36d1\" name=\"f57f5604-4186-4bb1-b7de-4023701f36d1\">この読書体験のすべてが、いま私がAIに指示を出すときの「言語化力」や「理解力」の土台になっています。</p><hr id=\"1561f80f-ad1e-4f2a-a0d8-c09b6b04ed92\" name=\"1561f80f-ad1e-4f2a-a0d8-c09b6b04ed92\"/><h3 id=\"21297d9a-2e7c-45d7-adf9-b7b6d13f4225\" name=\"21297d9a-2e7c-45d7-adf9-b7b6d13f4225\">SEとして培った「翻訳力」</h3><p id=\"8820d720-d6c7-4b84-8d98-d8be884e38eb\" name=\"8820d720-d6c7-4b84-8d98-d8be884e38eb\">システムエンジニアとして私は長年、「お客様の要望を聞き取り → プログラマーに正確に伝える」という役割を担ってきました。<br/>これはまさに、人間同士の“プロンプトエンジニアリング”です。</p><p id=\"873cd49e-3dbe-4bd7-a980-23de8207259a\" name=\"873cd49e-3dbe-4bd7-a980-23de8207259a\">顧客の曖昧な要求を整理し、論理的に仕様へ変換する。<br/>その経験があるからこそ、AIに対しても的確な指示を与えられるのです。</p><p id=\"f25c0b26-1e96-4c09-8475-777d50d5b618\" name=\"f25c0b26-1e96-4c09-8475-777d50d5b618\">AI時代において、こうした“翻訳力”を持つ人はますます重宝されるでしょう。</p><hr id=\"bff60d01-f452-46ef-81d1-402de7f4e3b4\" name=\"bff60d01-f452-46ef-81d1-402de7f4e3b4\"/><h3 id=\"d3f27943-e6c5-432b-88d2-b3b34a6206f8\" name=\"d3f27943-e6c5-432b-88d2-b3b34a6206f8\">AI進化の5段階フェーズ</h3><p id=\"03114cab-8ba1-44b8-a83b-7edc1a0f423e\" name=\"03114cab-8ba1-44b8-a83b-7edc1a0f423e\">AIは、明確なステップを踏みながら進化しています。</p><ol id=\"67019b0e-e961-4a89-b7fd-c7b43bb32455\" name=\"67019b0e-e961-4a89-b7fd-c7b43bb32455\"><li><p id=\"b753960a-0fcb-4841-a1ed-cd7ad2190ec1\" name=\"b753960a-0fcb-4841-a1ed-cd7ad2190ec1\"><strong>チャットボット</strong>：現在のChatGPTやClaudeなど。質問に答えるが、あくまで“受け身”。</p></li><li><p id=\"753d3d70-2fb4-4d1b-a327-920e3e59293b\" name=\"753d3d70-2fb4-4d1b-a327-920e3e59293b\"><strong>推論者</strong>：論理的に状況を分析し、課題を解決できるAI。</p></li><li><p id=\"d230d536-d38e-426b-84ff-a9535ae337f8\" name=\"d230d536-d38e-426b-84ff-a9535ae337f8\"><strong>エージェント</strong>：自ら行動を起こし、情報を収集・実行できる。2025年は「AIエージェント元年」と呼ばれる見込み。</p></li><li><p id=\"a470f48f-4264-4ed1-b4a5-1771ca13d18f\" name=\"a470f48f-4264-4ed1-b4a5-1771ca13d18f\"><strong>革新者</strong>：新しいアイデアや発明を生み出すAI。人間の思考を補完し、革新を推進する存在。</p></li><li><p id=\"e2963e86-bd58-4243-b06d-ef5d8fecd7c7\" name=\"e2963e86-bd58-4243-b06d-ef5d8fecd7c7\"><strong>組織マネジメントAI</strong>：CEOやマネージャーのように戦略から実務までを統括できる未来像。</p></li></ol><p id=\"9ef76664-6b5c-4c4b-b7a3-f865b18fc6f5\" name=\"9ef76664-6b5c-4c4b-b7a3-f865b18fc6f5\">私たちが今触れているのはまだレベル3ですが、既にレベル4、そしてすぐにレベル5に到達していくでしょう。<br/><br/><br/>そのとき、私たちに求められるのは「AIを使いこなす力」ではなく、「AIを導く力」になっているはずです。</p><figure data-identifier=\"null\" data-src=\"https://albaneto.medium.com/openais-5-levels-of-artificial-intelligence-2228bad368b3\" embedded-content-key=\"emb3a6fce27a8c3\" embedded-service=\"external-article\" id=\"249bf999-4ace-4cee-a10d-f260ae981312\" name=\"249bf999-4ace-4cee-a10d-f260ae981312\"><div data-name=\"embedContainer\"><div data-embed-service=\"external-article\"><span><div class=\"external-article-widget\">\n<a href=\"https://albaneto.medium.com/openais-5-levels-of-artificial-intelligence-2228bad368b3\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">\n<strong class=\"external-article-widget-title\">\nOpenAi’s 5 Levels of Artificial Intelligence\n</strong>\n<em class=\"external-article-widget-description\">\nOpenAI has just launched a new AI classification system.\n</em>\n<em class=\"external-article-widget-url\">\nalbaneto.medium.com\n</em>\n</a><a class=\"external-article-widget-image\" href=\"https://albaneto.medium.com/openais-5-levels-of-artificial-intelligence-2228bad368b3\" rel=\"noopener noreferrer nofollow\" style=\"background-image: url('https://assets.st-note.com/production/uploads/ext/fe81902af67692e50e659137454ddb628d6332974c09b3b7a4ce0b82288c.jpeg?x-type=ogp');\" target=\"_blank\"></a>\n</div>\n</span></div></div></figure><p id=\"136ed8c6-5e19-4f75-9b08-33f29b1f634d\" name=\"136ed8c6-5e19-4f75-9b08-33f29b1f634d\">レベル4もすでに作り上げている人も出てきています。<br/></p><figure data-identifier=\"null\" data-src=\"https://youtu.be/2R9J2DT_ZAg?si=58vgHapxwNO2bvZZ\" embedded-content-key=\"embb576d2d30f72\" embedded-service=\"youtube\" id=\"a6531fc5-6469-4683-8516-6e5c31701037\" name=\"a6531fc5-6469-4683-8516-6e5c31701037\"><div data-name=\"embedContainer\"><div data-embed-service=\"youtube\"><span><div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;\"><iframe allow=\"accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *; web-share *;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"strict-origin-when-cross-origin\" scrolling=\"no\" src=\"https://www.youtube.com/embed/2R9J2DT_ZAg?rel=0\" style=\"top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;\"></iframe></div></span></div></div></figure><p id=\"f44570f1-549f-4960-bf22-08b10cfd6e7e\" name=\"f44570f1-549f-4960-bf22-08b10cfd6e7e\"><br/></p><hr id=\"4ffb9466-512b-4d37-8e0c-eef7427a5083\" name=\"4ffb9466-512b-4d37-8e0c-eef7427a5083\"/><h3 id=\"04c7f9ac-b586-4b97-897f-2f795e8352c9\" name=\"04c7f9ac-b586-4b97-897f-2f795e8352c9\">AI時代に求められる「人間の役割」</h3><p id=\"66ae4652-fdbf-48d5-9711-a05338f84fc3\" name=\"66ae4652-fdbf-48d5-9711-a05338f84fc3\">AIが進化すればするほど、人間に求められるのは「正しい指示を出す力」です。</p><ul id=\"40c72c68-7d09-4dc9-90f0-94ff3dddc6a9\" name=\"40c72c68-7d09-4dc9-90f0-94ff3dddc6a9\"><li><p id=\"f4ed2fff-4050-456b-b69a-b350c3211d10\" name=\"f4ed2fff-4050-456b-b69a-b350c3211d10\"><strong>AI顧問</strong></p></li><li><p id=\"44e39a6d-6846-47d9-a838-9a2b40574288\" name=\"44e39a6d-6846-47d9-a838-9a2b40574288\"><strong>AI CEO</strong></p></li><li><p id=\"08e26d07-596f-4458-b11b-c7e481a04b1b\" name=\"08e26d07-596f-4458-b11b-c7e481a04b1b\"><strong>AIマネージャー</strong></p></li></ul><p id=\"674443d1-b439-4c11-99cf-f5f1cb8d3b45\" name=\"674443d1-b439-4c11-99cf-f5f1cb8d3b45\">すでにこうした肩書を持つAIが登場し始めています。<br/>近い将来、AIは人間と対等に組織を運営する存在になるでしょう。</p><figure data-identifier=\"null\" data-src=\"https://www.watch.impress.co.jp/docs/news/2037141.html\" embedded-content-key=\"emb1a42eeb1ece2\" embedded-service=\"external-article\" id=\"10814dda-b7fd-4fed-80a5-54a7add3805b\" name=\"10814dda-b7fd-4fed-80a5-54a7add3805b\"><div data-name=\"embedContainer\"><div data-embed-service=\"external-article\"><span><div class=\"external-article-widget\">\n<a href=\"https://www.watch.impress.co.jp/docs/news/2037141.html\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">\n<strong class=\"external-article-widget-title\">\n三井住友FGに「AI-CEO」　グループCEOの“考え方”と行員が対話\n</strong>\n<em class=\"external-article-widget-description\">\n三井住友フィナンシャルグループ(SMBC グループ)と三井住友銀行は、「AI-CEO」を開発し、三井住友銀行で展開開始した\n</em>\n<em class=\"external-article-widget-url\">\nwww.watch.impress.co.jp\n</em>\n</a><a class=\"external-article-widget-image\" href=\"https://www.watch.impress.co.jp/docs/news/2037141.html\" rel=\"noopener noreferrer nofollow\" style=\"background-image: url('https://assets.st-note.com/production/uploads/ext/53dd50b9f4405a67d9e8bb9746e4aa28c3933c661ac31aa91d0427fc025b.jpeg?x-type=ogp');\" target=\"_blank\"></a>\n</div>\n</span></div></div></figure><figure data-identifier=\"null\" data-src=\"https://www.nikkei.com/article/DGXZQOUC1628D0W5A710C2000000/\" embedded-content-key=\"emb4af8f7906a8b\" embedded-service=\"external-article\" id=\"2fcabf75-873e-4080-a872-db962cabf124\" name=\"2fcabf75-873e-4080-a872-db962cabf124\"><div data-name=\"embedContainer\"><div data-embed-service=\"external-article\"><span><div class=\"external-article-widget\">\n<a href=\"https://www.nikkei.com/article/DGXZQOUC1628D0W5A710C2000000/\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">\n<strong class=\"external-article-widget-title\">\nAI経営者、社員4000人の評判　「評価公正」不服ほぼなし - 日本経済新聞\n</strong>\n<em class=\"external-article-widget-description\">\n【この記事でわかること】・「AI社長」の仕事ぶりは・AIを「参謀役」として活用する企業は・AIは起業家になれるのか中国南東\n</em>\n<em class=\"external-article-widget-url\">\nwww.nikkei.com\n</em>\n</a><a class=\"external-article-widget-image\" href=\"https://www.nikkei.com/article/DGXZQOUC1628D0W5A710C2000000/\" rel=\"noopener noreferrer nofollow\" style=\"background-image: url('https://assets.st-note.com/production/uploads/ext/2758b71760074746a703c95fa25d317d9aff640e8c2a4707cc29bee55728.jpeg?x-type=ogp');\" target=\"_blank\"></a>\n</div>\n</span></div></div></figure><p id=\"ae3fb5b3-e1d7-4160-8da8-03ab3ce8ffa5\" name=\"ae3fb5b3-e1d7-4160-8da8-03ab3ce8ffa5\"><br/>（なんなら、私もAI-CEO としてホームページに載せています。<br/>Heygen というサービスを使っていますが、本当に簡単に作成できます。<br/>良かったら遊んでみてください。いまは特にログは取っていませんのでご安心を。）<br/></p><figure data-identifier=\"null\" data-src=\"https://cosmicoai.space/\" embedded-content-key=\"emb2d198cea21ed\" embedded-service=\"external-article\" id=\"60c814a2-ddab-4d6e-b2f5-fd3a7b63b4d7\" name=\"60c814a2-ddab-4d6e-b2f5-fd3a7b63b4d7\"><div data-name=\"embedContainer\"><div data-embed-service=\"external-article\"><span><div class=\"external-article-widget\">\n<a href=\"https://cosmicoai.space/\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">\n<strong class=\"external-article-widget-title\">\n株式会社Cosmico - AIでビジネスを加速\n</strong>\n<em class=\"external-article-widget-description\">\n株式会社Cosmicoは、AI技術を活用して企業のビジネス変革を支援するコンサルティング会社です。\n</em>\n<em class=\"external-article-widget-url\">\ncosmicoai.space\n</em>\n</a><a class=\"external-article-widget-image\" href=\"https://cosmicoai.space/\" rel=\"noopener noreferrer nofollow\" style=\"background-image: url('https://assets.st-note.com/poc-image/manual/production/note_empty_ogp.svg');\" target=\"_blank\"></a>\n</div>\n</span></div></div></figure><p id=\"6bd9bc60-ca88-435e-8005-1f1994de8a73\" name=\"6bd9bc60-ca88-435e-8005-1f1994de8a73\"><br/></p><figure id=\"f8c9d8ab-3382-45d0-9f92-78b0b525c53b\" name=\"f8c9d8ab-3382-45d0-9f92-78b0b525c53b\"><img alt=\"\" height=\"345\" loading=\"lazy\" src=\"../img/blog/1759312633-OjNIH94ks8mfEp1XSqT25rKb.png\" width=\"620\"/><figcaption>右下にバーチャルヒューマンとしてお問い合わせにお答えしています。（約40言語対応）</figcaption></figure><p id=\"f38139b8-60ad-497f-a1d6-c041620b05a2\" name=\"f38139b8-60ad-497f-a1d6-c041620b05a2\"><br/><br/>では、人間はどうすべきか？<br/>答えはひとつ──AIを導く“ディレクター”になることです。</p><hr id=\"dcef546d-991c-483d-bb71-5f896288f336\" name=\"dcef546d-991c-483d-bb71-5f896288f336\"/><h3 id=\"8087195c-3ea5-4aec-89db-e583af0fcd15\" name=\"8087195c-3ea5-4aec-89db-e583af0fcd15\">本を通じて「ディレクター」になる6ステップ</h3><p id=\"c24ac762-8ea2-409c-8c6d-f949012ef377\" name=\"c24ac762-8ea2-409c-8c6d-f949012ef377\">指示力を磨く最強の方法は「読書」です。<br/>本を読むことで、AIを導くディレクターとしての力を段階的に鍛えられます。</p><ol id=\"fa9f3d4d-d0e8-4831-87f7-b1853eb597e3\" name=\"fa9f3d4d-d0e8-4831-87f7-b1853eb597e3\"><li><p id=\"64e424a6-41b9-44d9-b07b-9b204da28b38\" name=\"64e424a6-41b9-44d9-b07b-9b204da28b38\"><strong>基礎を学ぶ本を読む（論理と思考の土台づくり）</strong><br/>　ジャンル：論理学、心理学、クリティカルシンキング<br/>　目的：体系的に理解し、論理的に説明する力を養う<br/>　実践：学んだフレームをAIに説明してみる</p></li><li><p id=\"2411830d-33a2-4d94-a4f5-9774d574f368\" name=\"2411830d-33a2-4d94-a4f5-9774d574f368\"><strong>伝える力を高める本を読む（コミュニケーション力）</strong><br/>　ジャンル：ビジネス書、プレゼン術、ストーリーテリング<br/>　目的：AIにわかりやすく指示する力を学ぶ<br/>　実践：本で得た表現をそのままプロンプトに応用する</p></li><li><p id=\"b0c2457a-d5a3-4a3f-9540-1f914ba42f41\" name=\"b0c2457a-d5a3-4a3f-9540-1f914ba42f41\"><strong>問題解決の本を読む（AIに任せるテーマを見つける）</strong><br/>　ジャンル：経営学、プロジェクトマネジメント、ケーススタディ<br/>　目的：課題を分解し、解決プロセスを設計する力を得る<br/>　実践：「このケースをAIならどう解決する？」と試す</p></li><li><p id=\"76eb006e-5ebe-4660-a261-61f4b3aa15aa\" name=\"76eb006e-5ebe-4660-a261-61f4b3aa15aa\"><strong>創造性を刺激する本を読む（革新の土台）</strong><br/>　ジャンル：小説、歴史書、伝記、科学啓蒙書<br/>　目的：想像力を広げ、AIと共に新しい発想を生み出す<br/>　実践：小説や歴史から得た視点をAIに投げかける</p></li><li><p id=\"0e055a56-6cf0-4eea-b544-f1906b260e7c\" name=\"0e055a56-6cf0-4eea-b544-f1906b260e7c\"><strong>読んだ本をAIと“共同作業”にする</strong><br/>　本の要約をAIに解説させる<br/>　章ごとの要点をAIと議論する<br/>　読後感をAIと比較して整理する<br/>　👉 「読む → 考える → 対話する」の循環が生まれます</p></li><li><p id=\"fc069e91-e343-48bf-82cd-067f178925f8\" name=\"fc069e91-e343-48bf-82cd-067f178925f8\"><strong>AIの進化段階を意識して本を活用する</strong><br/>　読んだ知識を「この段階のAIと組み合わせられるか？」と考えることで、知識が未来の武器になります。</p></li></ol><hr id=\"992b8843-db80-4247-a197-c7c6dc182e26\" name=\"992b8843-db80-4247-a197-c7c6dc182e26\"/><h3 id=\"7f7228ec-9db8-4c5b-af13-5cd536ff3a61\" name=\"7f7228ec-9db8-4c5b-af13-5cd536ff3a61\">まとめ：本を読む人が未来を制する</h3><p id=\"b037d440-068b-4b1e-aef6-baacc45d97c0\" name=\"b037d440-068b-4b1e-aef6-baacc45d97c0\">AI時代を生き抜くには、次の力が必要です。</p><ul id=\"3535a7c6-932f-4070-925f-4ef709c20ab5\" name=\"3535a7c6-932f-4070-925f-4ef709c20ab5\"><li><p id=\"f9623ef7-66c8-4aa3-8f09-94dbd4920526\" name=\"f9623ef7-66c8-4aa3-8f09-94dbd4920526\">語彙力・表現力</p></li><li><p id=\"853dcdf5-144a-43c9-b5e2-1399545b7da7\" name=\"853dcdf5-144a-43c9-b5e2-1399545b7da7\">論理的に整理して伝える力</p></li><li><p id=\"f4e7e84b-d94a-467a-83bd-945150e782fb\" name=\"f4e7e84b-d94a-467a-83bd-945150e782fb\">心理や人間性を理解する力</p></li><li><p id=\"be1194f7-9a9c-4fdd-bd54-39c3c11facb0\" name=\"be1194f7-9a9c-4fdd-bd54-39c3c11facb0\">指示を的確に出すマネジメント力</p></li></ul><p id=\"6443f31e-457d-4169-88ff-7e5df0cf8bd3\" name=\"6443f31e-457d-4169-88ff-7e5df0cf8bd3\">そして、それらを養うのが <strong>読書</strong> です。<br/>ジャンルを問わず本を読み、言葉を磨くことこそが、AIを最大のパートナーに変える方法です。</p><p id=\"596d88ef-848b-4db9-9f91-a1459062efec\" name=\"596d88ef-848b-4db9-9f91-a1459062efec\">AIが「組織を動かす存在」になる未来はすぐそこにあります。<br/>あなたはそのとき、指示を出す側に立ちますか？<br/>それとも、AIの指示を受ける側に立ちますか？</p><p id=\"1cd5fa92-537d-4d53-8fb1-fe60f082f875\" name=\"1cd5fa92-537d-4d53-8fb1-fe60f082f875\">さぁ、本を開いて未来を切り拓きましょう🌟</p><h2 id=\"c7f5ccac-72dd-44c8-9c05-dc08e197a32b\" name=\"c7f5ccac-72dd-44c8-9c05-dc08e197a32b\">ジャンル別おすすめ読書リスト</h2><h3 id=\"49336818-5db9-4cc7-adf2-69ebd6e281e4\" name=\"49336818-5db9-4cc7-adf2-69ebd6e281e4\">ビジネス書</h3><ul id=\"a488389e-17a8-41c7-a62e-18a7143b2036\" name=\"a488389e-17a8-41c7-a62e-18a7143b2036\"><li><p id=\"fa472bef-11f1-4982-8e07-94cc980f4976\" name=\"fa472bef-11f1-4982-8e07-94cc980f4976\"><a href=\"https://www.amazon.co.jp/dp/4862760856\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">イシューからはじめよ ― 知的生産の「シンプルな本質」（安宅和人）</a></p></li><li><p id=\"571e73a0-d6c4-478e-9759-aaaa7016f03c\" name=\"571e73a0-d6c4-478e-9759-aaaa7016f03c\"><a href=\"https://www.amazon.co.jp/%E8%87%AA%E5%88%86%E3%82%92%E3%80%8C%E3%81%94%E3%81%8D%E3%81%92%E3%82%93%E3%80%8D%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95-%E8%BE%BB-%E7%A7%80%E4%B8%80/dp/4763132555/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;crid=1J3QBNR3AJJZ4&amp;dib=eyJ2IjoiMSJ9.rCbHhsJe9LLGsb2y30p1tk2vvoTo4MQwaCTbN3uP4rVxx8xgIqoAaz4qpMdK_8tyDJMLyeIzKbCapvqdFetUh9BXzSSWULQE9WPLTvXe7FRxCf3IxVvnpYHv150uToYc1bTpYhfSgbP_XUPcQhmVq83itJvaCyBe-VikW5F11EE-yVgYxPV6Y164KttkVVtuJINAV6koApCGMFpFLlEU6sKORfVbTDFCf9BnnWUfe1pRU2J83m86TnXQ36cvU33otb0-2cQL3Xe46DmdNkmddsaMePTvVA3bQu5wYEkgSmw.xB-hc6G3lB3DSs8A9ggKT_pUF_kHaWmeMZgjYDNKyEg&amp;dib_tag=se&amp;keywords=%E8%87%AA%E5%88%86%E3%82%92%E3%80%8C%E3%81%94%E3%81%8D%E3%81%92%E3%82%93%E3%80%8D%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95&amp;qid=1759313636&amp;sprefix=%E8%87%AA%E5%88%86%E3%82%92+%E3%81%94%E3%81%8D%E3%81%92%E3%82%93+%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%2Caps%2C176&amp;sr=8-1\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">自分を「ごきげん」にする方法（辻 秀一）</a></p></li><li><p id=\"bf098c49-2252-4fe4-8fca-3de1a6249340\" name=\"bf098c49-2252-4fe4-8fca-3de1a6249340\"><a href=\"https://www.amazon.co.jp/dp/B0FRFSDBM2/ref=sr_1_17?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;crid=2DO9BA3E83EK6&amp;dib=eyJ2IjoiMSJ9.ir11JSl0UFvlFYdyAkxfm1Q9Gg_L45hux8_ywVztN3zbefy90_7njW3Wwa6OM3pyyD_wuI_3FizboeXxAqKInkjmNmD7hVjbSHWPKyPx-fATlMwluKn6u6FLrp17DEYyL4qEdsDaKdoJtshuE7jtBR7TBl6Rb8ZEMSlMdJJ2pjDvCAis5KX--lD-YXbjclXXE13ZDM2zLyRQmbs1Pe_AHMuSVjo1zHSmfzBu26VIqvbCT7A1gLHWyI4ligHNOHoNfk22cXmPG9N0z60azQM58e587rgLYtcbmlaEwdVwWvM.201X3ozBcek9zoVRp3fC9eg3KJrai30_oFgDhIGrk6c&amp;dib_tag=se&amp;keywords=%E6%80%9D%E8%80%83%E3%81%AF%E7%8F%BE%E5%AE%9F%E5%8C%96%E3%81%99%E3%82%8B%EF%BC%88%E3%83%8A%E3%83%9D%E3%83%AC%E3%82%AA%E3%83%B3%E3%83%BB%E3%83%92%E3%83%AB%EF%BC%89&amp;qid=1759313663&amp;sprefix=%E6%80%9D%E8%80%83%E3%81%AF%E7%8F%BE%E5%AE%9F%E5%8C%96%E3%81%99%E3%82%8B+%E3%83%8A%E3%83%9D%E3%83%AC%E3%82%AA%E3%83%B3+%E3%83%92%E3%83%AB+%2Caps%2C175&amp;sr=8-17\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">思考は現実化する（ナポレオン・ヒル）</a></p></li></ul><h3 id=\"153a55cf-4e3c-42e8-9460-81cdc40265e1\" name=\"153a55cf-4e3c-42e8-9460-81cdc40265e1\">小説</h3><ul id=\"3dd0c90d-7fb0-48c2-9967-2e54fc436062\" name=\"3dd0c90d-7fb0-48c2-9967-2e54fc436062\"><li><p id=\"f08ba415-fbe7-4b86-8024-1f3ef7fdebef\" name=\"f08ba415-fbe7-4b86-8024-1f3ef7fdebef\"><a href=\"https://www.amazon.co.jp/%E5%AD%A4%E9%AB%98%E3%81%AE%E4%BA%BA-%E6%96%87%E5%BA%AB-%E4%B8%8A-%E4%B8%8B-%E3%82%BB%E3%83%83%E3%83%88/dp/B071Z2WRD1/ref=sr_1_3?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;crid=2VDB0OGBS83OY&amp;dib=eyJ2IjoiMSJ9.lsRmc3W84hZjGQnFw2_s3aqGgitZ-Q2mRPo-S0Vqmg-U2qWdjk_QmxjFUzgLljkXXs7SbFsQWqPXVV0I2i1Jvxsf994u1tChEU6EJ_KMM343hPAxUul8Ipb7nygJ02jevchMgHwhb-U6AkMG7ernLBNReEcQGfG_kyTds1CiWjntoI-EK9mJuGEoJTM3xJI-OUXxnQhELthCI5CjEqSb351zmBcicGQx3C1JTnDVjwQwX-uy_UNEtPZzmWQQekoa1xTntvEYad2tF_mLGyTkdcHlMRyNRuHyQSNvc5SJar8.B4gNv3own2oVtC2LgYgK13R7lzsod7poHEgnH7vsUhM&amp;dib_tag=se&amp;keywords=%E5%AD%A4%E9%AB%98%E3%81%AE%E4%BA%BA&amp;qid=1759313691&amp;sprefix=%E5%AD%A4%E9%AB%98%E3%81%AE%E4%BA%BA%2Caps%2C187&amp;sr=8-3\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">孤高の人（井上靖）</a></p></li><li><p id=\"1cfc6507-37ab-4b51-befd-12fddef9895b\" name=\"1cfc6507-37ab-4b51-befd-12fddef9895b\"><a href=\"https://www.amazon.co.jp/%E3%82%A2%E3%83%9E%E3%83%86%E3%83%A9%E3%82%B9%E3%81%AE%E6%9A%97%E5%8F%B7-%E3%80%88%E6%AD%B4%E5%8F%B2%E3%83%9F%E3%82%B9%E3%83%86%E3%83%AA%E3%83%BC%E5%B0%8F%E8%AA%AC%E3%80%89-%E4%BC%8A%E5%8B%A2%E8%B0%B7-%E6%AD%A6-ebook/dp/B07P7JMW7L/ref=sr_1_3?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;crid=28G7P56NXXT1C&amp;dib=eyJ2IjoiMSJ9.KW_-274TyIJZ-gQdtBY332Va-UveXd7b9zhS2vvNjarGjHj071QN20LucGBJIEps.N1c9qUWiBQKqI4zZfVSFSB5mNiIF1XIiMjUSACr2bnU&amp;dib_tag=se&amp;keywords=%E5%AD%A4%E9%AB%98%E3%81%AE%E4%BA%BA%EF%BC%88%E4%BA%95%E4%B8%8A%E9%9D%96%EF%BC%89+%E3%82%A2%E3%83%9E%E3%83%86%E3%83%A9%E3%82%B9%E3%81%AE%E6%9A%97%E5%8F%B7%EF%BC%88%E4%BC%8A%E5%8B%A2%E8%B0%B7+%E6%AD%A6%EF%BC%89&amp;qid=1759313708&amp;sprefix=%E5%AD%A4%E9%AB%98%E3%81%AE%E4%BA%BA+%E4%BA%95%E4%B8%8A%E9%9D%96+%E3%82%A2%E3%83%9E%E3%83%86%E3%83%A9%E3%82%B9%E3%81%AE%E6%9A%97%E5%8F%B7+%E4%BC%8A%E5%8B%A2%E8%B0%B7+%E6%AD%A6+%2Caps%2C181&amp;sr=8-3\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">アマテラスの暗号（伊勢谷 武）</a></p></li><li><p id=\"fd4371e2-9379-4f3c-b9b0-9fe5b27882bb\" name=\"fd4371e2-9379-4f3c-b9b0-9fe5b27882bb\"><a href=\"https://www.amazon.co.jp/%E8%9C%9C%E8%9C%82%E3%81%A8%E9%81%A0%E9%9B%B7-%E4%B8%8A%E4%B8%8B%E5%B7%BB%E3%82%BB%E3%83%83%E3%83%88-%E6%96%87%E5%BA%AB-%E5%B9%BB%E5%86%AC%E8%88%8E-%E6%81%A9%E7%94%B0%E9%99%B8/dp/B0D7TC7R7P/ref=sr_1_5?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;crid=3QI6UH4QK3IOE&amp;dib=eyJ2IjoiMSJ9.aQm518eV8LJBK80TzTATLk_gVhbWHTxI4pzhXlSuMzqWYzwYTsMDjjHL_ptW7eE4nqpb1Y2yJGj4BUkrK9qTlgyzG8_2L5u5hXKvnDyTETwYzzWN2Y_-iCqX5gSCy9-A1FBAqnmANSg-2udigGxjHXSSEwhZ2vb7p3MprdwK0NMwI_1Y0G9tIPRPQGRBNMREIsb4JzbCrNoZi8ZtEf35Xei-p5t9gN5xJKxLLzJ0wenWCm3GSd3NyC_cwdm28_pFNH8nq4N14eVwX3FmCB1Nd0MZ4MVakXXfNb6aKlGUIKg.mLVduqeJNXiSThrLillW5lj4smKAxjVnCmp9QbLFAmw&amp;dib_tag=se&amp;keywords=%E8%9C%9C%E8%9C%82%E3%81%A8%E9%81%A0%E9%9B%B7%EF%BC%88%E6%81%A9%E7%94%B0%E9%99%B8%EF%BC%89&amp;qid=1759313731&amp;sprefix=%E8%9C%9C%E8%9C%82%E3%81%A8%E9%81%A0%E9%9B%B7+%E6%81%A9%E7%94%B0%E9%99%B8+%2Caps%2C170&amp;sr=8-5\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">蜜蜂と遠雷（恩田陸）</a></p></li></ul><h3 id=\"424100aa-1ee7-45f7-924f-4b0c01f5c624\" name=\"424100aa-1ee7-45f7-924f-4b0c01f5c624\">伝記</h3><ul id=\"9dbc403c-3944-471d-bbb4-83bf2f3ce4a4\" name=\"9dbc403c-3944-471d-bbb4-83bf2f3ce4a4\"><li><p id=\"d11ead19-9de2-405e-8d51-3fdf06216c90\" name=\"d11ead19-9de2-405e-8d51-3fdf06216c90\"><a href=\"https://www.amazon.co.jp/%E5%90%88%E6%9C%AC-%E3%82%A4%E3%83%BC%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%9E%E3%82%B9%E3%82%AF-%E6%96%87%E6%98%A5e-Books-%E3%82%A6%E3%82%A9%E3%83%AB%E3%82%BF%E3%83%BC%E3%83%BB%E3%82%A2%E3%82%A4%E3%82%B6%E3%83%83%E3%82%AF%E3%82%BD%E3%83%B3-ebook/dp/B0CM3JLBRX/ref=sr_1_7?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&amp;crid=1YNROYQWUZ940&amp;dib=eyJ2IjoiMSJ9.wTBLM71DJ87GgPyMRvEgw67H5P1AtnNqd2hAlNCTw35Hv029DatzlYrGIIO8z5CM_M43y83L67AMbmseTosD5j8IOkA6r13WyKaZ0lUlsQYgxhqXro8i8Ms4WqGs3HTjTPtdWe3f20BeJ9Cp4cNjXYocnbJAuAiNIoFocjlRbEOY7oIS0ohFt2rnaC9Z1TeQIUaIohTpU_Ht5Sv7_rtlcEI0daAUURJwM3qBMUNUpH76CwGr4jvQGF18Ype-U7iX3dY45-N1jDJlBJdlrEdHCcnMCtILHEnnkjJBja6mHro.O2lwprJI7bgLnXIuxJTc96rKBRouxOEb_oBEKDa2WgA&amp;dib_tag=se&amp;keywords=%E3%82%A4%E3%83%BC%E3%83%AD%E3%83%B3%E3%83%BB%E3%83%9E%E3%82%B9%E3%82%AF&amp;qid=1759313753&amp;sprefix=%E3%82%A4%E3%83%BC%E3%83%AD%E3%83%B3+%E3%83%9E%E3%82%B9%E3%82%AF%2Caps%2C189&amp;sr=8-7\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">イーロン・マスク</a>（ウォルター・アイザックソン）</p></li><li><p id=\"849b4e52-8100-4350-97d3-c0e249d9cd2e\" name=\"849b4e52-8100-4350-97d3-c0e249d9cd2e\"><a href=\"https://www.hayakawa-online.co.jp/shop/g/g0000090371/?utm_source=chatgpt.com\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">E＝MC² ― 世界一有名な方程式の「伝記」</a>（デイヴィッド・ボダニス 著、訳：伊藤文英・高橋知子・吉田三知世）</p></li></ul><p id=\"dc8a3d2d-daab-43d8-bbf5-f82c2b477a50\" name=\"dc8a3d2d-daab-43d8-bbf5-f82c2b477a50\"><br/></p></div> <!-- --> <!-- --> <!-- --> <div data-v-7db6ac5e=\"\" style=\"display:none;\"><button class=\"a-button\" data-disable-focus=\"false\" data-file-widget=\"fileDownloadButton\" data-size=\"small\" data-type=\"primary\" data-v-4f14eb04=\"\" data-width=\"fit\" type=\"button\" undefined=\"\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><i aria-hidden=\"true\" class=\"a-icon a-icon--fileDownload a-icon--size_small\"><!-- --></i>\n    ダウンロード\n  </div></button></div> <!-- --> <button aria-label=\"コードをコピー\" class=\"a-button m-copyCodeButton m-iconButton\" data-disable-focus=\"false\" data-size=\"small\" data-type=\"none\" data-v-4f14eb04=\"\" data-v-80ab2cbc=\"\" style=\"display:none;\" type=\"button\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><span data-v-80ab2cbc=\"\"><span class=\"visually-hidden\" data-v-80ab2cbc=\"\">\n  copy\n</span> <i aria-hidden=\"true\" class=\"a-icon a-icon--copy a-icon--size_small\" data-v-80ab2cbc=\"\"><!-- --></i></span> <!-- --></div></button> <!-- --></div></div> <!-- --></div>",
+      "image_map": {
+        "https://assets.st-note.com/production/uploads/images/219258173/rectangle_large_type_2_afd8241d2eb43928e063c076fa52005c.png?width=1280": "../img/blog/rectangle_large_type_2_afd8241d2eb43928e063c076fa52005c.png",
+        "https://assets.st-note.com/img/1759312633-OjNIH94ks8mfEp1XSqT25rKb.png?width=1200": "../img/blog/1759312633-OjNIH94ks8mfEp1XSqT25rKb.png"
+      }
+    }
+  },
+  "n893d0e031bb0": {
+    "article": {
+      "title": "【Google AI完全活用】讃岐うどん巡りの旅 - 50店舗制覇者が教えるAI時代の最強旅行術",
+      "url": "https://note.com/magic_guppy1164/n/n893d0e031bb0",
+      "slug": "n893d0e031bb0",
+      "date": "2025年09月23日",
+      "date_obj": "2025-09-23T15:09:15+09:00",
+      "excerpt": "はじめに：AIで旅行が変わる時代旅行計画って、意外と時間がかかりませんか？どこに行くか、どの順番で回るか、どんなルートが効率的か...。そんな悩みをGoogle AIサービスで一気に解決した実体験をお話しします。続きをみる",
+      "thumbnail": null
+    },
+    "content": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "【Google AI完全活用】讃岐うどん巡りの旅 - 50店舗制覇者が教えるAI時代の最強旅行術"
+        },
+        {
+          "level": 2,
+          "text": "はじめに：AIで旅行が変わる時代"
+        },
+        {
+          "level": 2,
+          "text": "なぜGoogle AIを選んだのか？旅行計画の新常識"
+        },
+        {
+          "level": 2,
+          "text": "実践編：Google AIサービスを使った5つのステップ"
+        },
+        {
+          "level": 3,
+          "text": "STEP1：Google Mapの活用術 - 過去の財産をデジタル化"
+        },
+        {
+          "level": 3,
+          "text": "STEP2：Gemini CLIでコース最適化 - AIの真骨頂"
+        },
+        {
+          "level": 3,
+          "text": "STEP3：HTMLマップ作成 - 視覚的な旅行ガイド"
+        },
+        {
+          "level": 3,
+          "text": "このマップの素晴らしいところは："
+        },
+        {
+          "level": 3,
+          "text": "STEP4：AI生成の旅のしおり - プロ級の仕上がり"
+        },
+        {
+          "level": 2,
+          "text": "実際の旅行レポート：AIプランを現実で検証"
+        },
+        {
+          "level": 3,
+          "text": "1軒目：はりや - キング オブ 讃岐うどん"
+        },
+        {
+          "level": 3,
+          "text": "2軒目：上戸 - 海を眺めながらの絶品いりこ出汁"
+        },
+        {
+          "level": 3,
+          "text": "3軒目：大多喜 - 釜揚げうどんの真髄"
+        },
+        {
+          "level": 3,
+          "text": "観光スポット：銭形砂絵 - AIが提案した息抜きタイム"
+        },
+        {
+          "level": 3,
+          "text": "4軒目：うどんバカ一代 - 背徳のカロリー爆弾"
+        },
+        {
+          "level": 2,
+          "text": "想定外のハプニングとAIの対応力"
+        },
+        {
+          "level": 2,
+          "text": "STEP5：思い出をBookに - 旅行の新しい締めくくり"
+        },
+        {
+          "level": 2,
+          "text": "Google AIサービス活用のメリット・デメリット"
+        },
+        {
+          "level": 3,
+          "text": "メリット"
+        },
+        {
+          "level": 3,
+          "text": "デメリット"
+        },
+        {
+          "level": 2,
+          "text": "旅行業界の未来予想：AI時代の新常識"
+        },
+        {
+          "level": 2,
+          "text": "まとめ：Google AIで旅行は「体験」から「創造」へ"
+        },
+        {
+          "level": 2,
+          "text": "この記事で紹介したサービス"
+        }
+      ],
+      "paragraphs": [
+        "旅行計画って、意外と時間がかかりませんか？どこに行くか、どの順番で回るか、どんなルートが効率的か...。そんな悩みをGoogle AIサービスで一気に解決した実体験をお話しします。",
+        "今回の舞台は香川県。私が過去に50店舗以上巡った讃岐うどんの名店を、今回は友人と一緒に効率よく回るためにGeminiをフル活用しました。",
+        "従来の旅行計画といえば：",
+        "ガイドブックを読み漁る",
+        "ブログを片っ端から調べる",
+        "でもGoogle AIなら：",
+        "膨大なデータを瞬時に分析",
+        "最適なルートを自動提案",
+        "リアルタイムの店舗情報をチェック",
+        "旅のしおりまで自動作成",
+        "時間短縮効果は驚くほどでした。従来なら数時間かかる作業が、なんと数分で完了したんです。",
+        "まず私のGoogleMap上の香川県は光輝いています。なぜなら、過去の出張時代に訪れたうどん屋がすべて保存されているから。",
+        "GoogleMapの場所保存機能は旅行者の最強ツール。お気に入りのリストを作成し、星評価やメモを残すことで、自分だけのグルメマップが完成します。",
+        "※今回はこのデータをCSV形式でダウンロード。こちらの記事が詳しく参考にしました。もちろん、Web上のおすすめ店を列挙して使用しても構いません。",
+        "ここからがGeminiの出番です。データを読み込ませ、以下の条件で最適コースを提案してもらいました：",
+        "Geminiへの指示内容：",
+        "1日で効率よく回れるコース設計",
+        "移動時間を考慮したスケジュール作成",
+        "5つのコース案を提案してもらった中で、最終的に選んだのは、私にとって外せない東西の名店を組み込んだコースでした。",
+        "Geminiと何度も対話を重ねながら、あれこれ検討していくうちに、自分にとって一番しっくりくる最適なコースを決めることができました。",
+        "選定したコースをもとに、Geminiに依頼してHTMLファイルを作成。Google Maps APIと連携した、インタラクティブなマップが完成しました。",
+        "[作成されたHTMLマップ]",
+        "ワンクリックでGoogle Mapsアプリが起動",
+        "各店舗の詳細情報が表示",
+        "ルート案内が自動で開始",
+        "Geminiで作成した旅のしおりには、タイムスケジュールや各店舗の特徴とおすすめメニュー、さらに店名をクリックすればGoogleマップが起動するアクセス情報まで盛り込まれています。",
+        "また、Step3にはプラスして注意点なども加えられており、旅の流れを把握するだけでなく、細かな配慮まで行き届いた内容になっています。",
+        "旅のしおりリンク（ChatGPTリンク）：",
+        "つるシコの麺とかしわ天、イカ天が最高。AIが提案した通り、朝一番で訪問したことで行列を避けることができました。",
+        "いりこ出汁の黄金スープが絶品。海沿いの駅に隣接し、景色も最高でした。Geminiが「景色も楽しめる」と提案していた理由がよく分かりました。",
+        "コシのある最高の麺とつけ汁。すこし濃いめのつゆにつけながら味わううどん。お母さんの明るい人柄に癒されました。",
+        "うどんばかりもう入らんと、近くの観光スポットをみることに。銭形砂絵で歴史に触れる時間は、旅にメリハリを与えてくれました。",
+        "釜玉バターうどん。最高カロリーの背徳感とバターの香りが最高でした！",
+        "もちろん、完璧な計画でも想定外は起きます：",
+        "行列で時間ロス→ Geminiが提案していた代替店舗リストが大活躍",
+        "道を間違える→ Google Maps のリアルタイムナビで即座に修正",
+        "東西の距離に苦戦→ 事前のAI計算が甘く、人間の判断で調整",
+        "最終的に回れたのは4店舗でしたが、バックアップ計画のおかげで充実した旅になりました。",
+        "旅行の後、Geminiで思い出ブックを作成しました。簡単な指示をするだけで、プロ仕様のフォトブックデザインが完成します。私が行ったことは、載せたい写真を選び、画像管理サービス（Postimageを使用）にアップロードすることだけです。",
+        "Geminiに写真を反映させるには、URL経由で指定する必要があります。Postimageではアップロード後に写真のURLを取得できるので、それぞれの写真にタイトルを付け、タイトルとURLをペアにしてGeminiへの指示に含めるのがコツです。",
+        "完成したフォトブック：",
+        "さらに、以前作っておいた「キーワードを渡すと資料を自動で作成してくれるGem」も試しに活用してみました。旅行に関連する思い出や体験を表すキーワードをいくつか投げてみたところ、あっという間に整理された素晴らしい資料が完成。まるで旅行記やアルバムの解説文のような仕上がりで、写真ブックとあわせて振り返ると一層楽しめる内容になりました。",
+        "このように、写真だけでなく文章によるまとめも自動で生成できるので、旅の思い出を多角的に残すことができて大変便利です。Geminiと組み合わせることで、写真のビジュアルとテキストによる記録が一体となった「自分だけの旅行記」を作れるのが魅力だと感じました。",
+        "レイアウト作成に約3時間",
+        "など、合計で7時間ほどかかっていましたが、Geminiを活用すると、これらすべての工程をまとめて スマホだけで30分以内で完了。写真選びから仕上がりまで一気に進められるので、作業の効率は驚くほど向上しました。",
+        "圧倒的な時間短縮従来なら数時間かかる作業が、AIを使うことで数分で完了。業務効率が大幅に向上します。",
+        "最新情報の取得リアルタイムで営業状況や最新のデータを確認でき、常にアップデートされた情報をもとに判断できます。",
+        "多角的な提案人間では思いつかないような視点やアイデアを提示してくれるため、企画や資料作成の幅が広がります。",
+        "継続的な改善学習機能により、使い続けるほどに精度が向上し、より自分に合った結果を得られるようになります。",
+        "最終判断は人間が必要AIの提案はあくまで参考。鵜呑みにせず、最終的な意思決定には人間のチェックが欠かせません。",
+        "地域特性の理解不足AIはローカルな事情や文化的なニュアンスを十分に理解できないことがあるため、人間の知見で補う必要があります。",
+        "今回の体験で感じたのは、**「帰るまでが遠足」から「記録するまでが旅行」**への変化です。",
+        "今後、私たちの旅行体験をより豊かにしてくれるサービスとして、さまざまな可能性が期待されています。たとえばNotebookLMを活用すれば、旅の出来事を自動的にまとめ上げてくれる「旅行記生成」が実現できるでしょう。写真や日記を整理する手間がなく、旅の記録が物語のように形になります。",
+        "さらにGoogle Vidsでは、旅の思い出を映像としてまとめる「思い出ムービー作成」が可能になります。自動編集によって、撮影した写真や動画が感動的なストーリーに仕上がり、家族や友人と簡単に共有できます。",
+        "そしてGeminiを通じては、旅行中のリアルタイム相談が大きな魅力です。行き先のおすすめ、現地の最新情報、食事や観光スポットの提案まで、その場でサポートしてくれる“旅のパートナー”として頼れる存在になるでしょう。",
+        "これらのサービスが組み合わさることで、旅行は「計画から記録・共有まで」より直感的で楽しい体験へと進化していくと考えられます。",
+        "Google AIサービスを活用することで：",
+        "計画時間を90%以上短縮",
+        "より多くの選択肢を検討可能",
+        "旅行後の記録作業も効率化",
+        "新しい発見や体験に時間を集中",
+        "重要なのは、AIを使いこなすことで、人間にしかできない「感動」や「発見」により多くの時間を使えるようになることです。",
+        "次回の旅行では、あなたもGoogle AIを相棒に、新しい旅のスタイルを体験してみませんか？",
+        "Google Map（場所保存・ルート検索）",
+        "GeminiCLI（旅行計画・コンテンツ作成）",
+        "Gemini（フォトブック、資料作成）",
+        "最後まで読んでいただき、ありがとうございました！この記事が少しでも皆さんの旅行計画のお役に立てれば幸いです＾＾"
+      ],
+      "lists": [
+        [
+          "ガイドブックを読み漁る",
+          "SNSで情報収集",
+          "ブログを片っ端から調べる"
+        ],
+        [
+          "膨大なデータを瞬時に分析",
+          "最適なルートを自動提案",
+          "リアルタイムの店舗情報をチェック",
+          "旅のしおりまで自動作成"
+        ],
+        [
+          "1日で効率よく回れるコース設計",
+          "各店舗の営業状況確認",
+          "移動時間を考慮したスケジュール作成",
+          "代替店舗の提案"
+        ],
+        [
+          "ワンクリックでGoogle Mapsアプリが起動",
+          "各店舗の詳細情報が表示",
+          "ルート案内が自動で開始"
+        ],
+        [
+          "行列で時間ロス→ Geminiが提案していた代替店舗リストが大活躍",
+          "道を間違える→ Google Maps のリアルタイムナビで即座に修正",
+          "東西の距離に苦戦→ 事前のAI計算が甘く、人間の判断で調整"
+        ],
+        [
+          "写真の選別に約2時間",
+          "レイアウト作成に約3時間",
+          "文章作成に約2時間"
+        ],
+        [
+          "圧倒的な時間短縮従来なら数時間かかる作業が、AIを使うことで数分で完了。業務効率が大幅に向上します。",
+          "最新情報の取得リアルタイムで営業状況や最新のデータを確認でき、常にアップデートされた情報をもとに判断できます。",
+          "多角的な提案人間では思いつかないような視点やアイデアを提示してくれるため、企画や資料作成の幅が広がります。",
+          "継続的な改善学習機能により、使い続けるほどに精度が向上し、より自分に合った結果を得られるようになります。"
+        ],
+        [
+          "最終判断は人間が必要AIの提案はあくまで参考。鵜呑みにせず、最終的な意思決定には人間のチェックが欠かせません。",
+          "地域特性の理解不足AIはローカルな事情や文化的なニュアンスを十分に理解できないことがあるため、人間の知見で補う必要があります。"
+        ],
+        [
+          "計画時間を90%以上短縮",
+          "より多くの選択肢を検討可能",
+          "旅行後の記録作業も効率化",
+          "新しい発見や体験に時間を集中"
+        ],
+        [
+          "Google Map（場所保存・ルート検索）",
+          "GeminiCLI（旅行計画・コンテンツ作成）",
+          "Gemini（フォトブック、資料作成）"
+        ]
+      ],
+      "images": [
+        "../img/blog/rectangle_large_type_2_15c5f87734085c5ccee5d993635dab4b.png",
+        "../img/blog/1758592351-fLbZiNdMEuog4QV5Jnhp3a1F.png",
+        "../img/blog/1758592395-KHgnXzpaFij9yVfmUG5chuwr.png",
+        "../img/blog/1758592498-6KChYL7mGvji3pIHTF15srSc.png",
+        "../img/blog/1758592931-kZBdOEzWur7mpUTXHLbV30sS.png",
+        "../img/blog/1758593791-XHY7WxOZvPmnoD2jlR48kqQK.png",
+        "../img/blog/1758607468-GsdQCku5H7Wt9pxTy2MhboqO.png",
+        "../img/blog/1758596605-ghJM3DKdkI6nuTFbALzHYeZw.png",
+        "../img/blog/1758596815-aROqHZQ8CsdNmSVPtMg3o6eA.jpg",
+        "../img/blog/1758596872-kcB9a7gFZivlSorx5uHph41W.png",
+        "../img/blog/1758596930-LjDmG3oBist0SnMwPF4ublCf.png",
+        "../img/blog/1758597040-bXRA32rF7hEMGwDpjlcP6gnf.png",
+        "../img/blog/1758597087-ncgpZUq4LK8hAIxEtuRaJVzb.png",
+        "../img/blog/1758597194-LeCynoWNHq89tAXZrIm2VYhx.png",
+        "../img/blog/1758597227-mEAByhF0YxsvaW7XUPQwVrH8.png",
+        "../img/blog/1758597263-jIODMcwdpJoavN4qeTlzCxtL.png",
+        "../img/blog/1758603853-MVuXmez4a7nbCsGcqwklLE6I.png",
+        "../img/blog/1758603777-HCQP5kouhvLqjlxfayAi2tmM.png"
+      ],
+      "html": "<div class=\"p-article__content pb-4\" data-v-0e32a970=\"\"><div data-note-id=\"127119704\" data-note-key=\"n893d0e031bb0\" data-v-0e32a970=\"\"><div class=\"o-noteContentText o-noteContentText--font_sansserif o-noteContentText--device_windows\" data-v-7db6ac5e=\"\"><figure class=\"o-noteEyecatch\" data-v-1811b4ec=\"\" data-v-7db6ac5e=\"\"><img alt=\"見出し画像\" class=\"a-image o-noteEyecatch__image\" data-v-1811b4ec=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"576\" loading=\"lazy\" src=\"../img/blog/rectangle_large_type_2_15c5f87734085c5ccee5d993635dab4b.png\" width=\"1101\"/> <!-- --> <!-- --></figure> <div class=\"o-noteContentHeader o-noteContentText__header\" data-v-03d2631f=\"\" data-v-7db6ac5e=\"\"><div class=\"o-noteContentHeader__titleContainer o-noteContentHeader__titleContainer--font_sansserif o-noteContentHeader__titleContainer--device_windows\" data-v-03d2631f=\"\"><h1 class=\"o-noteContentHeader__title\" data-v-03d2631f=\"\">\n      【Google AI完全活用】讃岐うどん巡りの旅 - 50店舗制覇者が教えるAI時代の最強旅行術\n    </h1> <div class=\"o-noteContentHeader__titleAttachment\" data-v-03d2631f=\"\"><div class=\"flex\" data-v-03d2631f=\"\"><span class=\"o-noteLikeV3\" data-v-03d2631f=\"\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainer\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainerInner\" data-v-5259bb13=\"\"><button aria-label=\"スキ\" aria-pressed=\"false\" class=\"o-noteLikeV3__iconButton leading-none flex items-center\" data-v-5259bb13=\"\"><i aria-hidden=\"true\" class=\"o-noteLikeV3__icon a-icon a-icon--heart a-icon--size_mediumSmall\" data-disable-focus=\"true\" data-fill=\"lightGray\" data-tooltip=\"スキ\" data-v-5259bb13=\"\"><!-- --></i> </button> <!-- --></span></span> <!-- --> <button aria-label=\"18スキ この記事にスキをつけたユーザーを見る\" class=\"o-noteLikeV3__count o-noteLikeV3__count--mediumSmall text-text-secondary\" data-v-5259bb13=\"\">\n    18\n  </button></span> <!-- --></div> <div class=\"flex items-center gap-2 justify-center flex-wrap shrink grow-0\" data-v-03d2631f=\"\"><!-- --> <!-- --> <!-- --> <!-- --></div></div></div> <div class=\"o-noteContentHeader__creatorInfo\" data-v-03d2631f=\"\"><a aria-hidden=\"true\" class=\"o-noteContentHeader__avatar a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\"><span class=\"m-avatar m-avatar--medium\" data-v-03d2631f=\"\" data-v-3153a960=\"\"><img alt=\"株式会社Cosmico 代表/生成AI\" class=\"a-image m-avatar__image lazyload\" data-src=\"https://assets.st-note.com/production/uploads/images/209172942/profile_63735566a1e3c6bca33c05399cb7b782.jpeg?width=60\" data-v-3153a960=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"56\" loading=\"lazy\" src=\"data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23fff%22%2F%3E%3Cstop%20offset%3D%2267%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3CanimateTransform%20attributeName%3D%22gradientTransform%22%20type%3D%22translate%22%20from%3D%22-1%200%22%20to%3D%221%200%22%20begin%3D%220s%22%20dur%3D%221.5s%22%20repeatCount%3D%22indefinite%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20class%3D%22rect%22%20fill%3D%22url(%23a)%22%20d%3D%22M-100-100h300v300h-300z%22%2F%3E%3C%2Fsvg%3E\" width=\"56\"/></span></a> <div class=\"o-noteContentHeader__info\" data-v-03d2631f=\"\"><div class=\"o-noteContentHeader__name\" data-v-03d2631f=\"\"><a class=\"a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\">\n          株式会社Cosmico 代表/生成AI\n        </a></div> <span class=\"o-noteContentHeader__date\" data-v-03d2631f=\"\"><time data-v-03d2631f=\"\" datetime=\"2025-09-23T15:09:15.000+09:00\">2025年9月23日 15:09</time></span> <!-- --></div> <!-- --> <div class=\"o-noteContentHeader__status\" data-v-03d2631f=\"\"> <!-- --></div></div></div> <div class=\"note-common-styles__textnote-body\" data-name=\"body\" data-v-7db6ac5e=\"\"><h2 id=\"b525e21b-735f-4d7b-b4f5-fa8af1d16b24\" name=\"b525e21b-735f-4d7b-b4f5-fa8af1d16b24\">はじめに：AIで旅行が変わる時代</h2><p id=\"96ab9d2f-0f60-4f87-a330-2eb764e214b4\" name=\"96ab9d2f-0f60-4f87-a330-2eb764e214b4\">旅行計画って、意外と時間がかかりませんか？どこに行くか、どの順番で回るか、どんなルートが効率的か...。そんな悩みを<strong>Google AIサービス</strong>で一気に解決した実体験をお話しします。</p><p id=\"ddd1cf4d-d2d7-4d6a-a273-8a21174d8379\" name=\"ddd1cf4d-d2d7-4d6a-a273-8a21174d8379\">今回の舞台は香川県。私が過去に50店舗以上巡った讃岐うどんの名店を、今回は友人と一緒に効率よく回るために<strong>Gemini</strong>をフル活用しました。</p><h2 id=\"af49af73-2679-4ca9-b90c-42e5f7aa981e\" name=\"af49af73-2679-4ca9-b90c-42e5f7aa981e\">なぜGoogle AIを選んだのか？旅行計画の新常識</h2><p id=\"0f86ad42-67d6-4076-b111-74257a127efb\" name=\"0f86ad42-67d6-4076-b111-74257a127efb\">従来の旅行計画といえば：</p><ul id=\"437ceb4f-e2c5-4095-976b-3fadb0f872af\" name=\"437ceb4f-e2c5-4095-976b-3fadb0f872af\"><li><p id=\"f85f180e-f1a6-4d0e-8ec5-8bc3cd35f3c2\" name=\"f85f180e-f1a6-4d0e-8ec5-8bc3cd35f3c2\">ガイドブックを読み漁る</p></li><li><p id=\"de9136f1-c36f-4f3c-ab82-a335721d1f52\" name=\"de9136f1-c36f-4f3c-ab82-a335721d1f52\">SNSで情報収集</p></li><li><p id=\"349ce2a0-a756-45b9-bd30-08a842b43230\" name=\"349ce2a0-a756-45b9-bd30-08a842b43230\">ブログを片っ端から調べる</p></li></ul><p id=\"ffd28b65-e0a1-4891-941f-359dea6e5336\" name=\"ffd28b65-e0a1-4891-941f-359dea6e5336\">でも<strong>Google AIなら</strong>：</p><ul id=\"05352b53-5904-4e34-97ae-6c9cab3b3cc7\" name=\"05352b53-5904-4e34-97ae-6c9cab3b3cc7\"><li><p id=\"4a9e4d8c-505b-4c53-b438-33ab13db178a\" name=\"4a9e4d8c-505b-4c53-b438-33ab13db178a\">膨大なデータを瞬時に分析</p></li><li><p id=\"b21552e4-3cf3-4e3b-bb22-d7248bb4168a\" name=\"b21552e4-3cf3-4e3b-bb22-d7248bb4168a\">最適なルートを自動提案</p></li><li><p id=\"cfdd912c-169c-4638-9737-7e135187d4d0\" name=\"cfdd912c-169c-4638-9737-7e135187d4d0\">リアルタイムの店舗情報をチェック</p></li><li><p id=\"df68e997-8f04-4a4e-b477-b0b8d23be8ad\" name=\"df68e997-8f04-4a4e-b477-b0b8d23be8ad\">旅のしおりまで自動作成</p></li></ul><p id=\"75738ebe-65fb-40ac-8bf4-0d316678dc34\" name=\"75738ebe-65fb-40ac-8bf4-0d316678dc34\"><strong>時間短縮効果は驚くほど</strong>でした。従来なら数時間かかる作業が、なんと<strong>数分</strong>で完了したんです。</p><h2 id=\"e2500652-5502-47a5-8969-f0e407660995\" name=\"e2500652-5502-47a5-8969-f0e407660995\">実践編：Google AIサービスを使った5つのステップ</h2><h3 id=\"d80d4090-f3f7-4c50-9e6e-e628d87aed68\" name=\"d80d4090-f3f7-4c50-9e6e-e628d87aed68\">STEP1：Google Mapの活用術 - 過去の財産をデジタル化</h3><p id=\"9d6056cd-6861-4e2e-8184-e6b737470c32\" name=\"9d6056cd-6861-4e2e-8184-e6b737470c32\">まず私の<strong>GoogleMap上の香川県は光輝いています</strong>。なぜなら、過去の出張時代に訪れたうどん屋がすべて保存されているから。</p><p id=\"592d82c9-e01c-4239-add5-584006720142\" name=\"592d82c9-e01c-4239-add5-584006720142\"><br/></p><figure id=\"e9af8a86-ef60-4cd4-9f5e-dfd6019c9ccf\" name=\"e9af8a86-ef60-4cd4-9f5e-dfd6019c9ccf\"><img alt=\"\" height=\"344\" loading=\"lazy\" src=\"../img/blog/1758592351-fLbZiNdMEuog4QV5Jnhp3a1F.png\" width=\"620\"/><figcaption>GoogleMapで香川県のうどん店がマーキングされた画面</figcaption></figure><p id=\"c8f6b8d0-94a8-4c96-8f35-049f1290cb28\" name=\"c8f6b8d0-94a8-4c96-8f35-049f1290cb28\"><br/><strong>GoogleMapの場所保存機能</strong>は旅行者の最強ツール。お気に入りのリストを作成し、星評価やメモを残すことで、自分だけのグルメマップが完成します。</p><p id=\"4e47a04e-1fc6-42fe-b5e3-49321763ae8e\" name=\"4e47a04e-1fc6-42fe-b5e3-49321763ae8e\">※今回はこのデータをCSV形式でダウンロード。<a href=\"https://note.com/key_curiosity/n/naeec8f1bf205\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">こちらの記事</a>が詳しく参考にしました。もちろん、Web上のおすすめ店を列挙して使用しても構いません。</p><figure id=\"b3d1505d-9ffa-4273-9d25-10aa59afb55c\" name=\"b3d1505d-9ffa-4273-9d25-10aa59afb55c\"><img alt=\"\" height=\"455\" loading=\"lazy\" src=\"../img/blog/1758592395-KHgnXzpaFij9yVfmUG5chuwr.png\" width=\"620\"/><figcaption>GoogleMapからエクスポートしたCSVファイルをGeminiCLIで列挙</figcaption></figure><h3 id=\"1fbbefe4-fe9d-4cfd-b43b-cd848290bc52\" name=\"1fbbefe4-fe9d-4cfd-b43b-cd848290bc52\">STEP2：Gemini CLIでコース最適化 - AIの真骨頂</h3><p id=\"936dbd89-ca94-4d09-82dd-174b8b0cecb6\" name=\"936dbd89-ca94-4d09-82dd-174b8b0cecb6\">ここからが<strong>Gemini</strong>の出番です。データを読み込ませ、以下の条件で最適コースを提案してもらいました：</p><p id=\"92005151-a947-4169-82b8-71a5f78ddb79\" name=\"92005151-a947-4169-82b8-71a5f78ddb79\"><strong>Geminiへの指示内容</strong>：</p><ol id=\"3baaa3b4-69da-4714-baee-998eebe583ec\" name=\"3baaa3b4-69da-4714-baee-998eebe583ec\"><li><p id=\"bca139c6-c3d3-48ad-9b17-0547b03bd804\" name=\"bca139c6-c3d3-48ad-9b17-0547b03bd804\">1日で効率よく回れるコース設計</p></li><li><p id=\"a2a695cf-2635-4426-ae30-304404f89f59\" name=\"a2a695cf-2635-4426-ae30-304404f89f59\">各店舗の営業状況確認</p></li><li><p id=\"f05b649d-16f0-434f-ab85-3dee85b6ed84\" name=\"f05b649d-16f0-434f-ab85-3dee85b6ed84\">移動時間を考慮したスケジュール作成</p></li><li><p id=\"39b862aa-6bf2-429e-89bb-d4af0ae1bb7f\" name=\"39b862aa-6bf2-429e-89bb-d4af0ae1bb7f\">代替店舗の提案</p></li></ol><figure id=\"c605cfa6-6199-4cfe-9ba1-bfbbfa85ddfe\" name=\"c605cfa6-6199-4cfe-9ba1-bfbbfa85ddfe\"><img alt=\"\" height=\"631\" loading=\"lazy\" src=\"../img/blog/1758592498-6KChYL7mGvji3pIHTF15srSc.png\" width=\"620\"/><figcaption>Gemini CLIでコース提案を受けている画面</figcaption></figure><p id=\"6be6c1a9-44bd-423a-aacc-adac29482943\" name=\"6be6c1a9-44bd-423a-aacc-adac29482943\">5つのコース案を提案してもらった中で、最終的に選んだのは、私にとって外せない東西の名店を組み込んだコースでした。</p><p id=\"0a739f98-25a9-4795-a519-a22d52c051a4\" name=\"0a739f98-25a9-4795-a519-a22d52c051a4\">Geminiと何度も対話を重ねながら、あれこれ検討していくうちに、自分にとって一番しっくりくる最適なコースを決めることができました。</p><h3 id=\"921a255b-84ae-4738-8bea-95430b67eca3\" name=\"921a255b-84ae-4738-8bea-95430b67eca3\">STEP3：HTMLマップ作成 - 視覚的な旅行ガイド</h3><p id=\"d01632d7-fb79-4a7f-8b06-5ba6491be62c\" name=\"d01632d7-fb79-4a7f-8b06-5ba6491be62c\">選定したコースをもとに、<strong>Geminiに依頼してHTMLファイルを作成</strong>。Google Maps APIと連携した、インタラクティブなマップが完成しました。</p><figure id=\"18b08f58-bcf9-4d19-8be9-8e37515b804f\" name=\"18b08f58-bcf9-4d19-8be9-8e37515b804f\"><img alt=\"\" height=\"323\" loading=\"lazy\" src=\"../img/blog/1758592931-kZBdOEzWur7mpUTXHLbV30sS.png\" width=\"620\"/><figcaption>作成されたHTMLマップの表示画面</figcaption></figure><p id=\"3bf855d4-5547-4248-a79b-6c6052f9d45a\" name=\"3bf855d4-5547-4248-a79b-6c6052f9d45a\">[作成されたHTMLマップ]</p><figure embedded-content-key=\"embb1022e761b0b\" embedded-service=\"attachment\" id=\"6f0103b8-c374-46a2-98f5-0f717f3c6b00\" name=\"6f0103b8-c374-46a2-98f5-0f717f3c6b00\"><div data-name=\"embedContainer\"><div data-embed-service=\"attachment\"><div class=\"fude-iframe-container\"><div class=\"fude-iframe-container-attachment\"><div class=\"file-widget\"><a class=\"file-widget__link\" data-attachment-key=\"1a47ed0716bba2a1da12ad1a19272b0a\" href=\"https://note.com/api/v2/attachments/download/1a47ed0716bba2a1da12ad1a19272b0a\"><div class=\"file-widget__info\"><div class=\"file-widget__icon\"><i class=\"a-icon a-icon--attachFile\"></i></div><div class=\"file-widget__data\"><strong class=\"file-widget__filename\">final_gamou_plan.html</strong><div class=\"file-widget__filesize\">9.28 KB</div><div class=\"file-widget__note\"><span class=\"file-widget-disclaimer\">ファイルダウンロードについて</span></div></div></div><div class=\"file-widget__download\"><div class=\"a-button\" data-size=\"small\" data-type=\"primary\" data-width=\"fit\"><div class=\"a-button__inner\">\n<i class=\"a-icon a-icon--fileDownload a-icon--size_small\"></i>\nダウンロード\n</div></div></div></a></div></div></div></div></div></figure><h3 id=\"9dfbea44-eef6-4d6f-85b8-ad056be4fdce\" name=\"9dfbea44-eef6-4d6f-85b8-ad056be4fdce\">このマップの素晴らしいところは：</h3><ul id=\"f7fb3942-1f0d-45de-89fc-33d74024c28f\" name=\"f7fb3942-1f0d-45de-89fc-33d74024c28f\"><li><p id=\"2c2b520a-7280-42d1-82b6-69ec926c3c5c\" name=\"2c2b520a-7280-42d1-82b6-69ec926c3c5c\">ワンクリックでGoogle Mapsアプリが起動</p></li><li><p id=\"8ef75800-ba74-49af-828e-6881aff061af\" name=\"8ef75800-ba74-49af-828e-6881aff061af\">各店舗の詳細情報が表示</p></li><li><p id=\"bf200356-d116-4dc2-98e9-6b91d5b409ee\" name=\"bf200356-d116-4dc2-98e9-6b91d5b409ee\">ルート案内が自動で開始</p></li></ul><figure id=\"5ef73c7c-e027-4fe2-a270-9b66db4d1fc0\" name=\"5ef73c7c-e027-4fe2-a270-9b66db4d1fc0\"><img alt=\"\" height=\"402\" loading=\"lazy\" src=\"../img/blog/1758593791-XHY7WxOZvPmnoD2jlR48kqQK.png\" width=\"620\"/><figcaption>HTMLマップからクリックでGoogleMapが起動</figcaption></figure><h3 id=\"d01cd2b4-afd1-499b-8c7e-24268ac1b336\" name=\"d01cd2b4-afd1-499b-8c7e-24268ac1b336\"><br/><br/>STEP4：AI生成の旅のしおり - プロ級の仕上がり</h3><p id=\"c4ccabc1-9929-4d61-909c-00703c652111\" name=\"c4ccabc1-9929-4d61-909c-00703c652111\">Geminiで作成した旅のしおりには、タイムスケジュールや各店舗の特徴とおすすめメニュー、さらに店名をクリックすればGoogleマップが起動するアクセス情報まで盛り込まれています。</p><p id=\"a9f0206e-8ac9-4776-991e-6bf35c24aa10\" name=\"a9f0206e-8ac9-4776-991e-6bf35c24aa10\">また、Step3にはプラスして注意点なども加えられており、旅の流れを把握するだけでなく、細かな配慮まで行き届いた内容になっています。</p><p id=\"9100600e-359f-48fd-af7b-65bd46387f4d\" name=\"9100600e-359f-48fd-af7b-65bd46387f4d\"><br/></p><figure id=\"7172f8e2-fe0c-4259-98b9-b433a9af0017\" name=\"7172f8e2-fe0c-4259-98b9-b433a9af0017\"><img alt=\"\" height=\"436\" loading=\"lazy\" src=\"../img/blog/1758607468-GsdQCku5H7Wt9pxTy2MhboqO.png\" width=\"620\"/><figcaption>旅のしおり　Map以外の情報を記載</figcaption></figure><p id=\"c2320c50-c5c9-455b-ab58-d0ce028ff272\" name=\"c2320c50-c5c9-455b-ab58-d0ce028ff272\">旅のしおりリンク（ChatGPTリンク）：</p><figure data-identifier=\"null\" data-src=\"https://chatgpt.com/canvas/shared/68d20d1adb8081919256972dbdf86e42\" embedded-content-key=\"embc44f069aad70\" embedded-service=\"external-article\" id=\"044c280c-ec40-4dce-90c9-e1bab42bfae9\" name=\"044c280c-ec40-4dce-90c9-e1bab42bfae9\"><div data-name=\"embedContainer\"><div data-embed-service=\"external-article\"><span><div class=\"external-article-widget\">\n<a href=\"https://chatgpt.com/canvas/shared/68d20d1adb8081919256972dbdf86e42\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">\n<strong class=\"external-article-widget-title\">\nUdon Itinerary Alt\n</strong>\n<em class=\"external-article-widget-description\">\nA conversational AI system that listens, learns, and challeng\n</em>\n<em class=\"external-article-widget-url\">\nchatgpt.com\n</em>\n</a><a class=\"external-article-widget-image\" href=\"https://chatgpt.com/canvas/shared/68d20d1adb8081919256972dbdf86e42\" rel=\"noopener noreferrer nofollow\" style=\"background-image: url('https://cdn.oaistatic.com/assets/made-with-chatgpt-og-g73iyayd.webp');\" target=\"_blank\"></a>\n</div>\n</span></div></div></figure><p id=\"9639dcc1-9787-4cce-a24f-265622503176\" name=\"9639dcc1-9787-4cce-a24f-265622503176\"><br/></p><h2 id=\"70221cfe-d9fe-4ed9-bab7-47584ae18e30\" name=\"70221cfe-d9fe-4ed9-bab7-47584ae18e30\">実際の旅行レポート：AIプランを現実で検証</h2><h3 id=\"8eecd0ea-ceb8-445c-bb75-08a8efcb27e0\" name=\"8eecd0ea-ceb8-445c-bb75-08a8efcb27e0\">1軒目：はりや - キング オブ 讃岐うどん</h3><p id=\"cd2deac5-8e5a-41e5-bbae-d8835c1d4744\" name=\"cd2deac5-8e5a-41e5-bbae-d8835c1d4744\"><strong>つるシコの麺とかしわ天、イカ天が最高</strong>。AIが提案した通り、朝一番で訪問したことで行列を避けることができました。</p><figure id=\"6f0fd40f-d0f8-408b-a4cf-d61a381bdfdb\" name=\"6f0fd40f-d0f8-408b-a4cf-d61a381bdfdb\"><img alt=\"\" height=\"410\" loading=\"lazy\" src=\"../img/blog/1758596605-ghJM3DKdkI6nuTFbALzHYeZw.png\" width=\"620\"/><figcaption>はりやのうどん看板</figcaption></figure><p id=\"b7d0b365-8b52-485d-87bd-bc2e0f7ef5f6\" name=\"b7d0b365-8b52-485d-87bd-bc2e0f7ef5f6\"><br/></p><figure id=\"de51da04-a493-4f6d-bf1a-b7722f5ce78b\" name=\"de51da04-a493-4f6d-bf1a-b7722f5ce78b\"><img alt=\"\" height=\"465\" loading=\"lazy\" src=\"../img/blog/1758596815-aROqHZQ8CsdNmSVPtMg3o6eA.jpg\" width=\"620\"/><figcaption>かしわざるうどん</figcaption></figure><h3 id=\"bc902cf2-8df0-41d0-8cef-9967099ba182\" name=\"bc902cf2-8df0-41d0-8cef-9967099ba182\">2軒目：上戸 - 海を眺めながらの絶品いりこ出汁</h3><p id=\"0be274c1-5ab3-487a-a3cf-a3a43a824f5e\" name=\"0be274c1-5ab3-487a-a3cf-a3a43a824f5e\"><strong>いりこ出汁の黄金スープが絶品</strong>。海沿いの駅に隣接し、景色も最高でした。Geminiが「景色も楽しめる」と提案していた理由がよく分かりました。</p><p id=\"834e63ac-bf20-4551-910e-a4f1078d133c\" name=\"834e63ac-bf20-4551-910e-a4f1078d133c\"><br/></p><figure id=\"2113c5fa-8f39-4fb0-adc9-e75bbeb4b73e\" name=\"2113c5fa-8f39-4fb0-adc9-e75bbeb4b73e\"><img alt=\"\" height=\"471\" loading=\"lazy\" src=\"../img/blog/1758596872-kcB9a7gFZivlSorx5uHph41W.png\" width=\"620\"/><figcaption>上戸うどん看板と海の景色</figcaption></figure><p id=\"f310b50a-8936-4c48-a0c6-763a43b8a99b\" name=\"f310b50a-8936-4c48-a0c6-763a43b8a99b\"><br/></p><figure id=\"9c97e08e-053f-4e3f-a8cb-f5f5429bc9f0\" name=\"9c97e08e-053f-4e3f-a8cb-f5f5429bc9f0\"><img alt=\"\" height=\"461\" loading=\"lazy\" src=\"../img/blog/1758596930-LjDmG3oBist0SnMwPF4ublCf.png\" width=\"620\"/><figcaption>いりこ出汁の黄金スープ</figcaption></figure><h3 id=\"10bc9984-0269-4c65-96c7-6babc9903e89\" name=\"10bc9984-0269-4c65-96c7-6babc9903e89\"><br/>3軒目：大多喜 - 釜揚げうどんの真髄</h3><p id=\"cbe86244-279c-49bb-830f-1979f04da459\" name=\"cbe86244-279c-49bb-830f-1979f04da459\"><strong>コシのある最高の麺とつけ汁</strong>。すこし濃いめのつゆにつけながら味わううどん。お母さんの明るい人柄に癒されました。<br/></p><figure id=\"bf132c7c-447e-4913-8243-9885e5683664\" name=\"bf132c7c-447e-4913-8243-9885e5683664\"><img alt=\"\" height=\"451\" loading=\"lazy\" src=\"../img/blog/1758597040-bXRA32rF7hEMGwDpjlcP6gnf.png\" width=\"620\"/><figcaption>大多喜うどん店構え</figcaption></figure><p id=\"5d03ec97-a0ed-4b6f-bb1b-7c1083a66c37\" name=\"5d03ec97-a0ed-4b6f-bb1b-7c1083a66c37\"><br/></p><figure id=\"7a066641-a20a-40b7-99fd-83836aecbc82\" name=\"7a066641-a20a-40b7-99fd-83836aecbc82\"><img alt=\"\" height=\"463\" loading=\"lazy\" src=\"../img/blog/1758597087-ncgpZUq4LK8hAIxEtuRaJVzb.png\" width=\"620\"/><figcaption>大多喜の釜揚げうどん</figcaption></figure><p id=\"f9c99ebd-2412-4ed2-9069-bb6c9ebd676d\" name=\"f9c99ebd-2412-4ed2-9069-bb6c9ebd676d\"><br/></p><h3 id=\"3080225a-8d7c-41a2-8566-46906b9e1f6a\" name=\"3080225a-8d7c-41a2-8566-46906b9e1f6a\">観光スポット：銭形砂絵 - AIが提案した息抜きタイム</h3><p id=\"955287d7-0bd2-4922-96e4-d52eb9f9127f\" name=\"955287d7-0bd2-4922-96e4-d52eb9f9127f\">うどんばかりもう入らんと、近くの観光スポットをみることに。<strong>銭形砂絵</strong>で歴史に触れる時間は、旅にメリハリを与えてくれました。<br/></p><figure id=\"188ddfc1-a2af-4edb-8beb-bb1d7a7f43e7\" name=\"188ddfc1-a2af-4edb-8beb-bb1d7a7f43e7\"><img alt=\"\" height=\"456\" loading=\"lazy\" src=\"../img/blog/1758597194-LeCynoWNHq89tAXZrIm2VYhx.png\" width=\"620\"/><figcaption>銭形砂絵の全景写真</figcaption></figure><h3 id=\"93d34f6b-727c-41ae-adbf-9746747f1a9c\" name=\"93d34f6b-727c-41ae-adbf-9746747f1a9c\"><br/>4軒目：うどんバカ一代 - 背徳のカロリー爆弾</h3><p id=\"8b0904bf-0e0b-4f17-8f73-20f56e0ea4fa\" name=\"8b0904bf-0e0b-4f17-8f73-20f56e0ea4fa\"><strong>釜玉バターうどん</strong>。最高カロリーの背徳感とバターの香りが最高でした！</p><figure id=\"551ac0fe-55d6-4910-8daa-63dda5f7db6e\" name=\"551ac0fe-55d6-4910-8daa-63dda5f7db6e\"><img alt=\"\" height=\"454\" loading=\"lazy\" src=\"../img/blog/1758597227-mEAByhF0YxsvaW7XUPQwVrH8.png\" width=\"620\"/><figcaption>うどんバカ一代のれん</figcaption></figure><p id=\"3171fdf8-5d06-48af-ab8d-2be4ec91d51e\" name=\"3171fdf8-5d06-48af-ab8d-2be4ec91d51e\"><br/></p><figure id=\"04bc74b4-9727-45b3-a129-19d3ef943a61\" name=\"04bc74b4-9727-45b3-a129-19d3ef943a61\"><img alt=\"\" height=\"459\" loading=\"lazy\" src=\"../img/blog/1758597263-jIODMcwdpJoavN4qeTlzCxtL.png\" width=\"620\"/><figcaption>釜玉バターうどん</figcaption></figure><p id=\"e6522943-d974-4ded-9b75-f122d6654681\" name=\"e6522943-d974-4ded-9b75-f122d6654681\"><br/></p><h2 id=\"d012feef-285c-488e-8d9d-2bda7c8e8cb5\" name=\"d012feef-285c-488e-8d9d-2bda7c8e8cb5\">想定外のハプニングとAIの対応力</h2><p id=\"efca8bf4-5636-415d-9417-b672d49538a6\" name=\"efca8bf4-5636-415d-9417-b672d49538a6\">もちろん、完璧な計画でも想定外は起きます：</p><ul id=\"d4589f12-6db2-41e6-b2e2-23deeffb8933\" name=\"d4589f12-6db2-41e6-b2e2-23deeffb8933\"><li><p id=\"2ae7074b-2069-4ec5-945e-6c87494a7210\" name=\"2ae7074b-2069-4ec5-945e-6c87494a7210\"><strong>行列で時間ロス</strong> → Geminiが提案していた代替店舗リストが大活躍</p></li><li><p id=\"45039c29-7cb6-4575-b455-9f0b09bc6779\" name=\"45039c29-7cb6-4575-b455-9f0b09bc6779\"><strong>道を間違える</strong> → Google Maps のリアルタイムナビで即座に修正</p></li><li><p id=\"50c6d2a4-7071-453f-a1e3-6bb624def721\" name=\"50c6d2a4-7071-453f-a1e3-6bb624def721\"><strong>東西の距離に苦戦</strong> → 事前のAI計算が甘く、人間の判断で調整</p></li></ul><p id=\"59a17614-72e4-40d7-b22c-82888478d863\" name=\"59a17614-72e4-40d7-b22c-82888478d863\"><strong>最終的に回れたのは4店舗</strong>でしたが、バックアップ計画のおかげで充実した旅になりました。</p><h2 id=\"0fefc134-fb1d-4f65-9599-931434a44421\" name=\"0fefc134-fb1d-4f65-9599-931434a44421\">STEP5：思い出をBookに - 旅行の新しい締めくくり</h2><p id=\"e6c550fb-a4e6-4d9b-af64-4cf485abdd2b\" name=\"e6c550fb-a4e6-4d9b-af64-4cf485abdd2b\">旅行の後、Geminiで思い出ブックを作成しました。簡単な指示をするだけで、プロ仕様のフォトブックデザインが完成します。私が行ったことは、載せたい写真を選び、画像管理サービス（<a href=\"https://postimages.org/\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">Postimage</a>を使用）にアップロードすることだけです。</p><p id=\"9813ebce-181e-40d7-b1ca-c796cd0d463d\" name=\"9813ebce-181e-40d7-b1ca-c796cd0d463d\">Geminiに写真を反映させるには、URL経由で指定する必要があります。Postimageではアップロード後に写真のURLを取得できるので、それぞれの写真にタイトルを付け、タイトルとURLをペアにしてGeminiへの指示に含めるのがコツです。</p><p id=\"1c010ed7-17b7-4db2-bfc3-c763903cb967\" name=\"1c010ed7-17b7-4db2-bfc3-c763903cb967\"><br/></p><figure id=\"181959c7-4c82-44a5-862f-0b0640108095\" name=\"181959c7-4c82-44a5-862f-0b0640108095\"><img alt=\"\" height=\"364\" loading=\"lazy\" src=\"../img/blog/1758603853-MVuXmez4a7nbCsGcqwklLE6I.png\" width=\"620\"/><figcaption>GeminiCanvasを利用してフォトブックの作成指示</figcaption></figure><p id=\"ca0b6f4e-ab10-49a1-80d5-4e3827a64dba\" name=\"ca0b6f4e-ab10-49a1-80d5-4e3827a64dba\">完成したフォトブック：</p><figure data-identifier=\"null\" data-src=\"https://youtu.be/ITCCjdSTPY0\" embedded-content-key=\"emb1035a7935484\" embedded-service=\"youtube\" id=\"5be3a1ac-dbb5-4f35-adba-1e9a3b9f78ec\" name=\"5be3a1ac-dbb5-4f35-adba-1e9a3b9f78ec\"><div data-name=\"embedContainer\"><div data-embed-service=\"youtube\"><span><div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;\"><iframe allow=\"accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *; web-share *;\" allowfullscreen=\"\" loading=\"lazy\" scrolling=\"no\" src=\"https://www.youtube.com/embed/ITCCjdSTPY0?rel=0\" style=\"top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;\"></iframe></div></span></div></div></figure><p id=\"954de5f9-4186-465d-90fc-4328b5b1705e\" name=\"954de5f9-4186-465d-90fc-4328b5b1705e\"><br/><br/>さらに、以前作っておいた「キーワードを渡すと資料を自動で作成してくれるGem」も試しに活用してみました。旅行に関連する思い出や体験を表すキーワードをいくつか投げてみたところ、あっという間に整理された素晴らしい資料が完成。まるで旅行記やアルバムの解説文のような仕上がりで、写真ブックとあわせて振り返ると一層楽しめる内容になりました。</p><p id=\"7ac7ddec-d5e5-4105-a958-af1d02150091\" name=\"7ac7ddec-d5e5-4105-a958-af1d02150091\">このように、写真だけでなく文章によるまとめも自動で生成できるので、旅の思い出を多角的に残すことができて大変便利です。Geminiと組み合わせることで、写真のビジュアルとテキストによる記録が一体となった「自分だけの旅行記」を作れるのが魅力だと感じました。</p><p id=\"1b80f9d1-5ced-4c7b-8447-7204ab6669ce\" name=\"1b80f9d1-5ced-4c7b-8447-7204ab6669ce\"><br/></p><figure id=\"78d103b1-7e09-469e-98d9-079ebc15e030\" name=\"78d103b1-7e09-469e-98d9-079ebc15e030\"><img alt=\"\" height=\"285\" loading=\"lazy\" src=\"../img/blog/1758603777-HCQP5kouhvLqjlxfayAi2tmM.png\" width=\"620\"/><figcaption>Geminiの資料作成Gemを利用して資料作成指示  </figcaption></figure><p id=\"121bd191-bece-4aaf-9682-9030b8a8f424\" name=\"121bd191-bece-4aaf-9682-9030b8a8f424\">完成した思い出資料：</p><figure data-identifier=\"null\" data-src=\"https://youtu.be/0t0z8zamfDY\" embedded-content-key=\"embf4b445dd64c7\" embedded-service=\"youtube\" id=\"c826c20e-1cad-4027-b134-0a7dfe53b17a\" name=\"c826c20e-1cad-4027-b134-0a7dfe53b17a\"><div data-name=\"embedContainer\"><div data-embed-service=\"youtube\"><span><div style=\"left: 0; width: 100%; height: 0; position: relative; padding-bottom: 56.25%;\"><iframe allow=\"accelerometer *; clipboard-write *; encrypted-media *; gyroscope *; picture-in-picture *; web-share *;\" allowfullscreen=\"\" loading=\"lazy\" scrolling=\"no\" src=\"https://www.youtube.com/embed/0t0z8zamfDY?rel=0\" style=\"top: 0; left: 0; width: 100%; height: 100%; position: absolute; border: 0;\"></iframe></div></span></div></div></figure><p id=\"8af7e4e6-85b6-4a43-85f7-5884cbf803d1\" name=\"8af7e4e6-85b6-4a43-85f7-5884cbf803d1\">PDFファイル：</p><figure embedded-content-key=\"embe040533d9200\" embedded-service=\"attachment\" id=\"c4984f0b-6e53-46b7-b308-abb728334c4b\" name=\"c4984f0b-6e53-46b7-b308-abb728334c4b\"><div data-name=\"embedContainer\"><div data-embed-service=\"attachment\"><div class=\"fude-iframe-container\"><div class=\"fude-iframe-container-attachment\"><div class=\"file-widget\"><a class=\"file-widget__link\" data-attachment-key=\"fb792d1eca107065461a1fc58f1c299a\" href=\"https://note.com/api/v2/attachments/download/fb792d1eca107065461a1fc58f1c299a\"><div class=\"file-widget__info\"><div class=\"file-widget__icon\"><i class=\"a-icon a-icon--attachFile\"></i></div><div class=\"file-widget__data\"><strong class=\"file-widget__filename\">香川うどん弾丸ツアー GeminiCLIチャレンジ.pdf</strong><div class=\"file-widget__filesize\">1.69 MB</div><div class=\"file-widget__note\"><span class=\"file-widget-disclaimer\">ファイルダウンロードについて</span></div></div></div><div class=\"file-widget__download\"><div class=\"a-button\" data-size=\"small\" data-type=\"primary\" data-width=\"fit\"><div class=\"a-button__inner\">\n<i class=\"a-icon a-icon--fileDownload a-icon--size_small\"></i>\nダウンロード\n</div></div></div></a></div></div></div></div></div></figure><p id=\"ec095696-d8d3-41f3-a1ab-091ec61deaf1\" name=\"ec095696-d8d3-41f3-a1ab-091ec61deaf1\"><br/>従来であれば、</p><ul id=\"428cb0f2-40c5-4bba-a9a7-f24fb03099c3\" name=\"428cb0f2-40c5-4bba-a9a7-f24fb03099c3\"><li><p id=\"5d8f5862-9204-4581-9f85-953912b7b3e9\" name=\"5d8f5862-9204-4581-9f85-953912b7b3e9\">写真の選別に約2時間</p></li><li><p id=\"2f4dc317-e6f5-4b78-887d-773e1e903237\" name=\"2f4dc317-e6f5-4b78-887d-773e1e903237\">レイアウト作成に約3時間</p></li><li><p id=\"cc2e5339-54ec-416a-b64f-bb5806b8f311\" name=\"cc2e5339-54ec-416a-b64f-bb5806b8f311\">文章作成に約2時間</p></li></ul><p id=\"b5b76caf-23f9-4577-882a-a09565674e47\" name=\"b5b76caf-23f9-4577-882a-a09565674e47\">など、合計で7時間ほどかかっていましたが、Geminiを活用すると、これらすべての工程をまとめて スマホだけで<strong>30分以内</strong> で完了。<br/><br/>写真選びから仕上がりまで一気に進められるので、作業の効率は驚くほど向上しました。</p><h2 id=\"f47bea6a-737c-4755-87e9-64b88cefc74b\" name=\"f47bea6a-737c-4755-87e9-64b88cefc74b\">Google AIサービス活用のメリット・デメリット</h2><h3 id=\"dc1b7c5b-7d2c-44c1-acfa-ba79723b9b6d\" name=\"dc1b7c5b-7d2c-44c1-acfa-ba79723b9b6d\">メリット</h3><ul id=\"d007e3ed-cefe-4ef9-9820-a71e1ef241e0\" name=\"d007e3ed-cefe-4ef9-9820-a71e1ef241e0\"><li><p id=\"ca75a488-2925-4857-a1bd-87c5d0df2479\" name=\"ca75a488-2925-4857-a1bd-87c5d0df2479\"><strong>圧倒的な時間短縮</strong><br/>従来なら数時間かかる作業が、AIを使うことで数分で完了。業務効率が大幅に向上します。</p></li><li><p id=\"e03c2614-481a-4249-b031-13c21e5f4542\" name=\"e03c2614-481a-4249-b031-13c21e5f4542\"><strong>最新情報の取得</strong><br/>リアルタイムで営業状況や最新のデータを確認でき、常にアップデートされた情報をもとに判断できます。</p></li><li><p id=\"8e3af375-d1f3-4365-a8b9-8a3ab06cc342\" name=\"8e3af375-d1f3-4365-a8b9-8a3ab06cc342\"><strong>多角的な提案</strong><br/>人間では思いつかないような視点やアイデアを提示してくれるため、企画や資料作成の幅が広がります。</p></li><li><p id=\"885bfa6b-882f-4924-931c-20da5573d456\" name=\"885bfa6b-882f-4924-931c-20da5573d456\"><strong>継続的な改善</strong><br/>学習機能により、使い続けるほどに精度が向上し、より自分に合った結果を得られるようになります。</p></li></ul><h3 id=\"49ce9b14-75a5-49e6-9bb1-8d2255338435\" name=\"49ce9b14-75a5-49e6-9bb1-8d2255338435\">デメリット</h3><ul id=\"b5fccb17-2722-4cbc-9f8e-6441ee7b482e\" name=\"b5fccb17-2722-4cbc-9f8e-6441ee7b482e\"><li><p id=\"96e80f78-41e4-4014-9f57-fc807e79d684\" name=\"96e80f78-41e4-4014-9f57-fc807e79d684\"><strong>最終判断は人間が必要</strong><br/>AIの提案はあくまで参考。鵜呑みにせず、最終的な意思決定には人間のチェックが欠かせません。</p></li><li><p id=\"901861f5-784e-48a6-918e-5ddf7c6ea0ad\" name=\"901861f5-784e-48a6-918e-5ddf7c6ea0ad\"><strong>地域特性の理解不足</strong><br/>AIはローカルな事情や文化的なニュアンスを十分に理解できないことがあるため、人間の知見で補う必要があります。</p></li></ul><h2 id=\"42ba2cc1-0dec-4780-afc5-8a80eff505e3\" name=\"42ba2cc1-0dec-4780-afc5-8a80eff505e3\">旅行業界の未来予想：AI時代の新常識</h2><p id=\"361eff26-4cc3-429b-b2bc-1336ac4107cb\" name=\"361eff26-4cc3-429b-b2bc-1336ac4107cb\">今回の体験で感じたのは、**「帰るまでが遠足」から「記録するまでが旅行」**への変化です。</p><p id=\"94037b3f-13b1-4758-b651-74fb82d242dd\" name=\"94037b3f-13b1-4758-b651-74fb82d242dd\">今後、私たちの旅行体験をより豊かにしてくれるサービスとして、さまざまな可能性が期待されています。<br/>たとえば <strong>NotebookLM</strong> を活用すれば、旅の出来事を自動的にまとめ上げてくれる「旅行記生成」が実現できるでしょう。写真や日記を整理する手間がなく、旅の記録が物語のように形になります。</p><p id=\"ae94f1d3-e6f8-46bb-b50e-c583e162345a\" name=\"ae94f1d3-e6f8-46bb-b50e-c583e162345a\">さらに <strong>Google Vids</strong> では、旅の思い出を映像としてまとめる「思い出ムービー作成」が可能になります。自動編集によって、撮影した写真や動画が感動的なストーリーに仕上がり、家族や友人と簡単に共有できます。</p><p id=\"4cd88174-43c2-45cf-8058-d1b2a4211daf\" name=\"4cd88174-43c2-45cf-8058-d1b2a4211daf\">そして <strong>Gemini</strong> を通じては、旅行中のリアルタイム相談が大きな魅力です。行き先のおすすめ、現地の最新情報、食事や観光スポットの提案まで、その場でサポートしてくれる“旅のパートナー”として頼れる存在になるでしょう。</p><p id=\"1812b825-1149-4820-8d78-94565243429e\" name=\"1812b825-1149-4820-8d78-94565243429e\">これらのサービスが組み合わさることで、旅行は「計画から記録・共有まで」より直感的で楽しい体験へと進化していくと考えられます。</p><h2 id=\"a74d4d9e-66e0-4da0-a378-fa7095d2e39c\" name=\"a74d4d9e-66e0-4da0-a378-fa7095d2e39c\">まとめ：Google AIで旅行は「体験」から「創造」へ</h2><p id=\"5534fcf1-96da-4a63-ad56-297345535ead\" name=\"5534fcf1-96da-4a63-ad56-297345535ead\"><strong>Google AIサービスを活用することで</strong>：</p><ul id=\"e2ede34d-895d-4a28-9f44-d7c280479307\" name=\"e2ede34d-895d-4a28-9f44-d7c280479307\"><li><p id=\"e2853ed8-5b89-4d5e-9c75-1596f4476226\" name=\"e2853ed8-5b89-4d5e-9c75-1596f4476226\">計画時間を90%以上短縮</p></li><li><p id=\"42b369c5-d54c-493b-ab68-08e0a48c4659\" name=\"42b369c5-d54c-493b-ab68-08e0a48c4659\">より多くの選択肢を検討可能</p></li><li><p id=\"3fccccb3-435c-4899-98a6-dc178628db9d\" name=\"3fccccb3-435c-4899-98a6-dc178628db9d\">旅行後の記録作業も効率化</p></li><li><p id=\"62e2a555-92b5-4742-9038-da382826248d\" name=\"62e2a555-92b5-4742-9038-da382826248d\">新しい発見や体験に時間を集中</p></li></ul><p id=\"45d3f7c1-245c-4131-8673-e0d28eda0b16\" name=\"45d3f7c1-245c-4131-8673-e0d28eda0b16\"><strong>重要なのは、AIを使いこなすことで、人間にしかできない「感動」や「発見」により多くの時間を使えるようになること</strong>です。</p><p id=\"e8b2b760-d8e9-466d-af47-413f66ba8d69\" name=\"e8b2b760-d8e9-466d-af47-413f66ba8d69\">次回の旅行では、あなたも<strong>Google AI</strong>を相棒に、新しい旅のスタイルを体験してみませんか？</p><hr id=\"a4c78614-a66c-4eba-9869-072a701b15e3\" name=\"a4c78614-a66c-4eba-9869-072a701b15e3\"/><h2 id=\"b4a42007-083f-48d1-a53a-2a7bb82fc3ed\" name=\"b4a42007-083f-48d1-a53a-2a7bb82fc3ed\">この記事で紹介したサービス</h2><ul id=\"35dda7f6-5cfb-437a-aec5-58d50b0ff987\" name=\"35dda7f6-5cfb-437a-aec5-58d50b0ff987\"><li><p id=\"defcb443-84d8-4d42-bd9d-e981b78d19b4\" name=\"defcb443-84d8-4d42-bd9d-e981b78d19b4\"><strong>Google Map</strong>（場所保存・ルート検索）</p></li><li><p id=\"d4f3399d-a896-4cff-94fb-f9367a4f3951\" name=\"d4f3399d-a896-4cff-94fb-f9367a4f3951\"><strong>GeminiCLI</strong>（旅行計画・コンテンツ作成）</p></li><li><p id=\"59a1e839-a6bf-41a7-928f-1bb01852028f\" name=\"59a1e839-a6bf-41a7-928f-1bb01852028f\"><strong>Gemini</strong>（フォトブック、資料作成）</p></li></ul><p id=\"b50f5761-6b4f-41fa-b5ec-6c2fd38695f2\" name=\"b50f5761-6b4f-41fa-b5ec-6c2fd38695f2\">最後まで読んでいただき、ありがとうございました！<br/><br/>この記事が少しでも皆さんの旅行計画のお役に立てれば幸いです＾＾</p></div> <!-- --> <!-- --> <!-- --> <div data-v-7db6ac5e=\"\" style=\"display:none;\"><button class=\"a-button\" data-disable-focus=\"false\" data-file-widget=\"fileDownloadButton\" data-size=\"small\" data-type=\"primary\" data-v-4f14eb04=\"\" data-width=\"fit\" type=\"button\" undefined=\"\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><i aria-hidden=\"true\" class=\"a-icon a-icon--fileDownload a-icon--size_small\"><!-- --></i>\n    ダウンロード\n  </div></button></div> <!-- --> <button aria-label=\"コードをコピー\" class=\"a-button m-copyCodeButton m-iconButton\" data-disable-focus=\"false\" data-size=\"small\" data-type=\"none\" data-v-4f14eb04=\"\" data-v-80ab2cbc=\"\" style=\"display:none;\" type=\"button\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><span data-v-80ab2cbc=\"\"><span class=\"visually-hidden\" data-v-80ab2cbc=\"\">\n  copy\n</span> <i aria-hidden=\"true\" class=\"a-icon a-icon--copy a-icon--size_small\" data-v-80ab2cbc=\"\"><!-- --></i></span> <!-- --></div></button> <!-- --></div></div> <!-- --></div>",
+      "image_map": {
+        "https://assets.st-note.com/production/uploads/images/217316518/rectangle_large_type_2_15c5f87734085c5ccee5d993635dab4b.png?width=1280": "../img/blog/rectangle_large_type_2_15c5f87734085c5ccee5d993635dab4b.png",
+        "https://assets.st-note.com/img/1758592351-fLbZiNdMEuog4QV5Jnhp3a1F.png?width=1200": "../img/blog/1758592351-fLbZiNdMEuog4QV5Jnhp3a1F.png",
+        "https://assets.st-note.com/img/1758592395-KHgnXzpaFij9yVfmUG5chuwr.png?width=1200": "../img/blog/1758592395-KHgnXzpaFij9yVfmUG5chuwr.png",
+        "https://assets.st-note.com/img/1758592498-6KChYL7mGvji3pIHTF15srSc.png?width=1200": "../img/blog/1758592498-6KChYL7mGvji3pIHTF15srSc.png",
+        "https://assets.st-note.com/img/1758592931-kZBdOEzWur7mpUTXHLbV30sS.png?width=1200": "../img/blog/1758592931-kZBdOEzWur7mpUTXHLbV30sS.png",
+        "https://assets.st-note.com/img/1758593791-XHY7WxOZvPmnoD2jlR48kqQK.png?width=1200": "../img/blog/1758593791-XHY7WxOZvPmnoD2jlR48kqQK.png",
+        "https://assets.st-note.com/img/1758607468-GsdQCku5H7Wt9pxTy2MhboqO.png?width=1200": "../img/blog/1758607468-GsdQCku5H7Wt9pxTy2MhboqO.png",
+        "https://assets.st-note.com/img/1758596605-ghJM3DKdkI6nuTFbALzHYeZw.png?width=1200": "../img/blog/1758596605-ghJM3DKdkI6nuTFbALzHYeZw.png",
+        "https://assets.st-note.com/img/1758596815-aROqHZQ8CsdNmSVPtMg3o6eA.jpg?width=1200": "../img/blog/1758596815-aROqHZQ8CsdNmSVPtMg3o6eA.jpg",
+        "https://assets.st-note.com/img/1758596872-kcB9a7gFZivlSorx5uHph41W.png?width=1200": "../img/blog/1758596872-kcB9a7gFZivlSorx5uHph41W.png",
+        "https://assets.st-note.com/img/1758596930-LjDmG3oBist0SnMwPF4ublCf.png?width=1200": "../img/blog/1758596930-LjDmG3oBist0SnMwPF4ublCf.png",
+        "https://assets.st-note.com/img/1758597040-bXRA32rF7hEMGwDpjlcP6gnf.png?width=1200": "../img/blog/1758597040-bXRA32rF7hEMGwDpjlcP6gnf.png",
+        "https://assets.st-note.com/img/1758597087-ncgpZUq4LK8hAIxEtuRaJVzb.png?width=1200": "../img/blog/1758597087-ncgpZUq4LK8hAIxEtuRaJVzb.png",
+        "https://assets.st-note.com/img/1758597194-LeCynoWNHq89tAXZrIm2VYhx.png?width=1200": "../img/blog/1758597194-LeCynoWNHq89tAXZrIm2VYhx.png",
+        "https://assets.st-note.com/img/1758597227-mEAByhF0YxsvaW7XUPQwVrH8.png?width=1200": "../img/blog/1758597227-mEAByhF0YxsvaW7XUPQwVrH8.png",
+        "https://assets.st-note.com/img/1758597263-jIODMcwdpJoavN4qeTlzCxtL.png?width=1200": "../img/blog/1758597263-jIODMcwdpJoavN4qeTlzCxtL.png",
+        "https://assets.st-note.com/img/1758603853-MVuXmez4a7nbCsGcqwklLE6I.png?width=1200": "../img/blog/1758603853-MVuXmez4a7nbCsGcqwklLE6I.png",
+        "https://assets.st-note.com/img/1758603777-HCQP5kouhvLqjlxfayAi2tmM.png?width=1200": "../img/blog/1758603777-HCQP5kouhvLqjlxfayAi2tmM.png"
+      }
+    }
+  },
+  "n197663d9721d": {
+    "article": {
+      "title": "転記作業の効率化 ― AIとアプリケーション化による業務改善の最前線",
+      "url": "https://note.com/magic_guppy1164/n/n197663d9721d",
+      "slug": "n197663d9721d",
+      "date": "2025年09月14日",
+      "date_obj": "2025-09-14T16:43:32+09:00",
+      "excerpt": "士業や事務職を悩ませる「転記作業」という課題会計士事務所や税理士法人における研修の場で、必ずといってよいほど受講者から上がる質問があります。それが「転記作業をどう効率化すればよいのか？」というものです。続きをみる",
+      "thumbnail": null
+    },
+    "content": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "転記作業の効率化 ― AIとアプリケーション化による業務改善の最前線"
+        },
+        {
+          "level": 3,
+          "text": "士業や事務職を悩ませる「転記作業」という課題"
+        },
+        {
+          "level": 3,
+          "text": "一般事務職における転記作業の現実"
+        },
+        {
+          "level": 3,
+          "text": "なぜAIプロンプトでは限界があるのか？"
+        },
+        {
+          "level": 3,
+          "text": "解決策 ― アプリケーション化"
+        },
+        {
+          "level": 2,
+          "text": "アプリケーション化を目指した要件設計"
+        },
+        {
+          "level": 3,
+          "text": "タグ設計の基本ルール"
+        }
+      ],
+      "paragraphs": [
+        "会計士事務所や税理士法人における研修の場で、必ずといってよいほど受講者から上がる質問があります。それが「転記作業をどう効率化すればよいのか？」というものです。",
+        "財務報告書の作成や、取引ごとの仕訳入力、さらにはクレジットカード明細や銀行通帳データの整理など、これらの作業は毎日のように発生します。しかも、一度限りではなく、常に繰り返し行う必要があるため、時間的コストが非常に高くなります。",
+        "一見単純に思える作業であっても、数字の1つ、文字の1つの誤りが大きな影響を与えることもあり、「正確性」と「効率性」を両立するのが難しい領域とされてきました。士業にとっては専門的な判断に集中すべき貴重な時間を奪われる原因となり、生産性を大きく低下させる要因となっているのです。",
+        "この課題は士業だけにとどまりません。一般的な企業の事務職においても、日常的に多くの転記作業が発生しています。顧客データをエクセルに入力したり、在庫数値を管理表に反映させたり、会議資料や報告書へ売上データを記入したりといった作業は、どの会社でも共通して行われています。",
+        "特に大量のデータを扱う場合、単純な作業の繰り返しは担当者の集中力を奪い、ヒューマンエラーを誘発しやすい状況を生み出します。小さな入力ミスが後々の大きなトラブルに繋がることもあるため、どの現場でも「転記作業を効率化し、できる限り自動化したい」というニーズが高まっています。",
+        "ChatGPTなどの生成AIを活用すれば、ある程度の転記作業を支援することは可能です。しかし「プロンプトを入力して都度指示を出す」という方法には、明確な限界があります。",
+        "GPTsを作成して対応する方法もありますが、AIの出力結果には揺らぎがあり、毎回同じ精度で処理できるとは限りません。さらに以下のような課題もあります。",
+        "同じ作業を繰り返すたびにプロンプトを入力する必要がある",
+        "出力内容にばらつきがあり、結果を人が確認・修正する手間が発生する",
+        "データ量が多いと処理時間がかかり、実用性に欠ける場合があるらない",
+        "つまり、AIをそのまま使うだけでは「転記作業を完全に置き換える」ことはできないのです。",
+        "その答えとして注目されるのが、**転記作業の「アプリケーション化」**です。一度ルールを設計し、AIや既存ツールを組み合わせて転記を自動化するアプリケーションを作ってしまえば、以降はワンクリックで誰でも同じ作業を実行できます。",
+        "これにより、プロンプトの入力は不要になり、処理の再現性や精度も飛躍的に高まります。まさに「人間の労力を最小化しつつ、AIの強みを最大化するアプローチ」と言えるでしょう。",
+        "― PowerPointのタグとExcelデータを連携させる仕組み",
+        "転記アプリを実現するうえで重要なのは、単に「ExcelのデータをPowerPointに転記する」という指示を出すことではなく、どのセルの値をどの箇所に転記するのかを正確に定義する設計です。AIや自動化の仕組みが誤解なく動作するためには、入力データと出力先の対応関係を明示する必要があります。そのために採用するのが、PowerPoint内に埋め込む「タグ」とExcelのセルの紐付けです。"
+      ],
+      "lists": [
+        [
+          "同じ作業を繰り返すたびにプロンプトを入力する必要がある",
+          "出力内容にばらつきがあり、結果を人が確認・修正する手間が発生する",
+          "データ量が多いと処理時間がかかり、実用性に欠ける場合があるらない"
+        ]
+      ],
+      "images": [
+        "../img/blog/rectangle_large_type_2_f5593cfc4ebba8f102f721764a6bdf97.png"
+      ],
+      "html": "<div class=\"p-article__content\" data-v-0e32a970=\"\"><div data-note-id=\"125905049\" data-note-key=\"n197663d9721d\" data-v-0e32a970=\"\"><div class=\"o-noteContentText o-noteContentText--font_sansserif o-noteContentText--device_windows\" data-v-7db6ac5e=\"\"><figure class=\"o-noteEyecatch\" data-v-1811b4ec=\"\" data-v-7db6ac5e=\"\"><img alt=\"見出し画像\" class=\"a-image o-noteEyecatch__image\" data-v-1811b4ec=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"847\" loading=\"lazy\" src=\"../img/blog/rectangle_large_type_2_f5593cfc4ebba8f102f721764a6bdf97.png\" width=\"1618\"/> <!-- --> <!-- --></figure> <div class=\"o-noteContentHeader o-noteContentText__header\" data-v-03d2631f=\"\" data-v-7db6ac5e=\"\"><div class=\"o-noteContentHeader__titleContainer o-noteContentHeader__titleContainer--font_sansserif o-noteContentHeader__titleContainer--device_windows\" data-v-03d2631f=\"\"><h1 class=\"o-noteContentHeader__title\" data-v-03d2631f=\"\">\n      転記作業の効率化 ― AIとアプリケーション化による業務改善の最前線\n    </h1> <div class=\"o-noteContentHeader__titleAttachment\" data-v-03d2631f=\"\"><div class=\"flex\" data-v-03d2631f=\"\"><span class=\"o-noteLikeV3\" data-v-03d2631f=\"\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainer\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainerInner\" data-v-5259bb13=\"\"><button aria-label=\"スキ\" aria-pressed=\"false\" class=\"o-noteLikeV3__iconButton leading-none flex items-center\" data-v-5259bb13=\"\"><i aria-hidden=\"true\" class=\"o-noteLikeV3__icon a-icon a-icon--heart a-icon--size_mediumSmall\" data-disable-focus=\"true\" data-fill=\"lightGray\" data-tooltip=\"スキ\" data-v-5259bb13=\"\"><!-- --></i> </button> <!-- --></span></span> <!-- --> <button aria-label=\"5スキ この記事にスキをつけたユーザーを見る\" class=\"o-noteLikeV3__count o-noteLikeV3__count--mediumSmall text-text-secondary\" data-v-5259bb13=\"\">\n    5\n  </button></span> <!-- --></div> <div class=\"flex items-center gap-2 justify-center flex-wrap shrink grow-0\" data-v-03d2631f=\"\"><!-- --> <!-- --> <!-- --> <!-- --></div></div></div> <div class=\"o-noteContentHeader__creatorInfo flex items-center\" data-v-03d2631f=\"\"><a aria-hidden=\"true\" class=\"o-noteContentHeader__avatar a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\"><span class=\"m-avatar m-avatar--medium\" data-v-03d2631f=\"\" data-v-3153a960=\"\"><img alt=\"株式会社Cosmico 代表/生成AI\" class=\"a-image m-avatar__image lazyload\" data-src=\"https://assets.st-note.com/production/uploads/images/209172942/profile_63735566a1e3c6bca33c05399cb7b782.jpeg?width=60\" data-v-3153a960=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"56\" loading=\"lazy\" src=\"data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23fff%22%2F%3E%3Cstop%20offset%3D%2267%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3CanimateTransform%20attributeName%3D%22gradientTransform%22%20type%3D%22translate%22%20from%3D%22-1%200%22%20to%3D%221%200%22%20begin%3D%220s%22%20dur%3D%221.5s%22%20repeatCount%3D%22indefinite%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20class%3D%22rect%22%20fill%3D%22url(%23a)%22%20d%3D%22M-100-100h300v300h-300z%22%2F%3E%3C%2Fsvg%3E\" width=\"56\"/></span></a> <div class=\"o-noteContentHeader__info\" data-v-03d2631f=\"\"><div class=\"o-noteContentHeader__name\" data-v-03d2631f=\"\"><a class=\"a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\">\n          株式会社Cosmico 代表/生成AI\n        </a></div> <span class=\"o-noteContentHeader__date\" data-v-03d2631f=\"\"><time data-v-03d2631f=\"\" datetime=\"2025-09-14T16:43:32.000+09:00\">2025年9月14日 16:43</time></span> <!-- --></div> <!-- --> <div class=\"o-noteContentHeader__status\" data-v-03d2631f=\"\"><!-- --> <div class=\"flex items-center relative\" data-v-03d2631f=\"\"><button class=\"a-button flex items-center\" data-disable-focus=\"false\" data-size=\"small\" data-type=\"secondary\" data-v-4f14eb04=\"\" data-width=\"fit\" type=\"button\" undefined=\"\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><span>¥500</span></div></button> <!-- --></div> <!-- --></div></div></div> <div class=\"note-common-styles__textnote-body\" data-name=\"body\" data-v-7db6ac5e=\"\"><h3 id=\"b82881b9-7dac-4345-ab37-a06bd6ace64f\" name=\"b82881b9-7dac-4345-ab37-a06bd6ace64f\">士業や事務職を悩ませる「転記作業」という課題</h3><p id=\"1d42e966-36ba-4c45-967b-522607188db8\" name=\"1d42e966-36ba-4c45-967b-522607188db8\">会計士事務所や税理士法人における研修の場で、必ずといってよいほど受講者から上がる質問があります。<br/>それが「転記作業をどう効率化すればよいのか？」というものです。</p><p id=\"c23c907e-2781-4d64-be35-fee1a97c77b9\" name=\"c23c907e-2781-4d64-be35-fee1a97c77b9\">財務報告書の作成や、取引ごとの仕訳入力、さらにはクレジットカード明細や銀行通帳データの整理など、これらの作業は毎日のように発生します。しかも、一度限りではなく、常に繰り返し行う必要があるため、時間的コストが非常に高くなります。</p><p id=\"d9898482-3016-463f-97b5-cf40c920215c\" name=\"d9898482-3016-463f-97b5-cf40c920215c\">一見単純に思える作業であっても、数字の1つ、文字の1つの誤りが大きな影響を与えることもあり、<strong>「正確性」と「効率性」を両立するのが難しい領域</strong>とされてきました。士業にとっては専門的な判断に集中すべき貴重な時間を奪われる原因となり、生産性を大きく低下させる要因となっているのです。</p><h3 id=\"ee2b9a31-2aec-4f2c-a511-7855a5f30a9e\" name=\"ee2b9a31-2aec-4f2c-a511-7855a5f30a9e\">一般事務職における転記作業の現実</h3><p id=\"53ad4a26-bd69-4f62-a887-3e2a701f79b6\" name=\"53ad4a26-bd69-4f62-a887-3e2a701f79b6\">この課題は士業だけにとどまりません。一般的な企業の事務職においても、日常的に多くの転記作業が発生しています。顧客データをエクセルに入力したり、在庫数値を管理表に反映させたり、会議資料や報告書へ売上データを記入したりといった作業は、どの会社でも共通して行われています。</p><p id=\"caa4f8a6-a05a-4884-96e8-b49315096d44\" name=\"caa4f8a6-a05a-4884-96e8-b49315096d44\">特に大量のデータを扱う場合、単純な作業の繰り返しは担当者の集中力を奪い、<strong>ヒューマンエラーを誘発しやすい状況</strong>を生み出します。小さな入力ミスが後々の大きなトラブルに繋がることもあるため、どの現場でも「転記作業を効率化し、できる限り自動化したい」というニーズが高まっています。</p><h3 id=\"e44799a7-3448-484f-88a6-ce3afd85d860\" name=\"e44799a7-3448-484f-88a6-ce3afd85d860\">なぜAIプロンプトでは限界があるのか？</h3><p id=\"585c15ab-9c88-41a9-96cf-3ed497796ffc\" name=\"585c15ab-9c88-41a9-96cf-3ed497796ffc\">ChatGPTなどの生成AIを活用すれば、ある程度の転記作業を支援することは可能です。<br/>しかし「プロンプトを入力して都度指示を出す」という方法には、明確な限界があります。</p><p id=\"c0653583-363e-4113-bfef-e63fe24432d1\" name=\"c0653583-363e-4113-bfef-e63fe24432d1\">GPTsを作成して対応する方法もありますが、AIの出力結果には揺らぎがあり、毎回同じ精度で処理できるとは限りません。さらに以下のような課題もあります。</p><ul id=\"8f3deec8-3a0d-433d-be6b-4320a657258f\" name=\"8f3deec8-3a0d-433d-be6b-4320a657258f\"><li><p id=\"db72b842-0914-4939-87d1-3c50760ecc0d\" name=\"db72b842-0914-4939-87d1-3c50760ecc0d\">同じ作業を繰り返すたびにプロンプトを入力する必要がある</p></li><li><p id=\"a488c83f-15e3-4f2b-acc8-865d4340dd03\" name=\"a488c83f-15e3-4f2b-acc8-865d4340dd03\">出力内容にばらつきがあり、結果を人が確認・修正する手間が発生する</p></li><li><p id=\"f3500d1a-93c5-4164-806c-d04a644cd5da\" name=\"f3500d1a-93c5-4164-806c-d04a644cd5da\">データ量が多いと処理時間がかかり、実用性に欠ける場合があるらない</p></li></ul><p id=\"d77cc6d4-e985-44ab-8e68-f4b19ff422b3\" name=\"d77cc6d4-e985-44ab-8e68-f4b19ff422b3\">つまり、AIをそのまま使うだけでは「転記作業を完全に置き換える」ことはできないのです。</p><h3 id=\"05cf5676-24cc-4262-8d27-6a299fef8fdf\" name=\"05cf5676-24cc-4262-8d27-6a299fef8fdf\">解決策 ― アプリケーション化</h3><p id=\"377720b6-16bf-4383-85cb-ab68840155e3\" name=\"377720b6-16bf-4383-85cb-ab68840155e3\">その答えとして注目されるのが、**転記作業の「アプリケーション化」**です。<br/>一度ルールを設計し、AIや既存ツールを組み合わせて転記を自動化するアプリケーションを作ってしまえば、以降はワンクリックで誰でも同じ作業を実行できます。</p><p id=\"e55030c7-4d1a-4ab0-9e8a-8a9b447d7c1d\" name=\"e55030c7-4d1a-4ab0-9e8a-8a9b447d7c1d\">これにより、プロンプトの入力は不要になり、処理の再現性や精度も飛躍的に高まります。まさに「人間の労力を最小化しつつ、AIの強みを最大化するアプローチ」と言えるでしょう。</p><h2 id=\"bfd593bb-d01f-4c1d-b2bc-c6184469b745\" name=\"bfd593bb-d01f-4c1d-b2bc-c6184469b745\">アプリケーション化を目指した要件設計</h2><p id=\"716b32db-4464-4ce8-aa6d-ad645bb18ff5\" name=\"716b32db-4464-4ce8-aa6d-ad645bb18ff5\">― PowerPointのタグとExcelデータを連携させる仕組み</p><p id=\"3322b226-20dc-4b62-a170-d4fd11b2a325\" name=\"3322b226-20dc-4b62-a170-d4fd11b2a325\">転記アプリを実現するうえで重要なのは、単に「ExcelのデータをPowerPointに転記する」という指示を出すことではなく、<strong>どのセルの値をどの箇所に転記するのかを正確に定義する設計</strong>です。AIや自動化の仕組みが誤解なく動作するためには、入力データと出力先の対応関係を明示する必要があります。そのために採用するのが、PowerPoint内に埋め込む「タグ」とExcelのセルの紐付けです。</p><h3 id=\"e2dbe0e7-592f-4dd6-b2a7-ffae158a4ae5\" name=\"e2dbe0e7-592f-4dd6-b2a7-ffae158a4ae5\">タグ設計の基本ルール</h3></div> <!-- --> <!-- --> <!-- --> <div data-v-7db6ac5e=\"\" style=\"display:none;\"><button class=\"a-button\" data-disable-focus=\"false\" data-file-widget=\"fileDownloadButton\" data-size=\"small\" data-type=\"primary\" data-v-4f14eb04=\"\" data-width=\"fit\" type=\"button\" undefined=\"\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><i aria-hidden=\"true\" class=\"a-icon a-icon--fileDownload a-icon--size_small\"><!-- --></i>\n    ダウンロード\n  </div></button></div> <!-- --> <button aria-label=\"コードをコピー\" class=\"a-button m-copyCodeButton m-iconButton\" data-disable-focus=\"false\" data-size=\"small\" data-type=\"none\" data-v-4f14eb04=\"\" data-v-80ab2cbc=\"\" style=\"display:none;\" type=\"button\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><span data-v-80ab2cbc=\"\"><span class=\"visually-hidden\" data-v-80ab2cbc=\"\">\n  copy\n</span> <i aria-hidden=\"true\" class=\"a-icon a-icon--copy a-icon--size_small\" data-v-80ab2cbc=\"\"><!-- --></i></span> <!-- --></div></button> <!-- --></div></div> <div class=\"relative\" data-v-0e32a970=\"\"><div class=\"absolute pointer-events-none bottom-0 z-[1] w-full h-12 block p-article__gradient\" data-v-0e32a970=\"\"></div></div></div>",
+      "image_map": {
+        "https://assets.st-note.com/production/uploads/images/215316286/rectangle_large_type_2_f5593cfc4ebba8f102f721764a6bdf97.png?width=1280": "../img/blog/rectangle_large_type_2_f5593cfc4ebba8f102f721764a6bdf97.png"
+      }
+    }
+  },
+  "n5e85f83c152d": {
+    "article": {
+      "title": "生成AIパスポート合格者の声が続々！激変するAI時代を勝ち抜く知見を手に入れる方法",
+      "url": "https://note.com/magic_guppy1164/n/n5e85f83c152d",
+      "slug": "n5e85f83c152d",
+      "date": "2025年09月08日",
+      "date_obj": "2025-09-08T09:29:56+09:00",
+      "excerpt": "近年、生成AIの進化は本当に目覚ましく、私たちの働き方やビジネスの進め方を大きく変えつつあります。その中で注目されているのが「生成AIパスポート」です。生成AIに関する体系的な知識や、実務での活用方法を幅広く学べるこの資格は、多くの方々から関心を寄せていただいています。私自身も講義や研修の場を担当させていただく中で、「生成AIパスポートに合格しました」という声を受講生の方からいただく機会が本当に増...",
+      "thumbnail": null
+    },
+    "content": {
+      "headings": [
+        {
+          "level": 1,
+          "text": "生成AIパスポート合格者の声が続々！激変するAI時代を勝ち抜く知見を手に入れる方法"
+        },
+        {
+          "level": 3,
+          "text": "生成AIパスポートとは？"
+        },
+        {
+          "level": 3,
+          "text": "市場背景とスキルの重要性"
+        },
+        {
+          "level": 3,
+          "text": "合格者の声とメリット"
+        },
+        {
+          "level": 3,
+          "text": "担当させていただいた業界での評価"
+        },
+        {
+          "level": 3,
+          "text": "まとめ"
+        }
+      ],
+      "paragraphs": [
+        "近年、生成AIの進化は本当に目覚ましく、私たちの働き方やビジネスの進め方を大きく変えつつあります。その中で注目されているのが「生成AIパスポート」です。生成AIに関する体系的な知識や、実務での活用方法を幅広く学べるこの資格は、多くの方々から関心を寄せていただいています。",
+        "私自身も講義や研修の場を担当させていただく中で、「生成AIパスポートに合格しました」という声を受講生の方からいただく機会が本当に増えてきました。合格をきっかけに、「業務への応用がよりクリアになった」「社内での評価につながった」といった感想をお伝えくださることもあり、こちらとしても大変ありがたく感じています。自分の講義が少しでもお役に立てているのであれば、講師冥利に尽きる思いです。",
+        "「生成AIパスポート」は、一般社団法人生成AI活用普及協会（GUGA）が実施している資格試験で、生成AIの基本的な仕組みから実践的な活用方法、さらに倫理的な配慮や法規制までを問う内容となっています。受験はオンライン形式で行われ、AI初心者の方でも取り組みやすい設計になっています。",
+        "ありがたいことに、教育機関や企業研修にも広がりを見せており、幅広い層の方々が「AIを正しく理解し、安全に活用できるようになりたい」という思いから受験されているようです。",
+        "市場調査によれば、生成AIの活用は今後さらに拡大していくと予測されています。数年先には数百億ドル規模の市場へと成長するとも言われており、特に「生成AIをどう実務に取り込むか」という視点を持った人材は、ますます求められるようになるでしょう。参照：https://www.statista.com/forecasts/1474143/global-ai-market-size",
+        "もちろん、資格そのものがすべてを解決してくれるわけではありませんが、学習を通じて体系的に整理された知識を得られる点は大きな意味があると感じます。受講生の皆様からも「独学では気づけなかった視点が得られた」とのお声をいただき、こちらも学ばせていただくことが多いです。",
+        "受講生の中でも、特に資格取得された方からは次のようなお声をいただいています。実際の体験談をお伺いすると、資格が単なる知識習得ではなく「行動や成果のきっかけ」になっていることを強く感じます。",
+        "新しい視点が得られたある営業担当の方は「生成AIの活用方法を学んだことで、お客様への提案にAIを取り入れるアイデアが生まれた」とおっしゃっていました。従来の資料作成だけでなく、AIを使った市場分析の切り口を加えることで、提案の説得力が増したそうです。",
+        "発想の幅が広がった別の受講生は「プレゼン資料のドラフトをAIに作成させたら、これまでにない表現や構成のヒントが出てきて、自分の思考が広がった」との感想をくださいました。時間短縮というよりも、“自分一人では思いつかない選択肢”をAIが提示してくれる点が大きな学びになったとのことです。",
+        "顧客や社内からの信頼感「資格を持っていることで、顧客への説明に説得力が増し、“最新技術を正しく理解している”という安心感を持っていただけた」とのお話をいただきました。対外的な信頼につながったのは大きな成果だと感じます。",
+        "キャリアの可能性拡大また、合格をきっかけに「社内向けのセミナーを自ら企画して実施した」という方もいらっしゃいました。その取り組みが評価され、リーダー的な役割を任されるようになったとのことで、生成AIパスポートが新しい挑戦の扉を開く後押しになったとお話しされています。",
+        "こうしたエピソードをお伺いするたびに、私自身も「知識を証明するだけでなく、行動や挑戦につながる資格である」と実感させていただいています。",
+        "私がこれまでに研修を担当させていただいた業界も、本当に多岐にわたります。",
+        "鋳造会社様：製造工程の効率化や品質チェックにAIをどう応用できるかを模索",
+        "IT・開発会社様、ITコンサル会社様：開発や提案のスピードを高めるためのAI活用",
+        "会計事務所様、国際税理士法人様：財務データ分析、レポート作成、転記作業や翻訳作業支援ツールの導入。",
+        "不動産会社様：市場調査、物件紹介の最適化、顧客対応、ステージングなど画像生成の活用。",
+        "農業法人様：データを活かした生育予測、センサー機器のデータ解析、従業員の進捗管理システムの構築。",
+        "ありがたいことに、講習の中では参加者の皆様とともにツールを構築し、実務に直結する視点を共有することができました。私自身にとっても多くの学びがあり、専門領域の違いによってAIの活かし方が大きく変わることを、皆様との対話を通じて改めて実感しています。",
+        "生成AIは「知的労働の産業革命」とも言われるほど、大きな変化をもたらしつつあります。その変化の中で、生成AIパスポートを通じて学ぶことは、キャリアやビジネスをより良い方向に進めるための確かな一歩になると思います。",
+        "私自身、まだまだ学びの途中ですが、受講生の皆様や企業の方々から「学んでよかった」とのお声をいただけることが、何よりの励みです。これからも一緒に生成AIを活かしながら、共に成長していければと思っています。"
+      ],
+      "lists": [
+        [
+          "新しい視点が得られたある営業担当の方は「生成AIの活用方法を学んだことで、お客様への提案にAIを取り入れるアイデアが生まれた」とおっしゃっていました。従来の資料作成だけでなく、AIを使った市場分析の切り口を加えることで、提案の説得力が増したそうです。",
+          "発想の幅が広がった別の受講生は「プレゼン資料のドラフトをAIに作成させたら、これまでにない表現や構成のヒントが出てきて、自分の思考が広がった」との感想をくださいました。時間短縮というよりも、“自分一人では思いつかない選択肢”をAIが提示してくれる点が大きな学びになったとのことです。",
+          "顧客や社内からの信頼感「資格を持っていることで、顧客への説明に説得力が増し、“最新技術を正しく理解している”という安心感を持っていただけた」とのお話をいただきました。対外的な信頼につながったのは大きな成果だと感じます。",
+          "キャリアの可能性拡大また、合格をきっかけに「社内向けのセミナーを自ら企画して実施した」という方もいらっしゃいました。その取り組みが評価され、リーダー的な役割を任されるようになったとのことで、生成AIパスポートが新しい挑戦の扉を開く後押しになったとお話しされています。"
+        ],
+        [
+          "鋳造会社様：製造工程の効率化や品質チェックにAIをどう応用できるかを模索",
+          "IT・開発会社様、ITコンサル会社様：開発や提案のスピードを高めるためのAI活用",
+          "会計事務所様、国際税理士法人様：財務データ分析、レポート作成、転記作業や翻訳作業支援ツールの導入。",
+          "不動産会社様：市場調査、物件紹介の最適化、顧客対応、ステージングなど画像生成の活用。",
+          "農業法人様：データを活かした生育予測、センサー機器のデータ解析、従業員の進捗管理システムの構築。"
+        ]
+      ],
+      "images": [
+        "../img/blog/rectangle_large_type_2_0fc14ecb1c35b00260e4b7fb38d435f9.png"
+      ],
+      "html": "<div class=\"p-article__content pb-4\" data-v-0e32a970=\"\"><div data-note-id=\"125211902\" data-note-key=\"n5e85f83c152d\" data-v-0e32a970=\"\"><div class=\"o-noteContentText o-noteContentText--font_sansserif o-noteContentText--device_windows\" data-v-7db6ac5e=\"\"><figure class=\"o-noteEyecatch\" data-v-1811b4ec=\"\" data-v-7db6ac5e=\"\"><img alt=\"見出し画像\" class=\"a-image o-noteEyecatch__image\" data-v-1811b4ec=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"415\" loading=\"lazy\" src=\"../img/blog/rectangle_large_type_2_0fc14ecb1c35b00260e4b7fb38d435f9.png\" width=\"793\"/> <!-- --> <!-- --></figure> <div class=\"o-noteContentHeader o-noteContentText__header\" data-v-03d2631f=\"\" data-v-7db6ac5e=\"\"><div class=\"o-noteContentHeader__titleContainer o-noteContentHeader__titleContainer--font_sansserif o-noteContentHeader__titleContainer--device_windows\" data-v-03d2631f=\"\"><h1 class=\"o-noteContentHeader__title\" data-v-03d2631f=\"\">\n      生成AIパスポート合格者の声が続々！激変するAI時代を勝ち抜く知見を手に入れる方法\n    </h1> <div class=\"o-noteContentHeader__titleAttachment\" data-v-03d2631f=\"\"><div class=\"flex\" data-v-03d2631f=\"\"><span class=\"o-noteLikeV3\" data-v-03d2631f=\"\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainer\" data-v-5259bb13=\"\"><span class=\"o-noteLikeV3__iconContainerInner\" data-v-5259bb13=\"\"><button aria-label=\"スキ\" aria-pressed=\"false\" class=\"o-noteLikeV3__iconButton leading-none flex items-center\" data-v-5259bb13=\"\"><i aria-hidden=\"true\" class=\"o-noteLikeV3__icon a-icon a-icon--heart a-icon--size_mediumSmall\" data-disable-focus=\"true\" data-fill=\"lightGray\" data-tooltip=\"スキ\" data-v-5259bb13=\"\"><!-- --></i> </button> <!-- --></span></span> <!-- --> <button aria-label=\"8スキ この記事にスキをつけたユーザーを見る\" class=\"o-noteLikeV3__count o-noteLikeV3__count--mediumSmall text-text-secondary\" data-v-5259bb13=\"\">\n    8\n  </button></span> <!-- --></div> <div class=\"flex items-center gap-2 justify-center flex-wrap shrink grow-0\" data-v-03d2631f=\"\"><!-- --> <!-- --> <!-- --> <!-- --></div></div></div> <div class=\"o-noteContentHeader__creatorInfo\" data-v-03d2631f=\"\"><a aria-hidden=\"true\" class=\"o-noteContentHeader__avatar a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\"><span class=\"m-avatar m-avatar--medium\" data-v-03d2631f=\"\" data-v-3153a960=\"\"><img alt=\"株式会社Cosmico 代表/生成AI\" class=\"a-image m-avatar__image lazyload\" data-src=\"https://assets.st-note.com/production/uploads/images/209172942/profile_63735566a1e3c6bca33c05399cb7b782.jpeg?width=60\" data-v-3153a960=\"\" data-v-50e2377b=\"\" decoding=\"async\" height=\"56\" loading=\"lazy\" src=\"data:image/svg+xml;charset=utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22a%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23fff%22%2F%3E%3Cstop%20offset%3D%2267%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23f7f9f9%22%2F%3E%3CanimateTransform%20attributeName%3D%22gradientTransform%22%20type%3D%22translate%22%20from%3D%22-1%200%22%20to%3D%221%200%22%20begin%3D%220s%22%20dur%3D%221.5s%22%20repeatCount%3D%22indefinite%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20class%3D%22rect%22%20fill%3D%22url(%23a)%22%20d%3D%22M-100-100h300v300h-300z%22%2F%3E%3C%2Fsvg%3E\" width=\"56\"/></span></a> <div class=\"o-noteContentHeader__info\" data-v-03d2631f=\"\"><div class=\"o-noteContentHeader__name\" data-v-03d2631f=\"\"><a class=\"a-link\" data-v-03d2631f=\"\" data-v-43e40ddc=\"\" href=\"/magic_guppy1164\">\n          株式会社Cosmico 代表/生成AI\n        </a></div> <span class=\"o-noteContentHeader__date\" data-v-03d2631f=\"\"><time data-v-03d2631f=\"\" datetime=\"2025-09-08T09:29:56.000+09:00\">2025年9月8日 09:29</time></span> <!-- --></div> <!-- --> <div class=\"o-noteContentHeader__status\" data-v-03d2631f=\"\"> <!-- --></div></div></div> <div class=\"note-common-styles__textnote-body\" data-name=\"body\" data-v-7db6ac5e=\"\"><p id=\"fa5b3ad7-1b81-4ee8-a51c-8a6400c7569b\" name=\"fa5b3ad7-1b81-4ee8-a51c-8a6400c7569b\">近年、生成AIの進化は本当に目覚ましく、私たちの働き方やビジネスの進め方を大きく変えつつあります。その中で注目されているのが「生成AIパスポート」です。生成AIに関する体系的な知識や、実務での活用方法を幅広く学べるこの資格は、多くの方々から関心を寄せていただいています。</p><p id=\"87310098-96f9-45db-b2d1-ad7093b67da1\" name=\"87310098-96f9-45db-b2d1-ad7093b67da1\">私自身も講義や研修の場を担当させていただく中で、「生成AIパスポートに合格しました」という声を受講生の方からいただく機会が本当に増えてきました。合格をきっかけに、「業務への応用がよりクリアになった」「社内での評価につながった」といった感想をお伝えくださることもあり、こちらとしても大変ありがたく感じています。自分の講義が少しでもお役に立てているのであれば、講師冥利に尽きる思いです。</p><h3 id=\"2e7ce5a4-cd90-4e47-a37a-ffaf9f7e17f3\" name=\"2e7ce5a4-cd90-4e47-a37a-ffaf9f7e17f3\">生成AIパスポートとは？</h3><p id=\"38bfb54a-72a5-4f57-9806-b9a5be581b6f\" name=\"38bfb54a-72a5-4f57-9806-b9a5be581b6f\">「生成AIパスポート」は、一般社団法人生成AI活用普及協会（GUGA）が実施している資格試験で、生成AIの基本的な仕組みから実践的な活用方法、さらに倫理的な配慮や法規制までを問う内容となっています。受験はオンライン形式で行われ、AI初心者の方でも取り組みやすい設計になっています。</p><p id=\"ea8580b6-a6ac-4f18-9be6-8f6584f00e2e\" name=\"ea8580b6-a6ac-4f18-9be6-8f6584f00e2e\">ありがたいことに、教育機関や企業研修にも広がりを見せており、幅広い層の方々が「AIを正しく理解し、安全に活用できるようになりたい」という思いから受験されているようです。</p><h3 id=\"0ecff085-9709-44bc-a7f0-da1c8db03e2a\" name=\"0ecff085-9709-44bc-a7f0-da1c8db03e2a\">市場背景とスキルの重要性</h3><p id=\"cde19fab-1c0e-47f7-aa6b-213a632859b7\" name=\"cde19fab-1c0e-47f7-aa6b-213a632859b7\">市場調査によれば、生成AIの活用は今後さらに拡大していくと予測されています。数年先には数百億ドル規模の市場へと成長するとも言われており、特に「生成AIをどう実務に取り込むか」という視点を持った人材は、ますます求められるようになるでしょう。<br/>参照：<a href=\"https://www.statista.com/forecasts/1474143/global-ai-market-size\" rel=\"noopener noreferrer nofollow\" target=\"_blank\">https://www.statista.com/forecasts/1474143/global-ai-market-size</a></p><p id=\"6d0fc8cb-176b-4e15-aa7e-081ed9c1d967\" name=\"6d0fc8cb-176b-4e15-aa7e-081ed9c1d967\">もちろん、資格そのものがすべてを解決してくれるわけではありませんが、学習を通じて体系的に整理された知識を得られる点は大きな意味があると感じます。受講生の皆様からも「独学では気づけなかった視点が得られた」とのお声をいただき、こちらも学ばせていただくことが多いです。</p><h3 id=\"71fce3c3-122a-4829-ae31-92d39a2b3f29\" name=\"71fce3c3-122a-4829-ae31-92d39a2b3f29\">合格者の声とメリット</h3><p id=\"56cc438d-c92c-43b4-bb2c-4804780c2ace\" name=\"56cc438d-c92c-43b4-bb2c-4804780c2ace\">受講生の中でも、特に資格取得された方からは次のようなお声をいただいています。実際の体験談をお伺いすると、資格が単なる知識習得ではなく「行動や成果のきっかけ」になっていることを強く感じます。</p><ul id=\"2a8fd69b-a3d2-4f09-ad63-942f5acb427a\" name=\"2a8fd69b-a3d2-4f09-ad63-942f5acb427a\"><li><p id=\"8433653c-8b75-4f41-be43-31e5f52bab4b\" name=\"8433653c-8b75-4f41-be43-31e5f52bab4b\"><strong>新しい視点が得られた</strong><br/>ある営業担当の方は「生成AIの活用方法を学んだことで、お客様への提案にAIを取り入れるアイデアが生まれた」とおっしゃっていました。従来の資料作成だけでなく、AIを使った市場分析の切り口を加えることで、提案の説得力が増したそうです。</p></li><li><p id=\"75104fd7-d3c0-48ae-8450-4bdfa8eea406\" name=\"75104fd7-d3c0-48ae-8450-4bdfa8eea406\"><strong>発想の幅が広がった<br/></strong>別の受講生は「プレゼン資料のドラフトをAIに作成させたら、これまでにない表現や構成のヒントが出てきて、自分の思考が広がった」との感想をくださいました。時間短縮というよりも、“自分一人では思いつかない選択肢”をAIが提示してくれる点が大きな学びになったとのことです。</p></li><li><p id=\"fde33875-fa19-406b-af78-4b353033f1c9\" name=\"fde33875-fa19-406b-af78-4b353033f1c9\"><strong>顧客や社内からの信頼感</strong><br/>「資格を持っていることで、顧客への説明に説得力が増し、“最新技術を正しく理解している”という安心感を持っていただけた」とのお話をいただきました。対外的な信頼につながったのは大きな成果だと感じます。</p></li><li><p id=\"11c8f6c6-3301-429d-838a-ea91ef62a722\" name=\"11c8f6c6-3301-429d-838a-ea91ef62a722\"><strong>キャリアの可能性拡大</strong><br/>また、合格をきっかけに「社内向けのセミナーを自ら企画して実施した」という方もいらっしゃいました。その取り組みが評価され、リーダー的な役割を任されるようになったとのことで、生成AIパスポートが新しい挑戦の扉を開く後押しになったとお話しされています。</p></li></ul><p id=\"a776750d-0f50-405e-acaf-bfd140a9f159\" name=\"a776750d-0f50-405e-acaf-bfd140a9f159\">こうしたエピソードをお伺いするたびに、私自身も「知識を証明するだけでなく、行動や挑戦につながる資格である」と実感させていただいています。<br/></p><h3 id=\"d897870c-56bd-4533-8f5d-b61ecd33bece\" name=\"d897870c-56bd-4533-8f5d-b61ecd33bece\">担当させていただいた業界での評価</h3><p id=\"bbed7201-cdc3-4a70-842b-3365dda3e75e\" name=\"bbed7201-cdc3-4a70-842b-3365dda3e75e\">私がこれまでに研修を担当させていただいた業界も、本当に多岐にわたります。</p><ul id=\"b669feb4-1312-47e6-b074-f8f247bb9a00\" name=\"b669feb4-1312-47e6-b074-f8f247bb9a00\"><li><p id=\"b91bbbf3-d1cf-412d-bf5e-861d090a5f08\" name=\"b91bbbf3-d1cf-412d-bf5e-861d090a5f08\"><strong>鋳造会社様</strong>：製造工程の効率化や品質チェックにAIをどう応用できるかを模索</p></li><li><p id=\"b8766a5f-6776-43fb-a879-1803802a3342\" name=\"b8766a5f-6776-43fb-a879-1803802a3342\"><strong>IT・開発会社様、ITコンサル会社様</strong>：開発や提案のスピードを高めるためのAI活用</p></li><li><p id=\"6eeaf856-1926-4fe0-9ea5-64b89086d7b6\" name=\"6eeaf856-1926-4fe0-9ea5-64b89086d7b6\"><strong>会計事務所様、国際税理士法人様</strong>：財務データ分析、レポート作成、転記作業や翻訳作業支援ツールの導入。</p></li><li><p id=\"5c79d6e9-b157-4e47-a3b8-d5ff01ea87c1\" name=\"5c79d6e9-b157-4e47-a3b8-d5ff01ea87c1\"><strong>不動産会社様</strong>：市場調査、物件紹介の最適化、顧客対応、ステージングなど画像生成の活用。</p></li><li><p id=\"f5fbd1c3-2a77-44ed-bf04-d7c90afb19ff\" name=\"f5fbd1c3-2a77-44ed-bf04-d7c90afb19ff\"><strong>農業法人様</strong>：データを活かした生育予測、センサー機器のデータ解析、従業員の進捗管理システムの構築。</p></li></ul><p id=\"e7b4f852-528d-4b7a-8a4d-724bb6364750\" name=\"e7b4f852-528d-4b7a-8a4d-724bb6364750\">ありがたいことに、講習の中では参加者の皆様とともにツールを構築し、実務に直結する視点を共有することができました。私自身にとっても多くの学びがあり、専門領域の違いによってAIの活かし方が大きく変わることを、皆様との対話を通じて改めて実感しています。</p><h3 id=\"648f8c35-26d0-43c5-90c7-d24b086bccde\" name=\"648f8c35-26d0-43c5-90c7-d24b086bccde\">まとめ</h3><p id=\"c0fb027c-337e-4a81-93c9-b5563eee94a6\" name=\"c0fb027c-337e-4a81-93c9-b5563eee94a6\">生成AIは「知的労働の産業革命」とも言われるほど、大きな変化をもたらしつつあります。その変化の中で、生成AIパスポートを通じて学ぶことは、キャリアやビジネスをより良い方向に進めるための確かな一歩になると思います。</p><p id=\"5e422737-23b0-4856-a4e7-7c3469cd3765\" name=\"5e422737-23b0-4856-a4e7-7c3469cd3765\">私自身、まだまだ学びの途中ですが、受講生の皆様や企業の方々から「学んでよかった」とのお声をいただけることが、何よりの励みです。これからも一緒に生成AIを活かしながら、共に成長していければと思っています。</p></div> <!-- --> <!-- --> <!-- --> <div data-v-7db6ac5e=\"\" style=\"display:none;\"><button class=\"a-button\" data-disable-focus=\"false\" data-file-widget=\"fileDownloadButton\" data-size=\"small\" data-type=\"primary\" data-v-4f14eb04=\"\" data-width=\"fit\" type=\"button\" undefined=\"\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><i aria-hidden=\"true\" class=\"a-icon a-icon--fileDownload a-icon--size_small\"><!-- --></i>\n    ダウンロード\n  </div></button></div> <!-- --> <button aria-label=\"コードをコピー\" class=\"a-button m-copyCodeButton m-iconButton\" data-disable-focus=\"false\" data-size=\"small\" data-type=\"none\" data-v-4f14eb04=\"\" data-v-80ab2cbc=\"\" style=\"display:none;\" type=\"button\"><div class=\"a-button__inner\" data-v-4f14eb04=\"\"><span data-v-80ab2cbc=\"\"><span class=\"visually-hidden\" data-v-80ab2cbc=\"\">\n  copy\n</span> <i aria-hidden=\"true\" class=\"a-icon a-icon--copy a-icon--size_small\" data-v-80ab2cbc=\"\"><!-- --></i></span> <!-- --></div></button> <!-- --></div></div> <!-- --></div>",
+      "image_map": {
+        "https://assets.st-note.com/production/uploads/images/213856233/rectangle_large_type_2_0fc14ecb1c35b00260e4b7fb38d435f9.png?width=1280": "../img/blog/rectangle_large_type_2_0fc14ecb1c35b00260e4b7fb38d435f9.png"
+      }
+    }
+  }
+}

@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Cosmico - AIコンサルティング</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- three.js (ESM Module) -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.js"
+      }
+    }
+    </script>
+
+    <style>
+        /* 基本フォント設定 (Interを優先し、日本語はNoto Sans JPで補う) */
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            /* スクロールバーのデザイン（ライトモード） */
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #F3F4F6;
+            /* インディゴ / グレー100 */
+        }
+
+        /* Webkitブラウザ（Chrome, Safari）用のスクロールバー */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #F3F4F6;
+            /* グレー100 */
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            /* インディゴ600 */
+            border-radius: 20px;
+        }
+
+        /* ヒーローセクションの背景Canvas */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.6;
+            /* 白背景なので少し濃く */
+        }
+
+        /* ヒーローセクションのコンテンツがCanvasより手前に来るように */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* スクロールフェードイン用アニメーション (タブ切り替えでも使えるように汎用化) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* .is-visible クラスはJS側で制御（タブ切り替え時に付与） */
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ナビゲーションバーのグラデーションボーダー（下線） */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            /* リンク風カーソル */
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #A855F7);
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-link:hover {
+            color: #4F46E5;
+            /* ホバー時のテキスト色 (インディゴ600) */
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* サービスカードのホバーエフェクト */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        /* タブコンテンツがヘッダーに隠れないようにパディングを追加 */
+        .tab-content {
+            padding-top: 6rem;
+            /* 96px (navbarの高さ分) */
+        }
+
+        @media (min-width: 768px) {
+            .tab-content {
+                padding-top: 8rem;
+                /* 128px */
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 antialiased">
+
+    <!-- ===== ヘッダーナビゲーション ===== -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <!-- ロゴ (ホームボタンとして機能) -->
+                <a data-tab="hero" class="flex items-center space-x-3 cursor-pointer">
+                    <img src="img/logo.png" alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain">
+                    <span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span
+                            class="text-indigo-600">.ai</span></span>
+                </a>
+
+                <!-- ナビリンク (デスクトップ) -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a data-tab="services" class="nav-link text-gray-600 hover:text-indigo-600">サービス</a>
+                    <a data-tab="case" class="nav-link text-gray-600 hover:text-indigo-600">導入事例</a>
+                    <a data-tab="about" class="nav-link text-gray-600 hover:text-indigo-600">会社概要</a>
+                    <a data-tab="blog" class="nav-link text-gray-600 hover:text-indigo-600">ブログ</a>
+                    <a data-tab="contact"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300 cursor-pointer">
+                        お問い合わせ
+                    </a>
+                </div>
+
+                <!-- モバイルメニューボタン (ハンバーガー) -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-900 focus:outline-none">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- モバイルメニュー (ドロップダウン) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md px-6 pb-4 shadow-lg">
+            <a data-tab="services" class="block py-2 text-gray-700 cursor-pointer">サービス</a>
+            <a data-tab="case" class="block py-2 text-gray-700 cursor-pointer">導入事例</a>
+            <a data-tab="about" class="block py-2 text-gray-700 cursor-pointer">会社概要</a>
+            <a data-tab="blog" class="block py-2 text-gray-700 cursor-pointer">ブログ</a>
+            <a data-tab="contact"
+                class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300 cursor-pointer">
+                お問い合わせ
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== メインコンテンツ ===== -->
+    <main>
+
+        <!-- ===== ヒーローセクション (ホームタブ) ===== -->
+        <section id="hero" data-tab-content="hero"
+            class="h-screen min-h-[700px] flex items-center justify-center text-center relative overflow-hidden bg-white">
+            <!-- 3Dパーティクル背景 -->
+            <canvas id="hero-canvas"></canvas>
+
+            <!-- コンテンツ -->
+            <div class="hero-content p-6">
+                <h1
+                    class="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-tight tracking-tighter mb-6 fade-in">
+                    AIで、<br class="md:hidden">ビジネスの<span class="text-indigo-600">新しい宇宙</span>を拓く。
+                </h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-10 fade-in"
+                    style="transition-delay: 200ms;">
+                    Cosmicoは、最先端のAI技術と深い業界知見を融合させ、
+                    お客様のデジタルトランスフォーメーションを加速させる戦略的パートナーです。
+                </p>
+                <a data-tab="contact"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full text-lg transition-all duration-300 ease-in-out transform hover:scale-105 fade-in cursor-pointer"
+                    style="transition-delay: 400ms;">
+                    無料相談を予約する
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== サービスセクション (タブ) ===== -->
+        <section id="services" data-tab-content="services" class="tab-content py-20 md:py-32 bg-gray-50 hidden">
+            <div class="container mx-auto px-6">
+                <!-- メインサービス -->
+                <div class="text-center mb-16 max-w-2xl mx-auto fade-in">
+                    <span class="text-indigo-600 font-semibold tracking-wider">WHAT WE DO</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2">提供サービス</h2>
+                    <p class="text-lg text-gray-600 mt-4">
+                        お客様の課題に合わせた、オーダーメイドのAIソリューションを提供します。
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- サービスカード 1 -->
+                    <div class="service-card bg-white p-8 rounded-2xl border border-gray-200 shadow-lg fade-in">
+                        <div
+                            class="bg-indigo-600 text-white w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                            <!-- Heroicon: academic-cap -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4.26 10.147a60.436 60.436 0 000 7.706c3.12-1.2 6.5-2 10.5-2s7.38  .8 10.5 2c.5-1.28.75-2.653.75-4.06 0-1.407-.25-2.78-.75-4.06-3.12 1.2-6.5 2-10.5 2S7.38 11.347 4.26 10.147zM4.26 10.147c0-1.407.25-2.78.75-4.06C8.12 7.28 11.5 8.08 15.5 8.08s7.38-.8 10.5-2.094c.5 1.28.75 2.653.75 4.06s-.25 2.78-.75 4.06c-3.12-1.2-6.5-2-10.5-2s-7.38 .8-10.5 2z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">AI戦略コンサルティング</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            ビジネス課題を特定し、AI導入のロードマップ策定からROI最大化までをトータルで支援します。
+                        </p>
+                    </div>
+
+                    <!-- サービスカード 2 -->
+                    <div class="service-card bg-white p-8 rounded-2xl border border-gray-200 shadow-lg fade-in"
+                        style="transition-delay: 150ms;">
+                        <div
+                            class="bg-indigo-600 text-white w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                            <!-- Heroicon: code-bracket-square -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">DX・AI開発支援</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            DX推進とAI開発をワンストップで支援。業務プロセスの自動化から新規事業創出まで伴走します。
+                        </p>
+                    </div>
+
+                    <!-- サービスカード 3 -->
+                    <div class="service-card bg-white p-8 rounded-2xl border border-gray-200 shadow-lg fade-in"
+                        style="transition-delay: 300ms;">
+                        <div
+                            class="bg-indigo-600 text-white w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                            <!-- Heroicon: users -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-8 h-8">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.935c.445-.197.868-.42 1.263-.672a4.05 4.05 0 001.416-3.41c-.012-.26-.028-.517-.044-.772c-.016-.253-.028-.505-.042-.756C20.988 8.78 19.89 8 18.5 8c-.62 0-1.199.21-1.664.562c-.465.352-.87.82-1.228 1.37C15.028 10.65 15 11.32 15 12c0 .68.028 1.35.08 2.006c.048.582.12.1158.212 1.716C15.34 16.01 15 17.52 15 19.128zM9 12a3 3 0 11-6 0 3 3 0 016 0zM9 12c0 .68-.028 1.35-.08 2.006c-.048.582-.12 1.158-.212 1.716C8.66 16.01 9 17.52 9 19.128a9.38 9.38 0 01-2.625.372A9.337 9.337 0 012.25 18.411c-.445-.197-.868-.42-1.263-.672A4.05 4.05 0 01.416 14.32c.012-.26.028-.517.044-.772c.016-.253.028-.505.042-.756C1.012 8.78 2.11 8 3.5 8c.62 0 1.199.21 1.664.562c.465.352.87.82 1.228 1.37C6.972 10.65 7 11.32 7 12z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">AI人材育成</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            実践的なカリキュラムを通じて、貴社のAI活用を内製化できる人材を育成します。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Cosmicoの強み (拡張セクション) -->
+                <div class="mt-20 md:mt-32">
+                    <div class="text-center mb-16 max-w-2xl mx-auto fade-in">
+                        <span class="text-indigo-600 font-semibold tracking-wider">OUR STRENGTH</span>
+                        <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2">Cosmicoの強み</h3>
+                        <p class="text-lg text-gray-600 mt-4">
+                            私たちは、技術力とビジネス理解の両面から最適なソリューションを提供します。
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- 強み 1 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg fade-in">
+                            <div class="text-indigo-600 mb-4">
+                                <!-- Heroicon: presentation-chart-line -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M3.75 3v11.25A2.25 2.25 0 006 16.5h12a2.25 2.25 0 002.25-2.25V3M3.75 21h16.5M16.5 3.75h.008v.008H16.5V3.75zM9.75 3.75h.008v.008H9.75V3.75z" />
+                                </svg>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-3">ビジネス実装力</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                構想だけで終わらせず、現場で「使える」AIシステムを構築し、業務プロセスへの定着まで支援します。
+                            </p>
+                        </div>
+                        <!-- 強み 2 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg fade-in"
+                            style="transition-delay: 150ms;">
+                            <div class="text-indigo-600 mb-4">
+                                <!-- Heroicon: puzzle-piece -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.25 6.75a3 3 0 013 3m-3-3a3 3 0 00-3 3m3 0a3 3 0 01-3 3m-3-3a3 3 0 013-3m0 0a3 3 0 00-3-3m3 3a3 3 0 003 3m-3-3a3 3 0 01-3 3m0 0a3 3 0 00-3 3m3-3a3 3 0 003-3m-3 3a3 3 0 01-3 3m0 0a3 3 0 00-3 3m3-3a3 3 0 013-3m-3 3a3 3 0 003 3m0 0a3 3 0 013 3m-3-3a3 3 0 00-3-3" />
+                                </svg>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-3">高度な技術知見</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                最新の論文や技術トレンドを常にキャッチアップし、特定のベンダーに依存しない最適な技術を選定します。
+                            </p>
+                        </div>
+                        <!-- 強み 3 -->
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg fade-in"
+                            style="transition-delay: 300ms;">
+                            <div class="text-indigo-600 mb-4">
+                                <!-- Heroicon: arrows-right-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 mx-auto">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h18M16.5 3L21 7.5m0 0L16.5 12M21 7.5H3" />
+                                </svg>
+                            </div>
+                            <h4 class="text-2xl font-bold text-gray-900 mb-3">伴走型サポート</h4>
+                            <p class="text-gray-600 leading-relaxed">
+                                開発して終わりではなく、お客様のチームの一員としてAIの内製化や継続的な改善をサポートします。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== 導入事例セクション (タブ) ===== -->
+        <section id="case" data-tab-content="case" class="tab-content py-20 md:py-32 bg-white overflow-hidden hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 max-w-2xl mx-auto fade-in">
+                    <span class="text-indigo-600 font-semibold tracking-wider">CASE STUDIES</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2">導入事例</h2>
+                    <p class="text-lg text-gray-600 mt-4">
+                        多様な業界でのAI導入成功事例をご覧ください。
+                    </p>
+                </div>
+
+                <!-- 事例 1: 歯科医師 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgLineMedicine.png" alt="歯科医師の訪問治療スケジューリングシステム"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-indigo-600">ヘルスケア</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">歯科医師の訪問治療スケジューリングシステム</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            歯科医師の訪問治療スケジュールを最適化し、患者様の自宅での治療を効率的に管理。地理情報と治療時間を考慮した自動スケジューリングにより、医師の移動時間を最小化。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-indigo-700">課題:</strong> 歯科医師の訪問治療スケジュール調整の複雑さと移動時間の無駄</p>
+                            <p><strong class="text-indigo-700">ソリューション:</strong>
+                                地理情報と治療時間を考慮したAIスケジューリングシステムを構築し、患者様の自宅位置と治療内容に基づく最適ルートを自動生成。</p>
+                            <p><strong class="text-indigo-700">成果:</strong> 医師の移動時間40%削減、患者様の待ち時間60%短縮、治療効率35%向上。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 事例 2: LINE -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mb-20 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgDentist.png" alt="LINE公式を利用したお薬飲み忘れ防止通知機能"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-purple-600">ヘルスケア / コミュニケーション</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">LINE公式を利用したお薬飲み忘れ防止通知機能</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            LINE公式アカウントを活用したお薬の飲み忘れ防止システム。患者様の服薬スケジュールに基づいて自動的にリマインダーを送信し、服薬コンプライアンスを向上。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-purple-700">課題:</strong> 患者様の服薬忘れによる治療効果の低下と医療スタッフの確認作業の負担</p>
+                            <p><strong class="text-purple-700">ソリューション:</strong>
+                                LINE公式アカウントと連携した服薬リマインダーシステムを構築し、患者様の服薬スケジュールに基づく自動通知機能を実装。</p>
+                            <p><strong class="text-purple-700">成果:</strong> 服薬コンプライアンス80%向上、医療スタッフの確認作業時間60%削減、患者様満足度向上。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 事例 3: リフォーム -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgReform.png" alt="リフォーム会社向け業務管理システム"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-indigo-600">建設・不動産</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">リフォーム会社向け業務管理システム</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            現場一覧の作成とGoogleMapリンクによる協力会社への即座共有機能を実装。プロジェクト全体の進捗をリアルタイムで管理し、協力会社との連携を大幅に改善。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-indigo-700">課題:</strong> 複数現場の管理と協力会社への情報共有の手間</p>
+                            <p><strong class="text-indigo-700">ソリューション:</strong>
+                                現場一覧ダッシュボードとGoogleMap連携機能を開発し、協力会社への位置情報と進捗状況を即座に共有できるシステムを構築。</p>
+                            <p><strong class="text-indigo-700">成果:</strong> 協力会社との連携時間70%短縮、現場管理効率50%向上、顧客満足度向上。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 事例 4: OCR -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mb-20 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgManufacturing.png" alt="OCR活用による製造進捗管理システム"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-purple-600">製造業</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">OCR活用による製造進捗管理システム</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            OCR技術により撮影のみで進捗管理を実現。生産ラインの各工程をスマートフォンで撮影するだけで、自動的に進捗データを取得・分析。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-purple-700">課題:</strong> 手作業による進捗入力の手間とデータ入力ミスの多さ</p>
+                            <p><strong class="text-purple-700">ソリューション:</strong>
+                                高精度OCR技術とAI分析を組み合わせた撮影型進捗管理システムを開発。スマートフォンでの撮影だけで自動データ取得を実現。</p>
+                            <p><strong class="text-purple-700">成果:</strong>
+                                進捗入力時間90%削減、データ入力ミス95%削減、リアルタイム進捗把握による生産効率25%向上。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 事例 5: 税理士 -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgTaxassets.png" alt="税理資産の仕分け自動化システム"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-indigo-600">士業・コンサルティング</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">税理資産の仕分け自動化システム</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            AIによる取引データの自動仕分けにより、会計業務の効率化と人的ミスの削減を実現。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-indigo-700">課題:</strong> 手作業による仕分け作業の時間と人的ミスの多さ</p>
+                            <p><strong class="text-indigo-700">ソリューション:</strong> 機械学習による取引パターン学習と自動仕分けシステムを開発・導入。</p>
+                            <p><strong class="text-indigo-700">成果:</strong> 仕分け作業時間80%削減、人的ミス95%削減、会計業務効率大幅向上。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 事例 6: 財務分析 -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 md:gap-16 mb-20 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgFinancialAnalysis.png" alt="財務分析・レポート自動生成システム"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-purple-600">全業種</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">財務分析・レポート自動生成システム</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            財務データの自動分析とレポート生成により、経営判断の迅速化とデータ活用の促進を実現。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-purple-700">課題:</strong> 財務レポート作成の手間とデータ分析の時間的制約</p>
+                            <p><strong class="text-purple-700">ソリューション:</strong> AIによる財務データ分析と自動レポート生成システムを構築。</p>
+                            <p><strong class="text-purple-700">成果:</strong> レポート作成時間90%削減、データ分析精度向上、経営判断の迅速化。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 事例 7: 画像照合システム -->
+                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16 fade-in">
+                    <div class="w-full md:w-1/2">
+                        <!-- 画像プレースホルダー (日本語テキスト指定) -->
+                        <img src="img/imgImageAnalysis.png" alt="画像照合システム"
+                            class="rounded-2xl shadow-xl object-contain w-full h-64 md:h-80">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="font-semibold text-indigo-600">全業種</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">画像照合システム</h3>
+                        <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                            AI画像解析技術を活用した高精度な画像照合システム。深層学習による特徴抽出により、大量の画像データから類似画像や同一画像を瞬時に検索・照合し、業務効率化と人的ミスの削減を実現。
+                        </p>
+                        <div class="space-y-3 text-gray-700">
+                            <p><strong class="text-indigo-700">課題:</strong> 大量の画像データから目的の画像を探す時間と手間、人的判断による照合ミスの発生</p>
+                            <p><strong class="text-indigo-700">ソリューション:</strong>
+                                深層学習による画像特徴抽出と類似度計算システムを構築し、画像の自動照合・検索機能を実装。類似画像の検出や同一画像の判定を高精度で自動化。</p>
+                            <p><strong class="text-indigo-700">成果:</strong>
+                                画像照合作業時間80%削減、照合精度95%向上、人的ミス90%削減、業務効率の大幅な改善。</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== 会社概要セクション (タブ) ===== -->
+        <section id="about" data-tab-content="about" class="tab-content py-20 md:py-32 bg-gray-100 hidden">
+            <div class="container mx-auto px-6">
+
+                <!-- 1. ミッション (拡張・全幅) -->
+                <div class="text-center mb-16 md:mb-24 max-w-3xl mx-auto fade-in">
+                    <span class="text-indigo-600 font-semibold tracking-wider">OUR MISSION</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2">AIの力で、すべての人に、<br>まだ見ぬ可能性を。</h2>
+                    <p class="text-xl text-gray-800 mt-6 leading-relaxed">
+                        Cosmicoは、「AIを、すべての企業の力に」をミッションに掲げるテクノロジー企業です。
+                    </p>
+                    <p class="text-gray-600 mt-4 leading-relaxed">
+                        私たちは、AIが一部の巨大企業だけのものではなく、あらゆる規模の企業がその恩恵を受け、イノベーションを創出すべきだと信じています。
+                        データサイエンティスト、AIエンジニア、ビジネスコンサルタントから成る専門家チームが、構想から実装、運用まで一気通貫で伴走します。
+                    </p>
+                </div>
+
+                <!-- 2. 代表者挨拶 (拡張・絵を埋め込む箇所) -->
+                <div
+                    class="flex flex-col md:flex-row items-center gap-10 md:gap-16 mb-20 md:mb-32 bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-200 fade-in">
+                    <div class="w-full md:w-1/3 flex-shrink-0">
+                        <!-- 絵を埋め込む箇所 (代表者) -->
+                        <img src="img/IMG-4176.jpg" alt="代表 熊谷 治信"
+                            class="rounded-full shadow-xl object-cover w-48 h-48 md:w-full md:h-auto md:max-w-xs mx-auto aspect-square">
+                    </div>
+                    <div class="w-full md:w-2/3 text-center md:text-left">
+                        <span class="text-indigo-600 font-semibold tracking-wider">GREETING</span>
+                        <h3 class="text-3xl font-bold text-gray-900 mt-2 mb-4">代表者挨拶</h3>
+                        <p class="text-gray-600 leading-relaxed mb-4">
+                            AI技術が急速に進化する現代において、その可能性は無限大です。しかし、多くの企業様にとって「何から始めればよいか分からない」という声も事実です。
+                            私たちCosmicoは、その"最初の一歩"から"ビジネス変革"まで、お客様の視点に立ち、真のパートナーとして伴走することをお約束します。
+                        </p>
+                        <p class="text-gray-800 font-semibold text-lg">代表取締役CEO 熊谷 治信</p>
+                    </div>
+                </div>
+
+                <!-- 3. 会社情報 -->
+                <div class="max-w-4xl mx-auto fade-in" style="transition-delay: 200ms;">
+                    <h3 class="text-center text-3xl font-bold text-gray-900 mb-8">会社情報</h3>
+                    <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-gray-200">
+                        <ul class="space-y-6">
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">会社名</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">株式会社Cosmico (Cosmico
+                                    Inc.)</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">設立</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">2025年 3月</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">代表者</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">熊谷 治信</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">事業内容</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">AI戦略立案、AIモデル開発、AI人材育成支援</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">資本金</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">500万円</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">所在地</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">〒160-0023<br>東京都新宿区西新宿三丁目3番13号
+                                    西新宿水間ビル6階</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row border-b border-gray-200 pb-4">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">電話番号</span>
+                                <span class="w-full md:w-2/3 text-gray-900 font-semibold">070-4077-1049</span>
+                            </li>
+                            <li class="flex flex-col md:flex-row">
+                                <span class="w-full md:w-1/3 text-gray-500 font-medium mb-2 md:mb-0">メール</span>
+                                <span
+                                    class="w-full md:w-2/3 text-gray-900 font-semibold">h.kumagaya@cosmicoai.com</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== お問い合わせセクション (タブ) ===== -->
+        <section id="contact" data-tab-content="contact" class="tab-content py-20 md:py-32 bg-white hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 max-w-2xl mx-auto fade-in">
+                    <span class="text-indigo-600 font-semibold tracking-wider">GET IN TOUCH</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2">お問い合わせ</h2>
+                    <p class="text-lg text-gray-600 mt-4">
+                        AI導入に関するご相談、プロジェクトのご依頼など、お気軽にお問い合わせください。
+                    </p>
+                </div>
+
+                <form id="contact-form" class="max-w-2xl mx-auto fade-in">
+                    <div id="form-message" class="hidden p-4 rounded-lg mb-6 text-center"></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">お名前 *</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                        </div>
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-gray-700 mb-2">会社名</label>
+                            <input type="text" id="company" name="company"
+                                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">メールアドレス *</label>
+                        <input type="email" id="email" name="email" required
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    </div>
+                    <div class="mb-8">
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">お問い合わせ内容 *</label>
+                        <textarea id="message" name="message" rows="5" required
+                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-12 rounded-full text-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+                            送信する
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== ブログセクション (タブ) ===== -->
+        <section id="blog" data-tab-content="blog" class="tab-content py-20 md:py-32 bg-gray-50 hidden">
+            <div class="container mx-auto px-6">
+                <!-- ページタイトル -->
+                <div class="text-center mb-16 max-w-2xl mx-auto fade-in">
+                    <span class="text-indigo-600 font-semibold tracking-wider">BLOG</span>
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mt-2">ブログ</h2>
+                    <p class="text-lg text-gray-600 mt-4">
+                        AI技術の最新情報、業界トレンド、導入事例など、ビジネスに役立つ情報をお届けします。
+                    </p>
+                </div>
+
+                <!-- ブログ記事一覧 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in">
+                        <a href="blog/n1b06bda207e5.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">データ分析</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    「現存データのまとめ」と「未来予測」：AI時代の情報活用をまちがえないために
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年10月19日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    情報過多の時代、データドリブンな意思決定は競争力の源泉です。とくに生成AIや機械学習の普及により、企業はこれまで以上にデータを集約・分析し、将来を読む力を求められています。ところが、「現存データのまとめ」と「未来予測」という異なるアプローチを混同すると、判断を誤りがちです。本稿では両者の違いを明確化...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 150ms;">
+                        <a href="blog/n47dabbdb0d3c.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    AIを使いこなすなら本を読もう
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年10月01日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    〜読書とマネジメントが未来を切り拓く〜続きをみる...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 300ms;">
+                        <a href="blog/n893d0e031bb0.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">Gemini
+                                        CLI</span>
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    【Google AI完全活用】讃岐うどん巡りの旅 - 50店舗制覇者が教えるAI時代の最強旅行術
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年09月23日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    はじめに：AIで旅行が変わる時代旅行計画って、意外と時間がかかりませんか？どこに行くか、どの順番で回るか、どんなルートが効率的か...。そんな悩みをGoogle
+                                    AIサービスで一気に解決した実体験をお話しします。続きをみる...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 450ms;">
+                        <a href="blog/n197663d9721d.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">税理士</span>
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    転記作業の効率化 ― AIとアプリケーション化による業務改善の最前線
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年09月14日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    士業や事務職を悩ませる「転記作業」という課題会計士事務所や税理士法人における研修の場で、必ずといってよいほど受講者から上がる質問があります。それが「転記作業をどう効率化すればよいのか？」というものです。続きをみる...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 600ms;">
+                        <a href="blog/n5e85f83c152d.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">教育</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    生成AIパスポート合格者の声が続々！激変するAI時代を勝ち抜く知見を手に入れる方法
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年09月08日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    近年、生成AIの進化は本当に目覚ましく、私たちの働き方やビジネスの進め方を大きく変えつつあります。その中で注目されているのが「生成AIパスポート」です。生成AIに関する体系的な知識や、実務での活用方法を幅広く学べるこの資格は、多くの方々から関心を寄せていただいています。私自身も講義や研修の場を担当さ...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 750ms;">
+                        <a href="blog/llm-tax-accountant.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">LLM</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">税理士</span>
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    LLMの限界と税理士事務所における「本当に合理化できる」使い方
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年08月31日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    近年、生成AI（LLM）を活用した業務効率化が各業界で注目されており、税理士事務所においても「仕訳をAIに作らせましょう」といったセミナーが盛んに行われています。私自身も講義の場で税理士の先生方から直接ご意見を伺う機会があり、「毎月の同じ作業を安定的に実行できるかどうか」が大きな関心事であることを実...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 900ms;">
+                        <a href="blog/gemini-cli-visit.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Gemini
+                                        CLI</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    Gemini CLIで訪問をスマートに！移動支援ツールを素早く構築する方法
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年08月17日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    訪問のお仕事を担当されている方にとって、顧客訪問前のルート計画は意外と時間と労力を消費する業務です。特に複数の訪問先がある場合、毎回地図アプリに住所を入力して確認するのは非効率的で、移動中の確認も煩雑になりがちです。しかし
+                                    Google Gemini CLI を活用すれば、こうした課題を解決できます...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                    <!-- 記事 -->
+                    <article
+                        class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                        style="transition-delay: 1050ms;">
+                        <a href="blog/ai-security-mountain.html" class="block">
+                            <div class="p-6">
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                    <span
+                                        class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">情報漏洩対策</span>
+                                    <span
+                                        class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">セキュリティ</span>
+
+                                </div>
+                                <h2
+                                    class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                    AIにおける情報漏洩対策は「登山の準備」と同じ
+                                </h2>
+                                <p class="text-sm text-gray-500 mb-4">2025年08月16日</p>
+                                <p class="text-gray-600 leading-relaxed">
+                                    先日、燕岳へ登山に行ってきました。登山は一見シンプルに見えますが、実際には「想定外」をいかに想定して備えるかが重要です。AI時代の情報漏洩対策も、まさに登山の準備とよく似ています。続きをみる...
+                                </p>
+                                <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む
+                                    →</span>
+                            </div>
+                        </a>
+                    </article>
+
+                </div>
+
+                <!-- サイドバー（検索・タグ） -->
+                <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-2">
+                        <!-- 記事一覧は上に表示済み -->
+                    </div>
+
+                    <aside class="lg:col-span-1">
+                        <div class="bg-white rounded-2xl border border-gray-200 shadow-lg p-6 mb-6 fade-in">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">記事検索</h3>
+                            <input type="text" placeholder="キーワードで検索..."
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+
+                        <div class="bg-white rounded-2xl border border-gray-200 shadow-lg p-6 fade-in">
+                            <h3 class="text-xl font-bold text-gray-900 mb-4">タグ</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">LLM</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">税理士</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">業務効率化</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI活用</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">情報漏洩対策</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">セキュリティ</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Gemini
+                                    CLI</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">ルート計画</span>
+                                <span
+                                    class="px-3 py-1 bg-gray-50 text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Googleマップ</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== フッター ===== -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div class="mb-4 md:mb-0">
+                    <a data-tab="hero" class="flex items-center space-x-3 cursor-pointer">
+                        <img src="img/logo.png" alt="Cosmico.ai ロゴ" class="w-9 h-9 object-contain">
+                        <span class="text-2xl font-bold tracking-tighter text-gray-900">Cosmico<span
+                                class="text-indigo-600">.ai</span></span>
+                    </a>
+                </div>
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a data-tab="services"
+                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">サービス</a>
+                    <a data-tab="case"
+                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">導入事例</a>
+                    <a data-tab="about"
+                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">会社概要</a>
+                    <a data-tab="blog"
+                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">ブログ</a>
+                    <a data-tab="contact"
+                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">お問い合わせ</a>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500">&copy; COSPACE0504</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ===== JavaScript ===== -->
+    <script type="module">
+        // three.js をインポート
+        import * as THREE from 'three';
+
+        // --- 1. ヒーローセクションのパーティクルアニメーション ---
+        let scene, camera, renderer, particles, particleSystem;
+        let mouseX = 0, mouseY = 0;
+        const particlesCount = 3000;
+        const canvas = document.getElementById('hero-canvas');
+        let heygenEmbedWrapper = null;
+
+        function initThreeJS() {
+            if (!canvas) return;
+
+            // シーン
+            scene = new THREE.Scene();
+
+            // カメラ
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000);
+            camera.position.z = 1000;
+
+            // レンダラー
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // パーティクル
+            particles = new THREE.BufferGeometry();
+            const positions = new Float32Array(particlesCount * 3);
+
+            for (let i = 0; i < particlesCount; i++) {
+                const i3 = i * 3;
+                positions[i3] = (Math.random() - 0.5) * 2000; // X
+                positions[i3 + 1] = (Math.random() - 0.5) * 2000; // Y
+                positions[i3 + 2] = (Math.random() - 0.5) * 2000; // Z
+            }
+            particles.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+            const material = new THREE.PointsMaterial({
+                color: 0x4F46E5, // インディゴ色
+                size: 2,
+                transparent: true,
+                blending: THREE.AdditiveBlending,
+                sizeAttenuation: true
+            });
+
+            particleSystem = new THREE.Points(particles, material);
+            scene.add(particleSystem);
+
+            // イベントリスナー
+            document.addEventListener('mousemove', onDocumentMouseMove, false);
+            window.addEventListener('resize', onWindowResize, false);
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            render();
+        }
+
+        function render() {
+            // カメラをマウス位置にゆっくり追従させる
+            camera.position.x += (mouseX - camera.position.x) * 0.005;
+            camera.position.y += (-mouseY - camera.position.y) * 0.005;
+            camera.lookAt(scene.position);
+
+            // 回転ロジック
+            const time = Date.now() * 0.00005;
+            particleSystem.rotation.y = time * 0.5;
+            particleSystem.rotation.x = time * 0.2;
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - window.innerWidth / 2) * 2;
+            mouseY = (event.clientY - window.innerHeight / 2) * 2;
+        }
+
+        // --- 2. スクロールに応じたナビゲーションバーのスタイル変更 (タブ式に変更) ---
+        const navbar = document.getElementById('navbar');
+        // (このロジックは switchTab 関数内に移動しました)
+
+        // --- 3. スクロールフェードインアニメーション (タブ切り替え時に発火) ---
+        function triggerFadeIn(container) {
+            const fadeInElements = container.querySelectorAll('.fade-in');
+            // 一旦リセット（再度タブで表示された時のため）
+            fadeInElements.forEach(el => {
+                el.classList.remove('is-visible');
+                // 少し遅れてクラスを付与し、アニメーションを発火させる
+                setTimeout(() => {
+                    el.classList.add('is-visible');
+                }, 10); // わずかな遅延
+            });
+        }
+
+        // --- 4. モバイルメニューのトグル ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- 5. お問い合わせフォームの簡易送信処理 ---
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // 実際にはここでAPIにデータを送信します
+
+            // 送信成功時のダミーメッセージ表示
+            formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+            formMessage.classList.add('bg-green-100', 'text-green-700');
+            formMessage.textContent = 'お問い合わせありがとうございます。内容を確認の上、担当者よりご連絡いたします。';
+
+            contactForm.reset();
+
+            // 5秒後にメッセージを隠す
+            setTimeout(() => {
+                formMessage.classList.add('hidden');
+            }, 5000);
+        });
+
+        // --- 6. タブ切り替えロジック ---
+        const tabLinks = document.querySelectorAll('[data-tab]');
+        const tabContents = document.querySelectorAll('[data-tab-content]');
+
+        function switchTab(tabName) {
+            // まずすべてのコンテンツを非表示
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // 対応するコンテンツを表示
+            const activeContent = document.querySelector(`[data-tab-content="${tabName}"]`);
+            if (activeContent) {
+                activeContent.classList.remove('hidden');
+                // 表示したコンテンツのフェードインアニメーションを発火
+                triggerFadeIn(activeContent);
+            }
+
+            // ヒーローセクション（とパーティクル）の表示/非表示制御
+            const heroCanvas = document.getElementById('hero-canvas');
+            if (tabName === 'hero') {
+                heroCanvas.style.display = 'block';
+                // ヒーロー表示時はnavbar透明
+                navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-lg');
+                initHeygenEmbed();
+                toggleHeygenEmbed(true);
+            } else {
+                heroCanvas.style.display = 'none';
+                // 他セクションではnavbarに背景色を適用
+                navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-lg');
+                toggleHeygenEmbed(false);
+            }
+
+            // ページトップにスクロール
+            window.scrollTo(0, 0);
+
+            // モバイルメニューを閉じる
+            mobileMenu.classList.add('hidden');
+        }
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // リンクのデフォルト動作（スクロール）を無効化
+                const tabName = e.currentTarget.getAttribute('data-tab');
+                switchTab(tabName);
+            });
+        });
+
+
+        function initHeygenEmbed() {
+            if (heygenEmbedWrapper) return;
+
+            const host = 'https://labs.heygen.com';
+            const url = host + '/guest/streaming-embed?share=eyJxdWFsaXR5IjoiaGlnaCIsImF2YXRhck5hbWUiOiJhODNlNmEyZDhhMjY0NzZlYTYwOWJmZDg5OTc2YzBhYiIsInByZXZpZXdJbWciOiJodHRwczovL2ZpbGVzMi5oZXlnZW4uYWkvYXZhdGFyL3YzL2E4M2U2YTJkOGEyNjQ3NmVhNjA5YmZkODk5NzZjMGFiL2Z1bGwvMi4yL3ByZXZpZXdfdGFyZ2V0LndlYnAiLCJuZWVkUmVtb3ZlQmFja2dyb3VuZCI6ZmFsc2UsImtub3dsZWRnZUJhc2VJZCI6ImEzMzliNGE3MzQxODRjZTFhNDYyOTU0MzliZjg4Yzg0IiwidXNlcm5hbWUiOiJmMzc0NjEwODc2MWY0NzhmODBhNGFmYmFmODRkM2I4NSJ9&inIFrame=1';
+            const clientWidth = document.body.clientWidth;
+
+            heygenEmbedWrapper = document.createElement('div');
+            heygenEmbedWrapper.id = 'heygen-streaming-embed';
+            heygenEmbedWrapper.style.display = 'none';
+
+            const container = document.createElement('div');
+            container.id = 'heygen-streaming-container';
+
+            const stylesheet = document.createElement('style');
+            stylesheet.innerHTML = `
+  #heygen-streaming-embed {
+    z-index: 9999;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0px 8px 24px 0px rgba(0, 0, 0, 0.12);
+    transition: all linear 0.1s;
+    overflow: hidden;
+
+    opacity: 0;
+    visibility: hidden;
+  }
+  #heygen-streaming-embed.show {
+    opacity: 1;
+    visibility: visible;
+  }
+  #heygen-streaming-embed.expand {
+    ${clientWidth < 540 ? 'height: 266px; width: 96%; left: 50%; transform: translateX(-50%);' : 'height: 366px; width: calc(366px * 16 / 9); right: 40px; left: auto;'}
+    border: 0;
+    border-radius: 8px;
+  }
+  #heygen-streaming-container {
+    width: 100%;
+    height: 100%;
+  }
+  #heygen-streaming-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  `;
+
+            const iframe = document.createElement('iframe');
+            iframe.allowFullscreen = false;
+            iframe.title = 'Streaming Embed';
+            iframe.role = 'dialog';
+            iframe.allow = 'microphone';
+            iframe.src = url;
+
+            let visible = false;
+            let initial = false;
+            window.addEventListener('message', (e) => {
+                if (e.origin !== host || !e.data || e.data.type !== 'streaming-embed' || !heygenEmbedWrapper) return;
+                if (e.data.action === 'init') {
+                    initial = true;
+                    heygenEmbedWrapper.classList.toggle('show', initial);
+                } else if (e.data.action === 'show') {
+                    visible = true;
+                    heygenEmbedWrapper.classList.toggle('expand', visible);
+                } else if (e.data.action === 'hide') {
+                    visible = false;
+                    heygenEmbedWrapper.classList.toggle('expand', visible);
+                }
+            });
+
+            container.appendChild(iframe);
+            heygenEmbedWrapper.appendChild(stylesheet);
+            heygenEmbedWrapper.appendChild(container);
+            document.body.appendChild(heygenEmbedWrapper);
+        }
+
+        function toggleHeygenEmbed(show) {
+            if (!heygenEmbedWrapper) return;
+            heygenEmbedWrapper.style.display = show ? 'block' : 'none';
+        }
+
+        // --- 初期化処理 ---
+        document.addEventListener('DOMContentLoaded', () => {
+            initThreeJS();
+            initHeygenEmbed();
+            toggleHeygenEmbed(true);
+
+            // Check for hash in URL to switch tab
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                switchTab(hash);
+            } else {
+                // Default to hero if no hash
+                const heroContent = document.querySelector('[data-tab-content="hero"]');
+                if (heroContent) {
+                    triggerFadeIn(heroContent);
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

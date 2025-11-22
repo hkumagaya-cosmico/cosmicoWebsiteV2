@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gemini CLIで訪問をスマートに！移動支援ツールを素早く構築する方法 - Cosmico</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #F3F4F6;
+        }
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border-radius: 20px;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #A855F7);
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover {
+            color: #4F46E5;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .article-content {
+            line-height: 1.8;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1F2937;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        .article-content ul, .article-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        .article-content code {
+            background-color: #F3F4F6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        .article-content pre {
+            background-color: #1F2937;
+            color: #F9FAFB;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        .article-content pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+<!-- ===== ヘッダーナビゲーション ===== -->
+<header class="bg-white/90 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-50">
+<div class="container mx-auto px-6 py-4">
+<nav class="flex justify-between items-center">
+<a class="flex items-center space-x-3" href="../index.html">
+<img alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain" src="../img/logo.png"/>
+<span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+</a>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#services">サービス</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#case">導入事例</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#about">会社概要</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="index.html">ブログ</a>
+<a class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300" href="../index.html#contact">
+                        お問い合わせ
+                    </a>
+</div>
+<div class="md:hidden">
+<button class="text-gray-900 focus:outline-none" id="mobile-menu-btn">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</nav>
+</div>
+<div class="hidden md:hidden bg-white/90 backdrop-blur-md px-6 pb-4 shadow-lg" id="mobile-menu">
+<a class="block py-2 text-gray-700" href="../index.html#services">サービス</a>
+<a class="block py-2 text-gray-700" href="../index.html#case">導入事例</a>
+<a class="block py-2 text-gray-700" href="../index.html#about">会社概要</a>
+<a class="block py-2 text-gray-700" href="index.html">ブログ</a>
+<a class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300" href="../index.html#contact">
+                お問い合わせ
+            </a>
+</div>
+</header>
+<!-- ===== メインコンテンツ ===== -->
+<main class="pt-24 pb-20">
+<article class="container mx-auto px-6 max-w-4xl">
+<!-- パンくずリスト -->
+<nav class="mb-8 text-sm text-gray-600">
+<a class="hover:text-indigo-600" href="../index.html">ホーム</a>
+<span class="mx-2">/</span>
+<a class="hover:text-indigo-600" href="../blog.html">ブログ</a>
+<span class="mx-2">/</span>
+<span class="text-gray-900">Gemini CLIで訪問をスマートに！移動支援ツールを素早く構築する方法</span>
+</nav>
+<!-- 記事ヘッダー -->
+<header class="mb-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Gemini CLI</span>
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">ルート計画</span>
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Googleマップ</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Gemini CLIで訪問をスマートに！移動支援ツールを素早く構築する方法
+                </h1>
+<p class="text-gray-500">2025年8月17日</p>
+</header>
+<!-- 記事本文 -->
+<div class="article-content text-gray-700 bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-200"><div class="note-common-styles__textnote-body" data-name="body" data-v-7db6ac5e=""><p id="75120d32-e1ed-49fd-abf5-4e7d83c12c57" name="75120d32-e1ed-49fd-abf5-4e7d83c12c57">訪問のお仕事を担当されている方にとって、顧客訪問前のルート計画は意外と時間と労力を消費する業務です。<br/>特に複数の訪問先がある場合、毎回地図アプリに住所を入力して確認するのは非効率的で、移動中の確認も煩雑になりがちです。</p><p id="1bd05c86-9872-479c-aeca-e644d703f26e" name="1bd05c86-9872-479c-aeca-e644d703f26e">しかし <strong>Google Gemini CLI</strong> を活用すれば、こうした課題を解決できます。スマートフォンでも使えるシームレスな移動支援ツールを構築でき、営業活動の効率化につながります。<br/>今回は、私が2年前に「訪問歯科医師向け支援ツール」を構築した経験をもとに、その具体的な方法とメリットを紹介します。</p><p id="6fbb49ff-5aa9-4b36-a247-910e83dad3b0" name="6fbb49ff-5aa9-4b36-a247-910e83dad3b0"><strong><br/></strong></p><h3 id="2086f384-69e6-4cc2-89b5-6883af56cb97" name="2086f384-69e6-4cc2-89b5-6883af56cb97">1. 事前準備：会社住所リストの整理とプライバシー配慮</h3><p id="2a2f2097-83a1-48e7-b071-5beb08e7ef75" name="2a2f2097-83a1-48e7-b071-5beb08e7ef75">最初に、訪問先の会社住所リストを customer_list.txt として保存します。<br/>このリストがGemini CLIでGoogleマップリンクを生成するための基盤になります。</p><p id="f8a24736-179a-40a5-b27a-ee7e2c0b95cd" name="f8a24736-179a-40a5-b27a-ee7e2c0b95cd">🔒 <strong>プライバシーに注意</strong><br/>顧客住所などの個人情報を扱う場合は、Gemini CLIのプライバシー設定を「No」に設定しましょう。必要に応じて課金プランを利用することで、情報の安全性を確保できます。</p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="655" loading="lazy" src="../img/blog/1755464686-iLORqdI2h91JvMuYGfDgXKz0.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">customer_list.txt</span></p><h2 id="bec6fd95-b505-4b61-8d6e-b621af1cca78" name="bec6fd95-b505-4b61-8d6e-b621af1cca78">2. Google Gemini CLIでマップリンクを作成する方法</h2><p id="4512f886-b976-433f-aac8-2b51f47dbe91" name="4512f886-b976-433f-aac8-2b51f47dbe91">Gemini CLIを使ったマップリンク作成には大きく分けて2つの方法があります。</p><h3 id="ed82dce7-d9a4-4e2d-83b7-bf6f9fd9af0d" name="ed82dce7-d9a4-4e2d-83b7-bf6f9fd9af0d">方法1：プロンプトを直接入力してルート計算</h3><p id="214f2e79-1edb-4f63-8b1f-6a45a1c1cbe6" name="214f2e79-1edb-4f63-8b1f-6a45a1c1cbe6">Gemini CLIに会社コードや識別子を入力すると、最適ルートを自動計算してGoogleマップリンクを生成できます。</p><p id="abbe4d5f-c94e-483a-bc93-e43f51cb62e1" name="abbe4d5f-c94e-483a-bc93-e43f51cb62e1"><strong>プロンプト例</strong>：</p><pre id="3084625f-8236-46d4-97b0-e45ca06a5099" name="3084625f-8236-46d4-97b0-e45ca06a5099"><code class="hljs css"><span class="hljs-selector-tag">customer_list</span><span class="hljs-selector-class">.txt</span> を読み込み、新宿を出発点として <span class="hljs-selector-tag">C009</span>・<span class="hljs-selector-tag">C012</span>・<span class="hljs-selector-tag">C030</span> を最短（所要時間最小）となる順序で巡回する最適ルートを算出してください。各地点の <span class="hljs-selector-tag">Google</span> マップリンクを含む <span class="hljs-selector-tag">HTML</span> を生成し、ファイルとして保存してください</code></pre><h3 id="277ed04d-302c-4578-a9ee-fcefdcbfded9" name="277ed04d-302c-4578-a9ee-fcefdcbfded9">方法2：プロンプトファイルを定義して効率化</h3><p id="bd9c631c-7531-4493-bf6e-35f57437f52c" name="bd9c631c-7531-4493-bf6e-35f57437f52c">繰り返し使う場合は、プロンプトファイルを .toml 形式で保存しておくと便利です。</p><p id="4eef23f4-65b5-4529-975e-1230093b4f52" name="4eef23f4-65b5-4529-975e-1230093b4f52">例：~/.gemini/commands/route.toml</p><pre id="6d98c14e-38e1-4eb0-a785-e9e9e389f99b" name="6d98c14e-38e1-4eb0-a785-e9e9e389f99b"><code class="hljs python">name = <span class="hljs-string">"route"</span>
+description = <span class="hljs-string">"顧客コードから最適ルートを算出してHTML保存"</span>
+
+[prompt]
+text = <span class="hljs-string">"""
+customer_list.txt を読み込み、新宿を出発点として
+ユーザーが指定したコードの会社住所を最短（所要時間最小）となる順序で巡回する最適ルートを算出してください。
+各地点の Google マップリンクを含む HTML を生成し、ファイルとして保存してください。
+
+ユーザー入力: {{args}}
+"""</span>
+</code></pre><p id="3cb7c1ca-952b-47a1-ab9a-c9d6a58e96e4" name="3cb7c1ca-952b-47a1-ab9a-c9d6a58e96e4">保存後は以下のように実行できます：</p><pre id="aa4f9c00-fb13-415d-90a8-7002535f1d3b" name="aa4f9c00-fb13-415d-90a8-7002535f1d3b"><code class="hljs rust">gemini <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">route</span></span> <span class="hljs-string">"C009 C012 C030"</span></code></pre><p id="941f1f5d-3b56-40d1-91d5-d6f473924179" name="941f1f5d-3b56-40d1-91d5-d6f473924179">@route C009 C012 C030 のように、@routeに続けて顧客コードをスペースで区切って指定することで、同様のルート計算を実行できます</p><p id="fa2ca93a-bc8f-4711-89e0-d836600ac359" name="fa2ca93a-bc8f-4711-89e0-d836600ac359"><br/></p><p id="30c73e74-c600-4a1f-96ef-e72ce5ec4969" name="30c73e74-c600-4a1f-96ef-e72ce5ec4969"><strong>【ヒント】コードがわからない場合：</strong> 会社コードや識別子がすぐにわからない場合は、Gemini CLIにリストを表示させることで確認できます。これにより、必要な情報を迅速に把握し、次のステップに進むことができます。</p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="559" loading="lazy" src="../img/blog/1755426050-qrgNbufdP1Uo6RwSDs7xhnJG.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">customer_list.txt の内容を表示させた</span></p><p id="f8dc16cb-4e42-4c8e-b569-510bbf7c7526" name="f8dc16cb-4e42-4c8e-b569-510bbf7c7526"><br/></p><h3 id="6a302c55-c11d-4d6b-89e1-20e41e450f27" name="6a302c55-c11d-4d6b-89e1-20e41e450f27">3. 実行結果と活用方法</h3><p id="d3094006-c783-468c-a6fb-5bad166c287b" name="d3094006-c783-468c-a6fb-5bad166c287b">実際にプロンプトを実行すると以下の成果が得られます。</p><ul id="c18f635c-a014-466c-8a39-8216aeb3af9e" name="c18f635c-a014-466c-8a39-8216aeb3af9e"><li><p id="9a1753be-5edc-4021-860a-2e9b7b81b6ed" name="9a1753be-5edc-4021-860a-2e9b7b81b6ed"><strong>処理内容</strong></p><ul id="e24c1aad-bc87-4f71-bd57-a318ecebc380" name="e24c1aad-bc87-4f71-bd57-a318ecebc380"><li><p id="75dad272-f33d-4394-b943-ceca3600ba07" name="75dad272-f33d-4394-b943-ceca3600ba07">新宿を出発点に最短ルートを算出</p></li><li><p id="cdb75b9f-d54d-422b-8f6b-051195ae70db" name="cdb75b9f-d54d-422b-8f6b-051195ae70db">所要時間を最小化するよう自動並び替え</p></li><li><p id="da221d50-0a32-4dea-8cd8-f97d97a3b630" name="da221d50-0a32-4dea-8cd8-f97d97a3b630">HTMLファイルにルートとGoogleマップリンクを保存<br/></p></li></ul></li></ul><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="219" loading="lazy" src="../img/blog/1755427986-yGTwcqOrStKU5N9QYdLomXDW.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">最短ルートを算出</span></p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="199" loading="lazy" src="../img/blog/1755428004-TSciAlvgkZhQaI9HOG3yKPDM.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">HTMLファイルを作成</span></p><ul id="2c51cc49-b19d-4f3b-8ac5-19db0dc012b4" name="2c51cc49-b19d-4f3b-8ac5-19db0dc012b4"><li><p id="17dd0cd5-1a5e-4454-b430-65f62547e365" name="17dd0cd5-1a5e-4454-b430-65f62547e365">各訪問先には <strong>Google マップリンク</strong> を付与し、クリックするとすぐに経路確認が可能。</p></li><li><p id="25a3895d-a11e-46bf-b301-0685f66ce984" name="25a3895d-a11e-46bf-b301-0685f66ce984">出力ファイルはローカル環境で開くだけで、ブラウザ上で地図リンクが利用可能。</p></li></ul><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="575" loading="lazy" src="../img/blog/1755428012-EVOCeUbHK1yuDho6X5FxMYRf.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">HTMLファイルを開いた</span></p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="417" loading="lazy" src="../img/blog/1755428047-ARmubvs08I9V1CUgP3J2qzpX.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">リンクをクリックすると指定住所をGoogleMap上で表示（今回は都内の神社を割り当ててみました）</span></p><p id="073b2fe8-af3e-4c06-8809-e72a3933df29" name="073b2fe8-af3e-4c06-8809-e72a3933df29">📱 <strong>スマホ運用の例</strong></p><ul id="2d1831b2-4b3e-4f72-aebc-c065d2ffb9ac" name="2d1831b2-4b3e-4f72-aebc-c065d2ffb9ac"><li><p id="54e2ab68-b07d-4760-a68e-4a02ada3bc28" name="54e2ab68-b07d-4760-a68e-4a02ada3bc28">PCで生成 → AirDropでiPhoneへ転送</p></li><li><p id="3d0338eb-f7da-4144-bd94-fd82de0d1ce5" name="3d0338eb-f7da-4144-bd94-fd82de0d1ce5">ブラウザからMAPリンクをタップ → Googleマップアプリが自動起動</p></li><li><p id="6d917481-2165-48ea-b2c0-81704781d264" name="6d917481-2165-48ea-b2c0-81704781d264">そのままナビゲーション開始</p></li></ul><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="387" loading="lazy" src="../img/blog/1755428346-HGPLjO72raV4Q65SIc0zxDFt.png" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">AriDropでHTMLファイルを転送</span></p><p id="4a71a6ac-8f43-4583-8a02-a804e0c4fb83" name="4a71a6ac-8f43-4583-8a02-a804e0c4fb83"><br/></p><p id="8c81f896-005f-4680-8e53-7ad075a0da0d" name="8c81f896-005f-4680-8e53-7ad075a0da0d"><br/></p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="1123" loading="lazy" src="../img/blog/1755428401-z49ATXCfFZ3DsRvme7MB2diJ.jpg" style="width: 372px; height: 673.8px;" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">スマートフォンのブラウザで起動</span></p><p id="9708f12f-f369-433f-851f-26f33cd45227" name="9708f12f-f369-433f-851f-26f33cd45227"><br/></p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="1096" loading="lazy" src="../img/blog/1755428458-8YhAIaEzsoOqgkbD9Tjci4Xp.jpg" style="width: 372px; height: 657.6px;" width="620"/><span style="display: block; text-align: center; font-size: 0.875rem; color: #6B7280; margin-top: 0.5rem;">GoogleMAPで起動してすぐに経路案内が出来るようになった。</span></p><p id="ca77f27d-13d9-41b0-99d2-578958ebfa3c" name="ca77f27d-13d9-41b0-99d2-578958ebfa3c">これにより、従来は手作業だったルート確認が一瞬で完了します。訪問営業の効率化はもちろん、移動中のストレスも軽減されます。</p><h3 id="1e7122f7-7e12-40d4-959e-b344656ac007" name="1e7122f7-7e12-40d4-959e-b344656ac007"><br/>4. 生成したルートを共有するメリット</h3><ul id="68a15475-0b03-461e-a7a0-239af0476fa0" name="68a15475-0b03-461e-a7a0-239af0476fa0"><li><p id="9ed4a489-027b-4176-877b-eb90d7e15dfa" name="9ed4a489-027b-4176-877b-eb90d7e15dfa">HTMLファイル形式なのでチームでの共有が簡単</p></li><li><p id="ff9d6024-45a1-4ea2-b05f-e706583fed6f" name="ff9d6024-45a1-4ea2-b05f-e706583fed6f">上司や同僚に「今日のルート」をそのまま渡せる</p></li><li><p id="47a8f97c-73fa-415a-9722-657430ed2e4f" name="47a8f97c-73fa-415a-9722-657430ed2e4f">営業日報や社内共有ツールとも相性抜群</p></li></ul><p id="f4545762-7561-4ea3-98f9-05192a214457" name="f4545762-7561-4ea3-98f9-05192a214457">従来の「地図アプリで1件ずつ入力する手間」を大幅に削減できます。<br/><br/></p><h3 id="a65655e7-bc31-4e10-bc6f-912d28480a22" name="a65655e7-bc31-4e10-bc6f-912d28480a22">5. 次の一歩：運用の工夫</h3><p id="00ec6e4a-3701-4e82-8392-f1e24105e266" name="00ec6e4a-3701-4e82-8392-f1e24105e266">私はMacユーザーなのでAirDropでiPhoneに送っていますが、ファイルが溜まっていく点が課題です。<br/>次は「Gmailに添付して直接開く」方法を試してみる予定です。<br/><br/>小さな工夫次第で、Gemini CLIはさらに便利になります。営業活動の効率化はもちろん、移動時間の短縮や顧客との商談に集中するための大きな武器になるでしょう。</p><h3 id="35474c0b-efb2-4a4d-a557-37f81dcd26d3" name="35474c0b-efb2-4a4d-a557-37f81dcd26d3"><br/>まとめ</h3><ul id="0891e7fc-f97d-4bbc-ae11-db974f1ae741" name="0891e7fc-f97d-4bbc-ae11-db974f1ae741"><li><p id="04640804-852d-43b8-b9e1-b029d3610c88" name="04640804-852d-43b8-b9e1-b029d3610c88">訪問営業のルート計画は非効率になりやすい</p></li><li><p id="73aed1a2-6a07-4d5e-a910-c4481910db0b" name="73aed1a2-6a07-4d5e-a910-c4481910db0b"><strong>Gemini CLIで最短ルートを自動算出 → HTML化 → Googleマップリンクで即起動</strong></p></li><li><p id="c90effc5-518f-425b-a5cd-b759998a1227" name="c90effc5-518f-425b-a5cd-b759998a1227">AirDropやメール転送でスマホからシームレスに利用可能</p></li><li><p id="57c8462b-2838-49ab-b6c7-066fcc07127b" name="57c8462b-2838-49ab-b6c7-066fcc07127b">訪問活動の効率化とストレス軽減に直結</p></li></ul><p id="20db1a00-a6c8-43ec-afbd-5fe78f3746ad" name="20db1a00-a6c8-43ec-afbd-5fe78f3746ad">👉 訪問営業やルート管理で時間を削られている方は、ぜひGoogle Gemini CLIを導入してみてください。<br/>日々の業務がぐっとスマートになりますので＾＾</p><p id="c48bed3b-7ae3-4df1-a80b-92e403d0b299" name="c48bed3b-7ae3-4df1-a80b-92e403d0b299"><br/></p></div></div>
+<!-- 戻るボタン -->
+<div class="mt-8 text-center">
+<a class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300" href="../blog.html">
+                    ← ブログ一覧に戻る
+                </a>
+</div>
+</article>
+</main>
+<!-- ===== フッター ===== -->
+<footer class="bg-gray-50 border-t border-gray-200 py-12">
+<div class="container mx-auto px-6">
+<div class="text-center">
+<a class="flex items-center justify-center space-x-3 mb-4" href="../index.html">
+<img alt="Cosmico.ai ロゴ" class="w-9 h-9 object-contain" src="../img/logo.png"/>
+<span class="text-2xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+</a>
+<p class="text-sm text-gray-500">© 株式会社Cosmico. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

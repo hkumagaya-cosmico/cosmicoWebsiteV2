@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LLMの限界と税理士事務所における「本当に合理化できる」使い方 - Cosmico</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #F3F4F6;
+        }
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border-radius: 20px;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #A855F7);
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover {
+            color: #4F46E5;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .article-content {
+            line-height: 1.8;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1F2937;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        .article-content ul, .article-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+<!-- ===== ヘッダーナビゲーション ===== -->
+<header class="bg-white/90 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-50">
+<div class="container mx-auto px-6 py-4">
+<nav class="flex justify-between items-center">
+<a class="flex items-center space-x-3" href="../index.html">
+<img alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain" src="../img/logo.png"/>
+<span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+</a>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#services">サービス</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#case">導入事例</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#about">会社概要</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="index.html">ブログ</a>
+<a class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300" href="../index.html#contact">
+                        お問い合わせ
+                    </a>
+</div>
+<div class="md:hidden">
+<button class="text-gray-900 focus:outline-none" id="mobile-menu-btn">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</nav>
+</div>
+<div class="hidden md:hidden bg-white/90 backdrop-blur-md px-6 pb-4 shadow-lg" id="mobile-menu">
+<a class="block py-2 text-gray-700" href="../index.html#services">サービス</a>
+<a class="block py-2 text-gray-700" href="../index.html#case">導入事例</a>
+<a class="block py-2 text-gray-700" href="../index.html#about">会社概要</a>
+<a class="block py-2 text-gray-700" href="index.html">ブログ</a>
+<a class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300" href="../index.html#contact">
+                お問い合わせ
+            </a>
+</div>
+</header>
+<!-- ===== メインコンテンツ ===== -->
+<main class="pt-24 pb-20">
+<article class="container mx-auto px-6 max-w-4xl">
+<!-- パンくずリスト -->
+<nav class="mb-8 text-sm text-gray-600">
+<a class="hover:text-indigo-600" href="../index.html">ホーム</a>
+<span class="mx-2">/</span>
+<a class="hover:text-indigo-600" href="../blog.html">ブログ</a>
+<span class="mx-2">/</span>
+<span class="text-gray-900">LLMの限界と税理士事務所における「本当に合理化できる」使い方</span>
+</nav>
+<!-- 記事ヘッダー -->
+<header class="mb-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">LLM</span>
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">税理士</span>
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+<span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI活用</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    LLMの限界と税理士事務所における「本当に合理化できる」使い方
+                </h1>
+<p class="text-gray-500">2025年8月18日</p>
+</header>
+<!-- 記事本文 -->
+<div class="article-content text-gray-700 bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-200"><div class="note-common-styles__textnote-body" data-name="body" data-v-7db6ac5e=""><p id="846636b7-5dc0-4005-83f7-c7e35903f846" name="846636b7-5dc0-4005-83f7-c7e35903f846">近年、生成AI（LLM）を活用した業務効率化が各業界で注目されており、税理士事務所においても「仕訳をAIに作らせましょう」といったセミナーが盛んに行われています。私自身も講義の場で税理士の先生方から直接ご意見を伺う機会があり、「毎月の同じ作業を安定的に実行できるかどうか」が大きな関心事であることを実感しました。</p><h3 id="2bea18ae-263c-4359-a834-fadcd8298697" name="2bea18ae-263c-4359-a834-fadcd8298697">LLMは繰り返し作業が苦手：揺らぎがもたらす課題</h3><p id="bfbfe61a-dc1c-475c-a7e2-546558322d89" name="bfbfe61a-dc1c-475c-a7e2-546558322d89">LLMは高度な文章生成や推論は得意な一方で、同じ作業を何度も「揺らぎなく」実行するのは不得意です。実際、通帳のスキャンデータを表形式に整える処理では、ある月は問題なく整形できたとしても、翌月は出力の体裁が微妙に変わってしまうことがあります。講義中にも「7月分はきれいに整ったのに、8月分は少し違っていた」という先生の声があり、まさに現場で直面する課題であると強く感じました。これはLLMの仕組み上避けがたい性質であり、安定性が求められる現場では注意すべき点です。</p><h3 id="0ecc1c7b-78cb-4789-923e-498122d85d3e" name="0ecc1c7b-78cb-4789-923e-498122d85d3e">LLMを「プログラム生成ツール」として活用する合理的アプローチ</h3><p id="c8b447cb-ac2d-4eae-a4f2-998bd607eca6" name="c8b447cb-ac2d-4eae-a4f2-998bd607eca6">そこで有効な方法は、LLMを「直接の業務実行」ではなく「繰り返し作業を行うプログラムの生成」に活用することです。次のようなステップを踏むことで、現実的かつ合理的な運用が可能になります。</p><ol id="d4013348-6732-41a9-86f8-5515c4360e2a" name="d4013348-6732-41a9-86f8-5515c4360e2a"><li><p id="599e3024-acb6-455b-8a25-8d55a5824de2" name="599e3024-acb6-455b-8a25-8d55a5824de2"><strong>通帳のスキャンデータを表形式に整形する</strong>： まずはLLMを活用して、OCR結果のテキストデータを表形式に整えます。この工程はLLMの得意分野であり、比較的安定した結果が期待できます。</p></li><li><p id="45989b93-e709-49b1-8563-9a90dabd0232" name="45989b93-e709-49b1-8563-9a90dabd0232"><strong>繰り返し処理をプログラム化する</strong>： 次に、整形されたデータを基に、VBAやPythonなどで「毎月同じ作業を繰り返すプログラム」をLLMに書かせます。これにより、LLMの持つ「揺らぎ」を排除し、確実な再現性を担保できます。</p></li><li><p id="26935efd-a0d5-4f16-89ef-8ad29ce23895" name="26935efd-a0d5-4f16-89ef-8ad29ce23895"><strong>CSVを生成する</strong>： 最終的に、1で作成した表データを2で生成したプログラムで処理し、会計ソフトにインポート可能なCSVデータを作成します。</p></li></ol><p id="0d9e746a-c2fe-4cb0-8878-5f0c63afc8e2" name="0d9e746a-c2fe-4cb0-8878-5f0c63afc8e2">この流れを構築することで、「LLMの強み」である文章処理やコード生成能力を最大限に活かしつつ、「現場が求める安定性」を両立させることができます。</p><h3 id="f9728972-bd09-4a6a-99ba-c5fde35752a7" name="f9728972-bd09-4a6a-99ba-c5fde35752a7">「プロンプト沼」を避けるために</h3><p id="935821b3-a84e-41d9-a16c-70ade63ea6c0" name="935821b3-a84e-41d9-a16c-70ade63ea6c0">最近のLLM関連セミナーでは「プロンプトを工夫して仕訳を直接作成する」という取り組みも紹介されています。ただし、講義で聞いた先生方の声の中には「毎回プロンプトを変えないと安定しない」という悩みもありました。これは、プロンプトの調整を延々と繰り返す「プロンプト沼」に陥るリスクを示しています。税理士業務の多くは再現性・安定性が極めて重要であり、それを重視するならば「プログラム化を前提とした活用」が望ましいと考えられます。</p><h3 id="7d12e5a9-6ed4-4932-80b1-92ad28426cbb" name="7d12e5a9-6ed4-4932-80b1-92ad28426cbb">まとめ：LLMは「プログラム生成」で真価を発揮する</h3><p id="ee1c3592-a933-48a0-a49e-f016cfd7810d" name="ee1c3592-a933-48a0-a49e-f016cfd7810d">LLMを「そのまま業務に投入」するのではなく、「プログラムを自動生成するツール」として利用することこそが、税理士業務の合理化につながる近道です。講義での税理士の先生方の声を通じても、この方向性は現場に即した現実的な選択肢だと確信しています。携帯電話などの進化と同じように、我々のような技術者がより日本の実務に即したものを提供できるよう、先生方と共に作成していければと思いました。</p></div></div>
+<!-- 戻るボタン -->
+<div class="mt-8 text-center">
+<a class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300" href="../blog.html">
+                    ← ブログ一覧に戻る
+                </a>
+</div>
+</article>
+</main>
+<!-- ===== フッター ===== -->
+<footer class="bg-gray-50 border-t border-gray-200 py-12">
+<div class="container mx-auto px-6">
+<div class="text-center">
+<a class="flex items-center justify-center space-x-3 mb-4" href="../index.html">
+<img alt="Cosmico.ai ロゴ" class="w-9 h-9 object-contain" src="../img/logo.png"/>
+<span class="text-2xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+</a>
+<p class="text-sm text-gray-500">© 株式会社Cosmico. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

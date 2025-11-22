@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AIにおける情報漏洩対策は「登山の準備」と同じ - Cosmico</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #F3F4F6;
+        }
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border-radius: 20px;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #A855F7);
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover {
+            color: #4F46E5;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .article-content {
+            line-height: 1.8;
+        }
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1F2937;
+        }
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #374151;
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        .article-content ul, .article-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+<!-- ===== ヘッダーナビゲーション ===== -->
+<header class="bg-white/90 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-50">
+<div class="container mx-auto px-6 py-4">
+<nav class="flex justify-between items-center">
+<a class="flex items-center space-x-3" href="../index.html">
+<img alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain" src="../img/logo.png"/>
+<span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+</a>
+<div class="hidden md:flex space-x-8 items-center">
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#services">サービス</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#case">導入事例</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="../index.html#about">会社概要</a>
+<a class="nav-link text-gray-600 hover:text-indigo-600" href="index.html">ブログ</a>
+<a class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300" href="../index.html#contact">
+                        お問い合わせ
+                    </a>
+</div>
+<div class="md:hidden">
+<button class="text-gray-900 focus:outline-none" id="mobile-menu-btn">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</nav>
+</div>
+<div class="hidden md:hidden bg-white/90 backdrop-blur-md px-6 pb-4 shadow-lg" id="mobile-menu">
+<a class="block py-2 text-gray-700" href="../index.html#services">サービス</a>
+<a class="block py-2 text-gray-700" href="../index.html#case">導入事例</a>
+<a class="block py-2 text-gray-700" href="../index.html#about">会社概要</a>
+<a class="block py-2 text-gray-700" href="index.html">ブログ</a>
+<a class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300" href="../index.html#contact">
+                お問い合わせ
+            </a>
+</div>
+</header>
+<!-- ===== メインコンテンツ ===== -->
+<main class="pt-24 pb-20">
+<article class="container mx-auto px-6 max-w-4xl">
+<!-- パンくずリスト -->
+<nav class="mb-8 text-sm text-gray-600">
+<a class="hover:text-indigo-600" href="../index.html">ホーム</a>
+<span class="mx-2">/</span>
+<a class="hover:text-indigo-600" href="../blog.html">ブログ</a>
+<span class="mx-2">/</span>
+<span class="text-gray-900">AIにおける情報漏洩対策は「登山の準備」と同じ</span>
+</nav>
+<!-- 記事ヘッダー -->
+<header class="mb-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">情報漏洩対策</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">セキュリティ</span>
+<span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">登山</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    AIにおける情報漏洩対策は「登山の準備」と同じ
+                </h1>
+<p class="text-gray-500">2025年8月16日</p>
+</header>
+<!-- 記事本文 -->
+<div class="article-content text-gray-700 bg-white rounded-2xl p-8 md:p-12 shadow-lg border border-gray-200"><div class="note-common-styles__textnote-body" data-name="body" data-v-7db6ac5e=""><p id="14eca2f3-365d-4000-af2f-a7769f54bfcb" name="14eca2f3-365d-4000-af2f-a7769f54bfcb"><br/></p><p id="da9dd450-a9bc-4c55-9bb3-e3368d391160" name="da9dd450-a9bc-4c55-9bb3-e3368d391160">先日、燕岳へ登山に行ってきました。登山は一見シンプルに見えますが、実際には「想定外」をいかに想定して備えるかが重要です。AI時代の情報漏洩対策も、まさに登山の準備とよく似ています。</p><p id="bf65e002-2df3-4dd1-9e1d-4f375af60acf" name="bf65e002-2df3-4dd1-9e1d-4f375af60acf"><br/></p><hr id="35e0af81-e6be-43c1-9bc7-6bd9c1fbb23b" name="35e0af81-e6be-43c1-9bc7-6bd9c1fbb23b"/><p id="44cb1631-265e-42fd-9ace-867135bfc5d4" name="44cb1631-265e-42fd-9ace-867135bfc5d4"><br/></p><h2 id="00a29323-8374-4f3a-a845-f5be3ddc7690" name="00a29323-8374-4f3a-a845-f5be3ddc7690">登山で学んだ「備えの大切さ」</h2><p id="3c40767e-d562-4037-91cf-76115742e22d" name="3c40767e-d562-4037-91cf-76115742e22d">山に登るとき、必ずしも必要になるとは限らないものを持っていきます。<br/>例えば、レインウェア、痛み止め、ホッカイロ、そして多めの食料。実際に今回の登山でも、雨が強まり早めの撤退を決めましたが、ホッカイロが思いのほか役に立ちました。</p><p id="2d1dc203-6e24-4aad-aa7b-d28cb4d85d38" name="2d1dc203-6e24-4aad-aa7b-d28cb4d85d38">また、登山に向けて体重を7キロ落とし、週2回皇居を2周走るトレーニングを続けたおかげで、体力面でも安心感がありました。時に人から体型を揶揄され、不快な思いをすることもありましたが、最終的には「そういう場には行かなければいい」と割り切ることができました。目標があれば努力できる――その実感は登山だけでなく、日々の生活にもつながっています。</p><p id="0250b665-2c01-4cc4-93a9-62739b6ff71e" name="0250b665-2c01-4cc4-93a9-62739b6ff71e"><br/></p><hr id="56008e33-fee7-40d6-a186-26f2ac747812" name="56008e33-fee7-40d6-a186-26f2ac747812"/><p id="d3e297ca-0ef3-418b-8f52-bc715e202af4" name="d3e297ca-0ef3-418b-8f52-bc715e202af4"><br/></p><h2 id="be24119a-7674-4cb7-8f24-d572417f2096" name="be24119a-7674-4cb7-8f24-d572417f2096">先人の知恵と学び</h2><p id="52c20545-4f2c-4a8c-865c-971ecba3e869" name="52c20545-4f2c-4a8c-865c-971ecba3e869">これまで山に連れていってくれた諸先輩方からも、多くを学びました。<br/>「ロストしたら登れ」「体は冷やすな」など、現場でしか得られない実践的な知識。山で怪我をしたときの講習を受けたこともあります。こうした知恵は、準備や安全の基盤となり、自分の行動を大きく変えてくれました。</p><p id="a796eb43-86c3-49ae-9d1f-e863a07850ee" name="a796eb43-86c3-49ae-9d1f-e863a07850ee"><br/></p><hr id="49807e7a-b075-43a9-aea9-e11305c444cb" name="49807e7a-b075-43a9-aea9-e11305c444cb"/><p id="2d8e603d-f88c-4633-a335-c73b64c42d32" name="2d8e603d-f88c-4633-a335-c73b64c42d32"><br/></p><h2 id="0d893fb6-d371-4356-8380-7514ce26d3be" name="0d893fb6-d371-4356-8380-7514ce26d3be">AI時代の情報漏洩対策も同じ</h2><p id="ab57322c-59b8-49c7-b067-124bd9c3cd12" name="ab57322c-59b8-49c7-b067-124bd9c3cd12">AIのセキュリティ対策も、登山と同じです。<br/>「必ず必要になるかは分からないけれど、想定して備えておく」ことが重要です。入力する情報の取り扱い方、社外秘や機密情報の分類、そして不用意に公開領域に載せない習慣。こうした基本をまず心得として持つことが出発点になります。</p><p id="898f0f07-b64d-4ac8-a575-02f6323d6228" name="898f0f07-b64d-4ac8-a575-02f6323d6228">さらに、専門家に頼ることも欠かせません。登山でガイドや先輩に教わるのと同じように、セキュリティに関しても経験者・専門家の知見を借りることが、事故を防ぐ一番の近道です。私自身も仲間内でセキュリティについて議論を交わし、知識を更新しています。</p><p id="7c48894e-724b-4dcf-acc5-4752ccfc606a" name="7c48894e-724b-4dcf-acc5-4752ccfc606a"><br/></p><hr id="ddeb5ba8-09e3-4118-a730-6c0ba0aefef5" name="ddeb5ba8-09e3-4118-a730-6c0ba0aefef5"/><p id="076f5e34-49e5-4ff3-bc7c-355fecd1ae72" name="076f5e34-49e5-4ff3-bc7c-355fecd1ae72"><br/></p><h2 id="36ecb2c0-3120-4315-80f4-1994cd079fcc" name="36ecb2c0-3120-4315-80f4-1994cd079fcc">まとめ</h2><p id="6bec1485-c029-4180-9904-19ae2d4ba494" name="6bec1485-c029-4180-9904-19ae2d4ba494">登山もAIも、「準備がすべて」と言っても過言ではありません。<br/>無駄に思える準備が、いざというとき自分や仲間を守る命綱になります。情報漏洩という「遭難」を避けるために、日頃から心構えと知識を持ち、必要であれば専門家に相談する。その積み重ねが、安心してAIを活用できる未来を作っていくのだと感じています。</p><hr id="78313577-894c-4257-8a03-4ff1204f5872" name="78313577-894c-4257-8a03-4ff1204f5872"/><p id="6d0afad5-1980-4c11-b3c9-f7a452da606b" name="6d0afad5-1980-4c11-b3c9-f7a452da606b"><br/></p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="374" loading="lazy" src="../img/blog/1755342321-nLdTQBq3J2FKIclz0kVsjgPH.png" width="620"/></p><p><img alt="" class="w-full rounded-lg my-8 shadow-lg" height="311" loading="lazy" src="../img/blog/1755342346-MwR17cZLkfz50CVUe3bnumXs.png" width="620"/></p></div></div>
+<!-- 戻るボタン -->
+<div class="mt-8 text-center">
+<a class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-8 rounded-full transition-colors duration-300" href="../blog.html">
+                    ← ブログ一覧に戻る
+                </a>
+</div>
+</article>
+</main>
+<!-- ===== フッター ===== -->
+<footer class="bg-gray-50 border-t border-gray-200 py-12">
+<div class="container mx-auto px-6">
+<div class="text-center">
+<a class="flex items-center justify-center space-x-3 mb-4" href="../index.html">
+<img alt="Cosmico.ai ロゴ" class="w-9 h-9 object-contain" src="../img/logo.png"/>
+<span class="text-2xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+</a>
+<p class="text-sm text-gray-500">© 株式会社Cosmico. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ - Cosmico</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #F3F4F6;
+        }
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+        body::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+        body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border-radius: 20px;
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #A855F7);
+            transition: width 0.3s ease-out;
+        }
+        .nav-link:hover {
+            color: #4F46E5;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .blog-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+    <!-- ===== ヘッダーナビゲーション ===== -->
+    <header class="bg-white/90 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-50">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="../index.html" class="flex items-center space-x-3">
+                    <img src="../img/logo.png" alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain">
+                    <span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+                </a>
+                
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="../index.html#services" class="nav-link text-gray-600 hover:text-indigo-600">サービス</a>
+                    <a href="../index.html#case" class="nav-link text-gray-600 hover:text-indigo-600">導入事例</a>
+                    <a href="../index.html#about" class="nav-link text-gray-600 hover:text-indigo-600">会社概要</a>
+                    <a href="../index.html#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300">
+                        お問い合わせ
+                    </a>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-900 focus:outline-none">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white/90 backdrop-blur-md px-6 pb-4 shadow-lg">
+            <a href="../index.html#services" class="block py-2 text-gray-700">サービス</a>
+            <a href="../index.html#case" class="block py-2 text-gray-700">導入事例</a>
+            <a href="../index.html#about" class="block py-2 text-gray-700">会社概要</a>
+            <a href="../index.html#contact" class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300">
+                お問い合わせ
+            </a>
+        </div>
+    </header>
+
+    <!-- ===== メインコンテンツ ===== -->
+    <main class="pt-24 pb-20">
+        <div class="container mx-auto px-6">
+            <!-- ページタイトル -->
+            <div class="text-center mb-16 max-w-2xl mx-auto">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">ブログ</h1>
+                <p class="text-lg text-gray-600">
+                    AI技術の最新情報、業界トレンド、導入事例など、ビジネスに役立つ情報をお届けします。
+                </p>
+            </div>
+
+            <!-- ブログ記事一覧 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- 記事1 -->
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+                    <a href="llm-tax-accountant.html" class="block">
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">LLM</span>
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">税理士</span>
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                LLMの限界と税理士事務所における「本当に合理化できる」使い方
+                            </h2>
+                            <p class="text-sm text-gray-500 mb-4">2025年8月18日</p>
+                            <p class="text-gray-600 leading-relaxed">
+                                近年、生成AI（LLM）を活用した業務効率化が各業界で注目されており、税理士事務所においても「仕訳をAIに作らせましょう」といったセミナーが盛んに行われています。
+                            </p>
+                            <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む →</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- 記事2 -->
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+                    <a href="ai-security-mountain.html" class="block">
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">情報漏洩対策</span>
+                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">セキュリティ</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                AIにおける情報漏洩対策は「登山の準備」と同じ
+                            </h2>
+                            <p class="text-sm text-gray-500 mb-4">2025年8月16日</p>
+                            <p class="text-gray-600 leading-relaxed">
+                                先日、燕岳へ登山に行ってきました。登山は一見シンプルに見えますが、実際には「想定外」をいかに想定して備えるかが重要です。AI時代の情報漏洩対策も、まさに登山の準備とよく似ています。
+                            </p>
+                            <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む →</span>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- 記事3 -->
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden">
+                    <a href="gemini-cli-visit.html" class="block">
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Gemini CLI</span>
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">ルート計画</span>
+                            </div>
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
+                                Gemini CLIで訪問をスマートに！移動支援ツールを素早く構築する方法
+                            </h2>
+                            <p class="text-sm text-gray-500 mb-4">2025年8月17日</p>
+                            <p class="text-gray-600 leading-relaxed">
+                                訪問のお仕事を担当されている方にとって、顧客訪問前のルート計画は意外と時間と労力を消費する業務です。Google Gemini CLIを活用すれば、こうした課題を解決できます。
+                            </p>
+                            <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む →</span>
+                        </div>
+                    </a>
+                </article>
+            </div>
+
+            <!-- サイドバー（検索・タグ） -->
+            <div class="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <!-- 記事一覧は上に表示済み -->
+                </div>
+                
+                <aside class="lg:col-span-1">
+                    <div class="bg-gray-50 rounded-2xl p-6 mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">記事検索</h3>
+                        <input type="text" placeholder="キーワードで検索..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-2xl p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">タグ</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">LLM</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">税理士</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">業務効率化</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI活用</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">情報漏洩対策</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">セキュリティ</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Gemini CLI</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">ルート計画</span>
+                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Googleマップ</span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== フッター ===== -->
+    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <a href="../index.html" class="flex items-center space-x-3 mb-4">
+                        <img src="../img/logo.png" alt="Cosmico.ai ロゴ" class="w-9 h-9 object-contain">
+                        <span class="text-2xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+                    </a>
+                    <p class="text-gray-600 text-sm">AIコンサルティングでビジネスの未来を拓く。</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">クイックリンク</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="../index.html#about" class="text-gray-600 hover:text-indigo-600 transition-colors">会社概要</a></li>
+                        <li><a href="../index.html#services" class="text-gray-600 hover:text-indigo-600 transition-colors">サービス</a></li>
+                        <li><a href="../index.html#case" class="text-gray-600 hover:text-indigo-600 transition-colors">導入事例</a></li>
+                        <li><a href="index.html" class="text-gray-600 hover:text-indigo-600 transition-colors">ブログ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">連絡先</h4>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li>〒160-0023<br>東京都新宿区西新宿三丁目3番13号<br>西新宿水間ビル6階</li>
+                        <li>070-4077-1049</li>
+                        <li>h.kumagaya@cosmicoai.com</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gray-900 mb-4">ご相談ください</h4>
+                    <p class="text-sm text-gray-600 mb-4">AI導入に関するご相談や、サービスに関するご質問など、お気軽にお問い合わせください。</p>
+                    <a href="../index.html#contact" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300 text-sm">
+                        お問い合わせフォームへ
+                    </a>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t border-gray-200">
+                <p class="text-sm text-gray-500">&copy; 株式会社Cosmico. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // モバイルメニューのトグル
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
+
+
