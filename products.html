@@ -108,6 +108,8 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #F1F5F9;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -198,6 +200,38 @@
         .nav-link:hover::after,
         .nav-link.active::after {
             width: 100%;
+        }
+
+        /* Price Display */
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-container {
+            border-top: 1px solid #F1F5F9;
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .price-main {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1E293B;
+            margin-bottom: 0.25rem;
+        }
+
+        .price-detail {
+            font-size: 0.75rem;
+            color: #64748B;
+            line-height: 1.6;
+        }
+
+        .price-option {
+            margin-top: 0.5rem;
+            padding-left: 0.75rem;
+            border-left: 2px solid #E2E8F0;
         }
     </style>
 </head>
@@ -349,7 +383,7 @@
                                 <img src="images/field_management_illustration_1763714273152.png" alt="現場管理AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">現場・施工</span>
@@ -361,6 +395,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     建設・施工現場の複雑な管理業務をAIが一元化。現場住所の自動登録から、協力業者へのスムーズな情報共有、図面や写真などの重要書類のデジタル管理までをワンストップで提供します。さらに、リマインド機能によりタスク漏れを防ぎ、現場の生産性を飛躍的に向上させます。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">200万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -371,7 +408,7 @@
                                 <img src="images/info_delivery_illustration_1763714294126.png" alt="情報配信AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-cyan-600 bg-cyan-50 px-2 py-1 rounded">IT・Web</span>
@@ -383,6 +420,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     社内外への情報発信をAIが最適化。ターゲット層に合わせた最適なタイミングと内容で情報を配信し、開封率やエンゲージメントを最大化します。ニュースレターの自動生成から配信リストの管理まで、煩雑な配信業務を自動化し、効果的なコミュニケーションを実現します。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">30万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -393,7 +433,7 @@
                                 <img src="images/content_creation_illustration_1763714310249.png" alt="コンテンツ作成AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">クリエイティブ</span>
@@ -405,6 +445,14 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     Web記事、SNS投稿、営業資料など、あらゆるビジネスコンテンツの作成をAIが強力にサポート。キーワードを入力するだけで、SEOを意識した高品質な文章を瞬時に生成します。クリエイティブな作業時間を短縮し、より戦略的な業務に集中できる環境を作ります。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">初期導入 20万円</div>
+                                    <div class="price-detail">
+                                        運用保守費/月<br>
+                                        <span class="price-option">①1万円（文章投稿のみ）</span><br>
+                                        <span class="price-option">②5万円（投稿プロンプトコンサルティング）</span>
+                                    </div>
+                                </div>
                             </div>
                         </article>
 
@@ -415,7 +463,7 @@
                                 <img src="images/schedule_management_illustration_1763714329723.png" alt="スケジュール管理AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-orange-600 bg-orange-50 px-2 py-1 rounded">ビジネス</span>
@@ -427,6 +475,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     複数のメンバー間の日程調整や会議室の予約、タスクの期限管理をAIが完全自動化。個人の予定とチームの状況を分析し、全員にとって最適なスケジュールを提案します。ダブルブッキングの防止や移動時間の考慮など、きめ細やかな調整でビジネスのスピードを加速させます。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">50万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -437,7 +488,7 @@
                                 <img src="images/email_automation_illustration_1763714358190.png" alt="メール自動化AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-1 rounded">ビジネス</span>
@@ -449,6 +500,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     日々大量に届く問い合わせメールの分類から、返信文の作成、送信までをAIが代行。過去の対応履歴を学習し、顧客一人ひとりに合わせた自然で適切な返信を作成します。定型的なやり取りを自動化することで、スタッフはより複雑で重要な顧客対応に注力できます。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">100万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -459,7 +513,7 @@
                                 <img src="images/voice_input_illustration_1763714377464.png" alt="音声・入力支援AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-violet-600 bg-violet-50 px-2 py-1 rounded">IT・Web</span>
@@ -471,6 +525,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     会議の議事録作成や日報入力など、煩わしい入力業務を最新の音声認識AIがサポート。高精度な文字起こし機能に加え、要約やアクションアイテムの抽出も自動で行います。キーボード入力の手間を省き、情報の記録と共有をスムーズにします。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">30万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -481,7 +538,7 @@
                                 <img src="images/progress_management_illustration_1763714394132.png" alt="進捗管理AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded">マネジメント</span>
@@ -493,6 +550,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     プロジェクト全体の進捗状況をリアルタイムで可視化し、遅延リスクをAIが早期に検知。ガントチャートの自動更新や担当者へのアラート通知により、納期遅れを未然に防ぎます。複雑なプロジェクトも、AIのアシストで確実な進行管理が可能になります。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">200万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -500,10 +560,10 @@
                         <article class="product-card group" data-industry="consulting" data-category="service">
                             <div
                                 class="card-image-container bg-gradient-to-br from-indigo-500 to-purple-600 p-0 overflow-hidden">
-                                <img src="images/ai_analysis_service_v2.png" alt="AI分析サービス"
+                                <img src="images/ai_analysis_service_v3.png" alt="AI分析サービス"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">コンサル</span>
@@ -515,6 +575,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     社内に蓄積された膨大なデータをAIが多角的に分析し、ビジネスの成長につながる隠れた法則やトレンドを発見します。売上予測、顧客行動分析、市場トレンド予測など、経営判断に直結する高精度なインサイトを提供し、データドリブンな意思決定を支援します。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">100万円</div>
+                                </div>
                             </div>
                         </article>
 
@@ -522,10 +585,10 @@
                         <article class="product-card group" data-industry="retail" data-category="tool">
                             <div
                                 class="card-image-container bg-gradient-to-br from-slate-700 to-slate-900 p-0 overflow-hidden">
-                                <img src="images/art_gallery_appraisal.png" alt="画像鑑定AI"
+                                <img src="images/art_gallery_appraisal_v2.png" alt="画像鑑定AI"
                                     class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity">
                             </div>
-                            <div class="p-6">
+                            <div class="p-6 card-content">
                                 <div class="flex items-center gap-2 mb-3">
                                     <span
                                         class="text-xs font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded">小売・流通</span>
@@ -537,6 +600,9 @@
                                 <p class="text-sm text-slate-500 mb-6 leading-relaxed">
                                     アートギャラリー向けの画像登録・鑑定システム。作品の特徴を詳細に記録し、過去のデータベースから類似画像を瞬時に検索。真贋判定のサポートや、作品の来歴管理、顧客への提案資料作成を効率化します。
                                 </p>
+                                <div class="price-container">
+                                    <div class="price-main">100万円</div>
+                                </div>
                             </div>
                         </article>
                     </div>

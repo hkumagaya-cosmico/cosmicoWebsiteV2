@@ -1,0 +1,83 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="purpleGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#A78BFA;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purpleGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C4B5FD;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#FFFFFF"/>
+  
+  <!-- Data Source (Left) - Database/Server Icon -->
+  <g transform="translate(80, 200)">
+    <!-- Server/Database -->
+    <rect x="0" y="0" width="120" height="200" rx="12" fill="url(#purpleGrad1)" opacity="0.3"/>
+    <rect x="10" y="20" width="100" height="15" rx="4" fill="#7C3AED"/>
+    <rect x="10" y="45" width="100" height="15" rx="4" fill="#A78BFA"/>
+    <rect x="10" y="70" width="100" height="15" rx="4" fill="#7C3AED"/>
+    <rect x="10" y="95" width="100" height="15" rx="4" fill="#A78BFA"/>
+    <rect x="10" y="120" width="100" height="15" rx="4" fill="#7C3AED"/>
+    <rect x="10" y="145" width="100" height="15" rx="4" fill="#A78BFA"/>
+    <rect x="10" y="170" width="100" height="15" rx="4" fill="#7C3AED"/>
+  </g>
+  
+  <!-- Analysis Process (Center) - Data Flow -->
+  <g transform="translate(300, 250)">
+    <!-- Data Flow Lines -->
+    <path d="M 0 50 Q 100 30 200 50 T 400 50" stroke="#A78BFA" stroke-width="4" fill="none" opacity="0.6"/>
+    <path d="M 0 50 Q 100 70 200 50 T 400 50" stroke="#7C3AED" stroke-width="4" fill="none" opacity="0.6"/>
+    <path d="M 0 50 Q 100 50 200 50 T 400 50" stroke="#8B5CF6" stroke-width="3" fill="none" opacity="0.8"/>
+    
+    <!-- Analysis Nodes -->
+    <circle cx="100" cy="50" r="20" fill="#7C3AED" opacity="0.4"/>
+    <circle cx="200" cy="50" r="25" fill="#A78BFA" opacity="0.5"/>
+    <circle cx="300" cy="50" r="20" fill="#7C3AED" opacity="0.4"/>
+    
+    <!-- Chart/Graph Icon -->
+    <g transform="translate(150, 20)">
+      <rect x="0" y="0" width="100" height="60" rx="8" fill="url(#purpleGrad2)" opacity="0.2"/>
+      <!-- Bar Chart -->
+      <rect x="10" y="40" width="12" height="15" fill="#7C3AED"/>
+      <rect x="26" y="30" width="12" height="25" fill="#A78BFA"/>
+      <rect x="42" y="20" width="12" height="35" fill="#7C3AED"/>
+      <rect x="58" y="25" width="12" height="30" fill="#A78BFA"/>
+      <rect x="74" y="15" width="12" height="40" fill="#7C3AED"/>
+    </g>
+  </g>
+  
+  <!-- Results Screen (Right) -->
+  <g transform="translate(550, 150)">
+    <!-- Monitor Frame -->
+    <rect x="0" y="0" width="200" height="300" rx="12" fill="#7C3AED"/>
+    <rect x="8" y="8" width="184" height="284" rx="8" fill="#FFFFFF"/>
+    
+    <!-- Screen Content -->
+    <g transform="translate(20, 30)">
+      <!-- Title -->
+      <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#7C3AED">AI ANALYSIS</text>
+      
+      <!-- Results Text -->
+      <text x="0" y="30" font-family="Arial, sans-serif" font-size="12" fill="#7C3AED">DATA INSIGHTS</text>
+      <line x1="0" y1="35" x2="150" y2="35" stroke="#E0E7FF" stroke-width="2"/>
+      
+      <text x="0" y="60" font-family="Arial, sans-serif" font-size="12" fill="#7C3AED">TREND DETECTION</text>
+      <line x1="0" y1="65" x2="150" y2="65" stroke="#E0E7FF" stroke-width="2"/>
+      
+      <text x="0" y="90" font-family="Arial, sans-serif" font-size="12" fill="#7C3AED">PREDICTIVE MODEL</text>
+      <line x1="0" y1="95" x2="150" y2="95" stroke="#E0E7FF" stroke-width="2"/>
+      
+      <text x="0" y="120" font-family="Arial, sans-serif" font-size="12" fill="#7C3AED">BUSINESS INTELLIGENCE</text>
+      <line x1="0" y1="125" x2="150" y2="125" stroke="#E0E7FF" stroke-width="2"/>
+      
+      <!-- Progress Bar -->
+      <rect x="0" y="150" width="150" height="8" rx="4" fill="#E0E7FF"/>
+      <rect x="0" y="150" width="120" height="8" rx="4" fill="#7C3AED"/>
+    </g>
+  </g>
+</svg>
+
