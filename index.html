@@ -1075,26 +1075,65 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // --- 5. お問い合わせフォームの簡易送信処理 ---
+        // --- 5. お問い合わせフォームの送信処理 ---
         const contactForm = document.getElementById('contact-form');
         const formMessage = document.getElementById('form-message');
+        const submitButton = contactForm.querySelector('button[type="submit"]');
 
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // 実際にはここでAPIにデータを送信します
+            // 送信ボタンを無効化
+            submitButton.disabled = true;
+            submitButton.textContent = '送信中...';
 
-            // 送信成功時のダミーメッセージ表示
-            formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
-            formMessage.classList.add('bg-green-100', 'text-green-700');
-            formMessage.textContent = 'お問い合わせありがとうございます。内容を確認の上、担当者よりご連絡いたします。';
+            // メッセージエリアをリセット
+            formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
 
-            contactForm.reset();
+            try {
+                // フォームデータを取得
+                const formData = {
+                    name: document.getElementById('name').value,
+                    company: document.getElementById('company').value,
+                    email: document.getElementById('email').value,
+                    message: document.getElementById('message').value,
+                };
 
-            // 5秒後にメッセージを隠す
-            setTimeout(() => {
-                formMessage.classList.add('hidden');
-            }, 5000);
+                // APIに送信
+                const response = await fetch('/api/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // 送信成功
+                    formMessage.classList.add('bg-green-100', 'text-green-700');
+                    formMessage.textContent = data.message || 'お問い合わせありがとうございます。内容を確認の上、担当者よりご連絡いたします。';
+                    contactForm.reset();
+                } else {
+                    // 送信失敗
+                    formMessage.classList.add('bg-red-100', 'text-red-700');
+                    formMessage.textContent = data.error || '送信に失敗しました。しばらく時間をおいて再度お試しください。';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                formMessage.classList.add('bg-red-100', 'text-red-700');
+                formMessage.textContent = '送信に失敗しました。しばらく時間をおいて再度お試しください。';
+            } finally {
+                // 送信ボタンを再有効化
+                submitButton.disabled = false;
+                submitButton.textContent = '送信する';
+
+                // 5秒後にメッセージを隠す
+                setTimeout(() => {
+                    formMessage.classList.add('hidden');
+                }, 5000);
+            }
         });
 
         // --- 6. タブ切り替えロジック ---
