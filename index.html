@@ -192,13 +192,14 @@
         <!-- ===== ヒーローセクション (ホームタブ) ===== -->
         <section id="hero" data-tab-content="hero"
             class="h-screen min-h-[700px] flex items-center justify-center text-center relative overflow-hidden bg-white">
+
             <!-- 3Dパーティクル背景 -->
             <canvas id="hero-canvas"></canvas>
 
             <!-- コンテンツ -->
             <div class="hero-content p-6">
                 <h1
-                    class="text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-tight tracking-tighter mb-6 fade-in">
+                    class="mt-32 md:mt-60 text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 leading-tight tracking-tighter mb-6 fade-in">
                     AIで、<br class="md:hidden">ビジネスの<span class="text-indigo-600">新しい宇宙</span>を拓く。
                 </h1>
                 <p class="text-lg md:text-xl text-gray-700 max-w-2xl mx-auto mb-10 fade-in"
@@ -211,6 +212,10 @@
                     style="transition-delay: 400ms;">
                     無料相談を予約する
                 </a>
+                <div class="mt-10 fade-in" style="transition-delay: 600ms;">
+                    <img src="img/MANGA.JPG" alt="Manga Illustration"
+                        class="mx-auto max-w-full md:max-w-2xl rounded-lg shadow-2xl">
+                </div>
             </div>
         </section>
 
@@ -606,38 +611,28 @@
                     </p>
                 </div>
 
-                <form id="contact-form" class="max-w-2xl mx-auto fade-in">
-                    <div id="form-message" class="hidden p-4 rounded-lg mb-6 text-center"></div>
+                <!-- Googleフォーム埋め込み -->
+                <div class="max-w-2xl mx-auto fade-in">
+                    <iframe id="google-form-iframe"
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSfe8Jvl045211JmdGEaf8bIhGqjTB2Z43wCfSpag-2zV84Llg/viewform?embedded=true"
+                        width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0"
+                        class="rounded-lg shadow-lg" style="min-height: 600px;">
+                        読み込んでいます...
+                    </iframe>
+                </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">お名前 *</label>
-                            <input type="text" id="name" name="name" required
-                                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
-                        </div>
-                        <div>
-                            <label for="company" class="block text-sm font-medium text-gray-700 mb-2">会社名</label>
-                            <input type="text" id="company" name="company"
-                                class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">メールアドレス *</label>
-                        <input type="email" id="email" name="email" required
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
-                    </div>
-                    <div class="mb-8">
-                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">お問い合わせ内容 *</label>
-                        <textarea id="message" name="message" rows="5" required
-                            class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all"></textarea>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-12 rounded-full text-lg transition-all duration-300 ease-in-out transform hover:scale-105">
-                            送信する
-                        </button>
-                    </div>
-                </form>
+                <!-- または、GoogleフォームのURLに直接リンクする方法 -->
+                <!-- 
+                <div class="text-center fade-in">
+                    <a 
+                        href="YOUR_GOOGLE_FORM_URL" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-12 rounded-full text-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+                        お問い合わせフォームを開く
+                    </a>
+                </div>
+                -->
             </div>
         </section>
 
@@ -933,31 +928,25 @@
     </main>
 
     <!-- ===== フッター ===== -->
-    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+    <footer class="bg-slate-900 text-slate-400 py-12">
         <div class="container mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-                <div class="mb-4 md:mb-0">
-                    <a data-tab="hero" class="flex items-center space-x-3 cursor-pointer">
-                        <img src="img/logo.png" alt="Cosmico.ai ロゴ" class="w-9 h-9 object-contain">
-                        <span class="text-2xl font-bold tracking-tighter text-gray-900">Cosmico<span
-                                class="text-indigo-600">.ai</span></span>
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="index.html" class="flex items-center gap-2 mb-2">
+                        <span class="text-2xl font-bold text-white">Cosmico<span
+                                class="text-indigo-500">.ai</span></span>
                     </a>
+                    <p class="text-sm">Empowering business with AI.</p>
                 </div>
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a data-tab="services"
-                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">サービス</a>
-                    <a data-tab="case"
-                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">導入事例</a>
-                    <a data-tab="about"
-                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">会社概要</a>
-                    <a data-tab="blog"
-                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">ブログ</a>
-                    <a data-tab="contact"
-                        class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">お問い合わせ</a>
+                <div class="flex gap-8 text-sm font-medium">
+                    <a href="#" class="hover:text-white transition-colors">サービス</a>
+                    <a href="#" class="hover:text-white transition-colors">導入事例</a>
+                    <a href="#" class="hover:text-white transition-colors">会社概要</a>
+                    <a href="#" class="hover:text-white transition-colors">お問い合わせ</a>
                 </div>
-                <div>
-                    <p class="text-sm text-gray-500">&copy; COSPACE0504</p>
-                </div>
+            </div>
+            <div class="border-t border-slate-800 mt-8 pt-8 text-center text-xs">
+                &copy; Cosmico.ai All rights reserved.
             </div>
         </div>
     </footer>
@@ -1076,65 +1065,8 @@
         });
 
         // --- 5. お問い合わせフォームの送信処理 ---
-        const contactForm = document.getElementById('contact-form');
-        const formMessage = document.getElementById('form-message');
-        const submitButton = contactForm.querySelector('button[type="submit"]');
-
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // 送信ボタンを無効化
-            submitButton.disabled = true;
-            submitButton.textContent = '送信中...';
-
-            // メッセージエリアをリセット
-            formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
-
-            try {
-                // フォームデータを取得
-                const formData = {
-                    name: document.getElementById('name').value,
-                    company: document.getElementById('company').value,
-                    email: document.getElementById('email').value,
-                    message: document.getElementById('message').value,
-                };
-
-                // APIに送信
-                const response = await fetch('/api/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    // 送信成功
-                    formMessage.classList.add('bg-green-100', 'text-green-700');
-                    formMessage.textContent = data.message || 'お問い合わせありがとうございます。内容を確認の上、担当者よりご連絡いたします。';
-                    contactForm.reset();
-                } else {
-                    // 送信失敗
-                    formMessage.classList.add('bg-red-100', 'text-red-700');
-                    formMessage.textContent = data.error || '送信に失敗しました。しばらく時間をおいて再度お試しください。';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                formMessage.classList.add('bg-red-100', 'text-red-700');
-                formMessage.textContent = '送信に失敗しました。しばらく時間をおいて再度お試しください。';
-            } finally {
-                // 送信ボタンを再有効化
-                submitButton.disabled = false;
-                submitButton.textContent = '送信する';
-
-                // 5秒後にメッセージを隠す
-                setTimeout(() => {
-                    formMessage.classList.add('hidden');
-                }, 5000);
-            }
-        });
+        // Googleフォームを使用するため、JavaScriptの送信処理は不要です
+        // Googleフォームが自動的に送信を処理します
 
         // --- 6. タブ切り替えロジック ---
         const tabLinks = document.querySelectorAll('[data-tab]');
