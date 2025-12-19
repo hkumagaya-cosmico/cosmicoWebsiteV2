@@ -166,6 +166,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -176,6 +177,7 @@
                 transform: scale(0.8);
                 opacity: 0;
             }
+
             to {
                 transform: scale(1);
                 opacity: 1;
@@ -213,6 +215,7 @@
                     <a data-tab="services" class="nav-link text-gray-600 hover:text-indigo-600">サービス</a>
                     <a data-tab="case" class="nav-link text-gray-600 hover:text-indigo-600">導入事例</a>
                     <a data-tab="about" class="nav-link text-gray-600 hover:text-indigo-600">会社概要</a>
+                    <a href="seminar.html" class="nav-link text-gray-600 hover:text-indigo-600">AI研修</a>
                     <a data-tab="blog" class="nav-link text-gray-600 hover:text-indigo-600">ブログ</a>
                     <a data-tab="contact"
                         class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300 cursor-pointer">
@@ -238,6 +241,7 @@
             <a data-tab="services" class="block py-2 text-gray-700 cursor-pointer">サービス</a>
             <a data-tab="case" class="block py-2 text-gray-700 cursor-pointer">導入事例</a>
             <a data-tab="about" class="block py-2 text-gray-700 cursor-pointer">会社概要</a>
+            <a href="seminar.html" class="block py-2 text-gray-700 cursor-pointer">AI研修</a>
             <a data-tab="blog" class="block py-2 text-gray-700 cursor-pointer">ブログ</a>
             <a data-tab="contact"
                 class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300 cursor-pointer">
@@ -1033,11 +1037,19 @@
                     </a>
                     <p class="text-sm">Empowering business with AI.</p>
                 </div>
-                <div class="flex gap-8 text-sm font-medium">
-                    <a href="#" class="hover:text-white transition-colors">サービス</a>
-                    <a href="#" class="hover:text-white transition-colors">導入事例</a>
-                    <a href="#" class="hover:text-white transition-colors">会社概要</a>
-                    <a href="#" class="hover:text-white transition-colors">お問い合わせ</a>
+                <div class="flex flex-col items-center md:items-end gap-4">
+                    <div class="flex flex-wrap justify-center gap-6 text-sm">
+                        <a data-tab="services" class="hover:text-white transition-colors cursor-pointer">サービス</a>
+                        <a data-tab="case" class="hover:text-white transition-colors cursor-pointer">導入事例</a>
+                        <a data-tab="about" class="hover:text-white transition-colors cursor-pointer">会社概要</a>
+                        <a href="seminar.html" class="hover:text-white transition-colors">AI研修</a>
+                        <a data-tab="blog" class="hover:text-white transition-colors cursor-pointer">ブログ</a>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+                        <a href="privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a>
+                        <a href="security.html" class="hover:text-white transition-colors">セキュリティー</a>
+                        <a href="disclaimer.html" class="hover:text-white transition-colors">免責事項</a>
+                    </div>
                 </div>
             </div>
             <div class="border-t border-slate-800 mt-8 pt-8 text-center text-xs">

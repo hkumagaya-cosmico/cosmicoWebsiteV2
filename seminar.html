@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成AI研修 - Cosmico</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            scrollbar-width: thin;
+            scrollbar-color: #4F46E5 #F3F4F6;
+        }
+
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background: #F3F4F6;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #4F46E5;
+            border-radius: 20px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366F1, #A855F7);
+            transition: width 0.3s ease-out;
+        }
+
+        .nav-link:hover {
+            color: #4F46E5;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.15);
+        }
+
+        /* Hero Background Overlay */
+        .hero-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-800 antialiased">
+
+    <!-- ===== ヘッダー ===== -->
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-6 py-4">
+            <nav class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="img/logo.png" alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain">
+                    <span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span
+                            class="text-indigo-600">.ai</span></span>
+                </a>
+                <div class="hidden md:flex space-x-8 items-center font-medium">
+                    <a href="index.html#services" class="nav-link text-gray-600">サービス</a>
+                    <a href="index.html#case" class="nav-link text-gray-600">導入事例</a>
+                    <a href="index.html#about" class="nav-link text-gray-600">会社概要</a>
+                    <a href="seminar.html" class="nav-link text-indigo-600">AI研修</a>
+                    <a href="blog.html" class="nav-link text-gray-600">ブログ</a>
+                    <a href="index.html#contact"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-full transition-colors">
+                        お問い合わせ
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-24">
+        <!-- ===== ヒーローセクション ===== -->
+        <section class="hero-bg py-20 md:py-32 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="w-full md:w-1/2 fade-in">
+                        <span class="text-indigo-600 font-bold tracking-widest uppercase text-sm">AI Training
+                            Program</span>
+                        <h1 class="text-4xl md:text-6xl font-black text-gray-900 leading-tight mt-4">
+                            実務を劇的に変える<br>
+                            <span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">生成AI実践研修</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-600 mt-6 leading-relaxed">
+                            「難しい話を分かりやすく」をモットーに、貴社の業務に直結するAI活用スキルを確実に習得。
+                            DXを力強く推進し、次世代のビジネス競争力を手に入れませんか？
+                        </p>
+                        <div class="mt-10 flex flex-wrap gap-4">
+                            <a href="#contact"
+                                class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 px-10 rounded-full text-lg shadow-lg shadow-indigo-200 transition-all transform hover:scale-105">
+                                お申し込み・お問い合わせ
+                            </a>
+                            <div class="flex items-center gap-2 pt-2 md:pt-0">
+                                <span
+                                    class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">特典</span>
+                                <span class="text-sm font-semibold">AI導入アドバイスセッション(30分)無料</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 fade-in">
+                        <img src="img/seminar_hero.png" alt="Generative AI Training"
+                            class="w-full rounded-2xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 実績セクション ===== -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                    <div class="fade-in">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <span class="w-2 h-8 bg-indigo-600 rounded-full"></span>
+                            コンサルティング提供先
+                        </h2>
+                        <p class="text-gray-600 mb-6">多様な業種に対して生成AI導入のご支援を実施しています。</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">外科医</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">歯科医</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">税理士事務所</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">製茶会社</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">弁護士事務所</span>
+                        </div>
+                    </div>
+                    <div class="fade-in">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                            <span class="w-2 h-8 bg-purple-600 rounded-full"></span>
+                            講習を担当した業種
+                        </h2>
+                        <p class="text-gray-600 mb-6">幅広い業界に向けたAI活用の講習実績がございます。</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">鋳造会社</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">ソフトウェア開発</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">ITコンサル</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">会計事務所</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">デザイン会社</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">農業法人</span>
+                            <span
+                                class="bg-gray-50 border border-gray-100 px-4 py-2 rounded-lg font-medium text-gray-800">不動産会社</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== お客様の声セクション ===== -->
+        <section class="py-24 bg-gray-50 overflow-hidden">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-900">お客様の声</h2>
+                    <p class="text-gray-600 mt-4">研修を受講された方々から、多くの喜びの声をいただいております。</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 会計事務所 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="img/sector_office.png" alt="Office Icon"
+                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <div>
+                                <h3 class="font-bold text-gray-900">会計事務所 様</h3>
+                                <p class="text-xs text-gray-500">業務改善・効率化目的</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed italic">
+                            "ChatGPTを活用し業務改善が可能であることを理解。研修で学んだ内容を実務に試し、効果を実感しています。"
+                        </p>
+                    </div>
+
+                    <!-- 国際税理士法人 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="img/sector_office.png" alt="Office Icon"
+                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <div>
+                                <h3 class="font-bold text-gray-900">国際税理士法人グループ 様</h3>
+                                <p class="text-xs text-gray-500">QOL向上・業務応用</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed italic">
+                            "プロンプト指定の工夫で回答精度が変わる点を学び、日々のQOL向上につながりました。他業務にも応用可能です。"
+                        </p>
+                    </div>
+
+                    <!-- 農業法人 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="img/sector_agriculture.png" alt="Agriculture Icon"
+                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <div>
+                                <h3 class="font-bold text-gray-900">農業法人 様</h3>
+                                <p class="text-xs text-gray-500">Gemini活用事例</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed italic">
+                            "よく使っているGeminiの素晴らしい機能を知れて楽しかった。"
+                        </p>
+                    </div>
+
+                    <!-- 不動産会社 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="img/sector_realestate.png" alt="Real Estate Icon"
+                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <div>
+                                <h3 class="font-bold text-gray-900">不動産会社 様</h3>
+                                <p class="text-xs text-gray-500">営業教育への活用</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed italic">
+                            "ワークが具体的に業務に落とし込めそうで、非常にためになった。商談録音を教育に活用したいです。"
+                        </p>
+                    </div>
+
+                    <!-- ITコンサル -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <img src="img/sector_office.png" alt="IT Icon"
+                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <div>
+                                <h3 class="font-bold text-gray-900">ITコンサル会社 様</h3>
+                                <p class="text-xs text-gray-500">資料作成・ファクトチェック</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed italic">
+                            "AIを使って資料が簡単に作ることができ、感動した。ファクトチェックの重要性も理解できました。"
+                        </p>
+                    </div>
+
+                    <!-- 製造工場 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900">製造工場会社 様</h3>
+                                <p class="text-xs text-gray-500">課題解決・提案</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 leading-relaxed italic">
+                            "実現したいことへの制限はあったが、別ルートの解決策をご提案頂き助かりました。"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 受講による劇的な変化 (Before / After) ===== -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-900">受講による劇的な変化</h2>
+                    <p class="text-gray-600 mt-4">Before → After で見る研修の効果</p>
+                </div>
+
+                <div class="max-w-4xl mx-auto space-y-12">
+                    <!-- Before After Card 1 -->
+                    <div class="flex flex-col md:flex-row gap-8 items-stretch fade-in">
+                        <div class="flex-1 bg-gray-50 p-8 rounded-2xl border-l-8 border-gray-300">
+                            <span class="text-sm font-bold text-gray-500 uppercase tracking-widest">Before</span>
+                            <h3 class="text-xl font-bold text-gray-900 mt-2">AIに興味はあるが...</h3>
+                            <ul class="mt-4 space-y-3 text-gray-600">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-red-500 mt-1">✕</span>
+                                    <span>どう使えばいいか分からず放置</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-red-500 mt-1">✕</span>
+                                    <span>期待通りの回答が返ってこない</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-red-500 mt-1">✕</span>
+                                    <span>情報漏洩が不安で手が出せない</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="flex-1 bg-indigo-50 p-8 rounded-2xl border-l-8 border-indigo-600">
+                            <span class="text-sm font-bold text-indigo-600 uppercase tracking-widest">After</span>
+                            <h3 class="text-xl font-bold text-gray-900 mt-2">実務のパートナーに</h3>
+                            <ul class="mt-4 space-y-3 text-gray-700">
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-500 mt-1">✓</span>
+                                    <span>具体的な業務転用のイメージが明確に</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-500 mt-1">✓</span>
+                                    <span>意図通りの成果を出すスキルを習得</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="text-green-500 mt-1">✓</span>
+                                    <span>安全な運用ルールを理解し安心して導入</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 講師紹介 ===== -->
+        <section class="py-24 bg-indigo-900 text-white overflow-hidden relative">
+            <!-- Background Subtle Elements -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-800 rounded-full blur-3xl opacity-50 -mr-32 -mt-32">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-64 h-64 bg-indigo-800 rounded-full blur-3xl opacity-50 -ml-32 -mb-32">
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+                    <div class="w-full md:w-1/3 fade-in">
+                        <img src="img/IMG-4176.jpg" alt="Instructor"
+                            class="w-64 h-64 md:w-full md:h-auto rounded-2xl border-4 border-indigo-700 object-cover shadow-2xl mx-auto">
+                    </div>
+                    <div class="w-full md:w-2/3 fade-in">
+                        <span class="text-indigo-400 font-bold tracking-widest uppercase text-sm">Instructor</span>
+                        <h2 class="text-4xl font-black mt-4">講師紹介</h2>
+                        <div class="mt-6">
+                            <h3 class="text-2xl font-bold">AI活用コンサルタント／元SE</h3>
+                            <p class="text-indigo-200 mt-2">株式会社Cosmico 担当：熊谷 治信</p>
+                        </div>
+                        <p class="text-lg text-indigo-100 mt-8 leading-relaxed italic">
+                            「様々な業種のAI導入支援で培った豊富な実績を基に、貴所の状況に合わせた最適な活用法をご提案。『難しい話を分かりやすく』をモットーに、DXを力強く推進します。」
+                        </p>
+                        <div class="mt-8 flex gap-4">
+                            <div class="bg-indigo-800/50 p-4 rounded-xl border border-indigo-700/50 flex-1">
+                                <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider">Motto</p>
+                                <p class="font-bold text-white">難しい話を分かりやすく</p>
+                            </div>
+                            <div class="bg-indigo-800/50 p-4 rounded-xl border border-indigo-700/50 flex-1">
+                                <p class="text-xs text-indigo-300 font-bold uppercase tracking-wider">Expertise</p>
+                                <p class="font-bold text-white">実務直結型AI導入</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 料金・助成金 ===== -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-900">研修料金 & 助成金活用</h2>
+                    <p class="text-gray-600 mt-4">中小企業のリスキリングを強力に支援します。</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Price Card -->
+                    <div
+                        class="lg:col-span-1 bg-white p-10 rounded-3xl border-2 border-indigo-600 shadow-xl relative overflow-hidden fade-in">
+                        <div
+                            class="absolute top-0 right-0 bg-indigo-600 text-white px-6 py-2 rounded-bl-2xl text-sm font-bold">
+                            Standard Plan</div>
+                        <h3 class="text-2xl font-bold text-gray-900">1人あたり研修費用</h3>
+                        <div class="mt-8 flex items-baseline gap-2">
+                            <span class="text-5xl font-black text-indigo-600">¥400,000</span>
+                            <span class="text-gray-500 font-bold">(税込)</span>
+                        </div>
+                        <ul class="mt-10 space-y-4 text-gray-600 font-medium">
+                            <li class="flex items-center gap-2">
+                                <span class="text-indigo-600 text-xl font-black">✓</span>
+                                <span>実践重視のカリキュラム</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-indigo-600 text-xl font-black">✓</span>
+                                <span>即戦力となるAIスキル習得</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-indigo-600 text-xl font-black">✓</span>
+                                <span>教材・ワークショップ費用込</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Subsidy Card -->
+                    <div class="lg:col-span-2 bg-indigo-50 p-10 rounded-3xl border border-indigo-100 fade-in">
+                        <h3 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            助成金活用のご案内
+                        </h3>
+                        <p class="text-gray-700 mt-4 leading-relaxed">
+                            本研修は、厚生労働省の<b>「人材開発支援助成金（事業展開等リスキリング支援コース）」</b>の対象となる可能性があります。
+                        </p>
+
+                        <div class="mt-8 overflow-x-auto">
+                            <table class="w-full text-left bg-white rounded-xl overflow-hidden shadow-sm">
+                                <thead class="bg-indigo-600 text-white">
+                                    <tr>
+                                        <th class="px-6 py-4">受講時間</th>
+                                        <th class="px-6 py-4">研修費用助成</th>
+                                        <th class="px-6 py-4">賃金助成</th>
+                                        <th class="px-6 py-4 font-bold border-l border-indigo-500">実質負担額</th>
+                                        <th class="px-6 py-4">助成率</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-700 font-medium">
+                                    <tr class="border-b border-gray-100">
+                                        <td class="px-6 py-4">10時間</td>
+                                        <td class="px-6 py-4">30万円</td>
+                                        <td class="px-6 py-4">9,600円</td>
+                                        <td class="px-6 py-4 font-bold border-l border-gray-100 text-indigo-600">9.04万円
+                                        </td>
+                                        <td class="px-6 py-4 font-bold text-indigo-600">77.4%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4">12時間</td>
+                                        <td class="px-6 py-4">30万円</td>
+                                        <td class="px-6 py-4">11,520円</td>
+                                        <td class="px-6 py-4 font-bold border-l border-gray-100 text-indigo-600">8.84万円
+                                        </td>
+                                        <td class="px-6 py-4 font-bold text-indigo-600">77.9%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-4 leading-relaxed">
+                            ※助成率は受講費用40万円に対する割合です。中小企業を対象とした概算値であり、条件により異なる場合があります。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== 導入ステップ ===== -->
+        <section class="py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-900">導入の流れ</h2>
+                    <p class="text-gray-600 mt-4">お申し込みから開始まで、スムーズにサポートいたします。</p>
+                </div>
+
+                <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-8 relative items-start">
+                    <!-- Line (Desktop) -->
+                    <div class="hidden md:block absolute top-12 left-0 w-full h-1 bg-indigo-200 z-0"></div>
+
+                    <!-- Step 1 -->
+                    <div class="relative z-10 flex-1 text-center fade-in">
+                        <div
+                            class="w-20 h-20 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-2xl mx-auto mb-6 shadow-xl">
+                            1</div>
+                        <h3 class="font-bold text-lg">お打ち合わせ・準備</h3>
+                        <p class="text-gray-600 text-sm mt-3 px-4">現状の課題ヒアリングと研修のご要望を伺います。</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="relative z-10 flex-1 text-center fade-in">
+                        <div
+                            class="w-20 h-20 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-2xl mx-auto mb-6 shadow-xl">
+                            2</div>
+                        <h3 class="font-bold text-lg">計画届の作成・提出</h3>
+                        <p class="text-gray-600 text-sm mt-3 px-4">助成金申請に必要な計画書類の作成を支援します。</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="relative z-10 flex-1 text-center fade-in">
+                        <div
+                            class="w-20 h-20 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-2xl mx-auto mb-6 shadow-xl">
+                            3</div>
+                        <h3 class="font-bold text-lg">契約・お支払い</h3>
+                        <p class="text-gray-600 text-sm mt-3 px-4">契約書を締結し、研修費用をお支払いいただきます。</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="relative z-10 flex-1 text-center fade-in">
+                        <div
+                            class="w-20 h-20 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-2xl mx-auto mb-6 shadow-xl">
+                            4</div>
+                        <h3 class="font-bold text-lg">研修の実施</h3>
+                        <p class="text-gray-600 text-sm mt-3 px-4">プランに基づいた高品質な研修を実施します。</p>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="relative z-10 flex-1 text-center fade-in">
+                        <div
+                            class="w-20 h-20 bg-green-600 text-white rounded-full flex items-center justify-center font-black text-2xl mx-auto mb-6 shadow-xl">
+                            5</div>
+                        <h3 class="font-bold text-lg">支給申請・助成金着金</h3>
+                        <p class="text-gray-600 text-sm mt-3 px-4">研修終了後、助成金の支給申請を行い完了です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== よくある質問 ===== -->
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <div class="text-center mb-16 fade-in">
+                    <h2 class="text-4xl font-bold text-gray-900">よくあるご質問</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in">
+                        <button
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 group">
+                            <span>Q. 助成金の着金まで、どのくらいの期間を見込めば良いですか？</span>
+                            <span class="text-indigo-600 group-hover:rotate-180 transition-transform">▼</span>
+                        </button>
+                        <div class="px-6 pb-6 text-gray-600">
+                            A. 支給申請が受理されてから、通常4ヶ月から6ヶ月ほどでお振り込みされます。
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in">
+                        <button
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 group">
+                            <span>Q. 万が一、研修途中で従業員が退職した場合はどうなりますか？</span>
+                            <span class="text-indigo-600 group-hover:rotate-180 transition-transform">▼</span>
+                        </button>
+                        <div class="px-6 pb-6 text-gray-600">
+                            A. 助成金は、研修計画を提出した時点での対象人数に基づいて算出されます。そのため、万が一研修期間中にご退職者が出た場合でも、当初の計画通りの助成金を受給できることがほとんどです。
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in">
+                        <button
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 group">
+                            <span>Q. AIに全く触れたことがないのですが、参加は可能でしょうか？</span>
+                            <span class="text-indigo-600 group-hover:rotate-180 transition-transform">▼</span>
+                        </button>
+                        <div class="px-6 pb-6 text-gray-600">
+                            A. はい、全く問題ございません。本研修は、AIに初めて触れる方を対象に設計されております。PCの基本操作ができれば、どなたでも安心してご参加いただけます。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section id="contact" class="py-24 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <div class="max-w-3xl mx-auto fade-in">
+                    <h2 class="text-4xl md:text-5xl font-black mb-8 leading-tight">貴所のAX推進を、<br>私たちが全力でサポートします。</h2>
+                    <p class="text-xl text-indigo-100 mb-12">お見積りや詳細内容のご相談など、まずはお気軽にご連絡ください。</p>
+
+                    <div class="bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                            <div>
+                                <h3 class="text-lg font-bold mb-4 uppercase tracking-wider text-indigo-300">Contact Info
+                                </h3>
+                                <ul class="space-y-4 mb-8 md:mb-0">
+                                    <li class="flex items-center gap-3">
+                                        <span
+                                            class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">📧</span>
+                                        <span>h.kumagaya@cosmicoai.com</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span
+                                            class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">☎️</span>
+                                        <span>070-4077-1049</span>
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span
+                                            class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">🏢</span>
+                                        <span>株式会社Cosmico | 担当：熊谷</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <a href="index.html#contact"
+                                    class="block w-full bg-white text-indigo-600 hover:bg-indigo-50 font-black py-5 px-8 rounded-2xl text-center text-xl transition-all shadow-xl shadow-indigo-900/20">
+                                    お問い合わせフォームへ
+                                </a>
+                                <p class="text-center text-sm text-indigo-200 mt-4 leading-relaxed">
+                                    税理士向けAI研修 | 転記作業・報告書処理をAIで効率化し、税理士事務所の実務に直結するAI研修を提供しています。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== フッター ===== -->
+    <footer class="bg-gray-900 text-gray-500 py-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-8 mb-8">
+                <a href="index.html" class="flex items-center space-x-3 mb-6 md:mb-0">
+                    <span class="text-2xl font-bold text-white">Cosmico<span class="text-indigo-500">.ai</span></span>
+                </a>
+                <div class="flex flex-col items-center md:items-end gap-4">
+                    <div class="flex flex-wrap justify-center gap-6 text-sm">
+                        <a href="index.html#services" class="hover:text-white transition-colors">サービス</a>
+                        <a href="index.html#case" class="hover:text-white transition-colors">導入事例</a>
+                        <a href="index.html#about" class="hover:text-white transition-colors">会社概要</a>
+                        <a href="seminar.html" class="hover:text-white transition-colors text-indigo-400">AI研修</a>
+                        <a href="blog.html" class="hover:text-white transition-colors">ブログ</a>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 text-xs text-gray-500">
+                        <a href="privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a>
+                        <a href="security.html" class="hover:text-white transition-colors">セキュリティー</a>
+                        <a href="disclaimer.html" class="hover:text-white transition-colors">免責事項</a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center text-xs">&copy; 2025 Cosmico.ai Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade in animation on scroll
+        const observeElements = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        };
+
+        document.addEventListener('DOMContentLoaded', observeElements);
+    </script>
+</body>
+
+</html>

@@ -1,38 +1,46 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ブログ - Cosmico</title>
-    
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Noto+Sans+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+
     <style>
         body {
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             scrollbar-width: thin;
             scrollbar-color: #4F46E5 #F3F4F6;
         }
+
         body::-webkit-scrollbar {
             width: 8px;
         }
+
         body::-webkit-scrollbar-track {
             background: #F3F4F6;
         }
+
         body::-webkit-scrollbar-thumb {
             background-color: #4F46E5;
             border-radius: 20px;
         }
+
         .nav-link {
             position: relative;
             transition: color 0.3s ease;
         }
+
         .nav-link::after {
             content: '';
             position: absolute;
@@ -43,30 +51,37 @@
             background: linear-gradient(90deg, #6366F1, #A855F7);
             transition: width 0.3s ease-out;
         }
+
         .nav-link:hover {
             color: #4F46E5;
         }
+
         .nav-link:hover::after {
             width: 100%;
         }
+
         .blog-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .blog-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
         }
+
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
+
         .is-visible {
             opacity: 1;
             transform: translateY(0);
         }
     </style>
 </head>
+
 <body class="bg-white text-gray-800 antialiased">
     <!-- ===== ヘッダーナビゲーション ===== -->
     <header class="bg-white/90 backdrop-blur-md shadow-lg fixed top-0 left-0 w-full z-50">
@@ -74,15 +89,18 @@
             <nav class="flex justify-between items-center">
                 <a href="index.html" class="flex items-center space-x-3">
                     <img src="img/logo.png" alt="Cosmico.ai ロゴ" class="w-10 h-10 object-contain">
-                    <span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span class="text-indigo-600">.ai</span></span>
+                    <span class="text-3xl font-bold tracking-tighter text-gray-900">Cosmico<span
+                            class="text-indigo-600">.ai</span></span>
                 </a>
-                
+
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="index.html#services" class="nav-link text-gray-600 hover:text-indigo-600">サービス</a>
                     <a href="index.html#case" class="nav-link text-gray-600 hover:text-indigo-600">導入事例</a>
                     <a href="index.html#about" class="nav-link text-gray-600 hover:text-indigo-600">会社概要</a>
+                    <a href="seminar.html" class="nav-link text-gray-600 hover:text-indigo-600">AI研修</a>
                     <a href="blog.html" class="nav-link text-indigo-600">ブログ</a>
-                    <a href="index.html#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300">
+                    <a href="index.html#contact"
+                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300">
                         お問い合わせ
                     </a>
                 </div>
@@ -90,7 +108,8 @@
                 <div class="md:hidden">
                     <button id="mobile-menu-btn" class="text-gray-900 focus:outline-none">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7"></path>
                         </svg>
                     </button>
                 </div>
@@ -101,8 +120,10 @@
             <a href="index.html#services" class="block py-2 text-gray-700">サービス</a>
             <a href="index.html#case" class="block py-2 text-gray-700">導入事例</a>
             <a href="index.html#about" class="block py-2 text-gray-700">会社概要</a>
+            <a href="seminar.html" class="block py-2 text-gray-700">AI研修</a>
             <a href="blog.html" class="block py-2 text-indigo-600 font-semibold">ブログ</a>
-            <a href="index.html#contact" class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300">
+            <a href="index.html#contact"
+                class="block mt-2 w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-5 rounded-full transition-colors duration-300">
                 お問い合わせ
             </a>
         </div>
@@ -123,14 +144,19 @@
             <!-- ブログ記事一覧 -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in">
+                <article
+                    class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in">
                     <a href="blog/nefbd0c213fd2.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">ビジネススキル</span>
-                                <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">ライティング</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">ビジネススキル</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">ライティング</span>
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 AIで"指示の先"へ行くために
@@ -145,14 +171,18 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" >
+                <article
+                    class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in">
                     <a href="blog/n1b06bda207e5.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">データ分析</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">データ分析</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 「現存データのまとめ」と「未来予測」：AI時代の情報活用をまちがえないために
@@ -167,13 +197,16 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 150ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 150ms;">
                     <a href="blog/n47dabbdb0d3c.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 AIを使いこなすなら本を読もう
@@ -188,21 +221,27 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 300ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 300ms;">
                     <a href="blog/n893d0e031bb0.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">Gemini CLI</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">Gemini
+                                    CLI</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 【Google AI完全活用】讃岐うどん巡りの旅 - 50店舗制覇者が教えるAI時代の最強旅行術
                             </h2>
                             <p class="text-sm text-gray-500 mb-4">2025年09月23日</p>
                             <p class="text-gray-600 leading-relaxed">
-                                はじめに：AIで旅行が変わる時代旅行計画って、意外と時間がかかりませんか？どこに行くか、どの順番で回るか、どんなルートが効率的か...。そんな悩みをGoogle AIサービスで一気に解決した実体験をお話しします。続きをみる...
+                                はじめに：AIで旅行が変わる時代旅行計画って、意外と時間がかかりませんか？どこに行くか、どの順番で回るか、どんなルートが効率的か...。そんな悩みをGoogle
+                                AIサービスで一気に解決した実体験をお話しします。続きをみる...
                             </p>
                             <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む →</span>
                         </div>
@@ -210,14 +249,18 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 450ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 450ms;">
                     <a href="blog/n197663d9721d.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">税理士</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">税理士</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 転記作業の効率化 ― AIとアプリケーション化による業務改善の最前線
@@ -232,14 +275,18 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 600ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 600ms;">
                     <a href="blog/n5e85f83c152d.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">教育</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">AI活用</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">教育</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 生成AIパスポート合格者の声が続々！激変するAI時代を勝ち抜く知見を手に入れる方法
@@ -254,14 +301,18 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 750ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 750ms;">
                     <a href="blog/llm-tax-accountant.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">LLM</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">税理士</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">LLM</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">税理士</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">業務効率化</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 LLMの限界と税理士事務所における「本当に合理化できる」使い方
@@ -276,19 +327,23 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 900ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 900ms;">
                     <a href="blog/gemini-cli-visit.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Gemini CLI</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">Gemini
+                                    CLI</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 Gemini CLIで訪問をスマートに！移動支援ツールを素早く構築する方法
                             </h2>
                             <p class="text-sm text-gray-500 mb-4">2025年08月17日</p>
                             <p class="text-gray-600 leading-relaxed">
-                                訪問のお仕事を担当されている方にとって、顧客訪問前のルート計画は意外と時間と労力を消費する業務です。特に複数の訪問先がある場合、毎回地図アプリに住所を入力して確認するのは非効率的で、移動中の確認も煩雑になりがちです。しかし Google Gemini CLI を活用すれば、こうした課題を解決できます...
+                                訪問のお仕事を担当されている方にとって、顧客訪問前のルート計画は意外と時間と労力を消費する業務です。特に複数の訪問先がある場合、毎回地図アプリに住所を入力して確認するのは非効率的で、移動中の確認も煩雑になりがちです。しかし
+                                Google Gemini CLI を活用すれば、こうした課題を解決できます...
                             </p>
                             <span class="inline-block mt-4 text-indigo-600 font-semibold hover:underline">続きを読む →</span>
                         </div>
@@ -296,14 +351,18 @@
                 </article>
 
                 <!-- 記事 -->
-                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in" style="transition-delay: 1050ms;">
+                <article class="blog-card bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden fade-in"
+                    style="transition-delay: 1050ms;">
                     <a href="blog/ai-security-mountain.html" class="block">
                         <div class="p-6">
                             <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
-                            <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">情報漏洩対策</span>
-                            <span class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">セキュリティ</span>
-                            
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">AI</span>
+                                <span
+                                    class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">情報漏洩対策</span>
+                                <span
+                                    class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-full">セキュリティ</span>
+
                             </div>
                             <h2 class="text-xl font-bold text-gray-900 mb-3 hover:text-indigo-600 transition-colors">
                                 AIにおける情報漏洩対策は「登山の準備」と同じ
@@ -324,26 +383,38 @@
                 <div class="lg:col-span-2">
                     <!-- 記事一覧は上に表示済み -->
                 </div>
-                
+
                 <aside class="lg:col-span-1">
                     <div class="bg-gray-50 rounded-2xl p-6 mb-6 fade-in">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">記事検索</h3>
-                        <input type="text" placeholder="キーワードで検索..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <input type="text" placeholder="キーワードで検索..."
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
                     </div>
-                    
+
                     <div class="bg-gray-50 rounded-2xl p-6 fade-in">
                         <h3 class="text-xl font-bold text-gray-900 mb-4">タグ</h3>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">LLM</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">税理士</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">業務効率化</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI活用</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">情報漏洩対策</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">セキュリティ</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Gemini CLI</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">ルート計画</span>
-                            <span class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Googleマップ</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">LLM</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">税理士</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">業務効率化</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI活用</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">AI</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">情報漏洩対策</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">セキュリティ</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Gemini
+                                CLI</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">ルート計画</span>
+                            <span
+                                class="px-3 py-1 bg-white text-gray-700 text-sm rounded-full border border-gray-300 hover:bg-indigo-50 hover:border-indigo-300 cursor-pointer transition-colors">Googleマップ</span>
                         </div>
                     </div>
                 </aside>
@@ -362,11 +433,19 @@
                     </a>
                     <p class="text-sm">Empowering business with AI.</p>
                 </div>
-                <div class="flex gap-8 text-sm font-medium">
-                    <a href="#" class="hover:text-white transition-colors">サービス</a>
-                    <a href="#" class="hover:text-white transition-colors">導入事例</a>
-                    <a href="#" class="hover:text-white transition-colors">会社概要</a>
-                    <a href="#" class="hover:text-white transition-colors">お問い合わせ</a>
+                <div class="flex flex-col items-center md:items-end gap-4">
+                    <div class="flex flex-wrap justify-center gap-6 text-sm font-medium">
+                        <a href="index.html#services" class="hover:text-white transition-colors">サービス</a>
+                        <a href="index.html#case" class="hover:text-white transition-colors">導入事例</a>
+                        <a href="index.html#about" class="hover:text-white transition-colors">会社概要</a>
+                        <a href="seminar.html" class="hover:text-white transition-colors">AI研修</a>
+                        <a href="blog.html" class="hover:text-white transition-colors">ブログ</a>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-6 text-xs text-slate-500">
+                        <a href="privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a>
+                        <a href="security.html" class="hover:text-white transition-colors">セキュリティー</a>
+                        <a href="disclaimer.html" class="hover:text-white transition-colors">免責事項</a>
+                    </div>
                 </div>
             </div>
             <div class="border-t border-slate-800 mt-8 pt-8 text-center text-xs">
@@ -389,7 +468,7 @@
         // モバイルメニューのトグル
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        
+
         if (mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
@@ -397,6 +476,5 @@
         }
     </script>
 </body>
+
 </html>
-
-
