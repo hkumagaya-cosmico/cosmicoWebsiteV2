@@ -91,6 +91,23 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
+
+        /* FAQ Accordion Arrow Animation */
+        details[open] .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary {
+            list-style: none;
+        }
     </style>
 </head>
 
@@ -219,8 +236,8 @@
                     <!-- 会計事務所 -->
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
                         <div class="flex items-center gap-4 mb-6">
-                            <img src="img/sector_office.png" alt="Office Icon"
-                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <img src="img/imgImageAnalysis.png" alt="Office Icon"
+                                class="w-20 h-20 rounded-full border border-gray-200 object-cover">
                             <div>
                                 <h3 class="font-bold text-gray-900">会計事務所 様</h3>
                                 <p class="text-xs text-gray-500">業務改善・効率化目的</p>
@@ -234,8 +251,8 @@
                     <!-- 国際税理士法人 -->
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
                         <div class="flex items-center gap-4 mb-6">
-                            <img src="img/sector_office.png" alt="Office Icon"
-                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <img src="img/imgTaxassets.png" alt="Office Icon"
+                                class="w-20 h-20 rounded-full border border-gray-200 object-cover">
                             <div>
                                 <h3 class="font-bold text-gray-900">国際税理士法人グループ 様</h3>
                                 <p class="text-xs text-gray-500">QOL向上・業務応用</p>
@@ -250,7 +267,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
                         <div class="flex items-center gap-4 mb-6">
                             <img src="img/sector_agriculture.png" alt="Agriculture Icon"
-                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                                class="w-20 h-20 rounded-full border border-gray-200 object-cover">
                             <div>
                                 <h3 class="font-bold text-gray-900">農業法人 様</h3>
                                 <p class="text-xs text-gray-500">Gemini活用事例</p>
@@ -265,7 +282,7 @@
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
                         <div class="flex items-center gap-4 mb-6">
                             <img src="img/sector_realestate.png" alt="Real Estate Icon"
-                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                                class="w-20 h-20 rounded-full border border-gray-200 object-cover">
                             <div>
                                 <h3 class="font-bold text-gray-900">不動産会社 様</h3>
                                 <p class="text-xs text-gray-500">営業教育への活用</p>
@@ -279,8 +296,8 @@
                     <!-- ITコンサル -->
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
                         <div class="flex items-center gap-4 mb-6">
-                            <img src="img/sector_office.png" alt="IT Icon"
-                                class="w-12 h-12 rounded-full border border-gray-200 object-cover">
+                            <img src="img/imgFinancialAnalysis.png" alt="IT Icon"
+                                class="w-20 h-20 rounded-full border border-gray-200 object-cover">
                             <div>
                                 <h3 class="font-bold text-gray-900">ITコンサル会社 様</h3>
                                 <p class="text-xs text-gray-500">資料作成・ファクトチェック</p>
@@ -294,14 +311,8 @@
                     <!-- 製造工場 -->
                     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 card-hover fade-in">
                         <div class="flex items-center gap-4 mb-6">
-                            <div
-                                class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                            </div>
+                            <img src="img/imgManufacturing.png" alt="Manufacturing Icon"
+                                class="w-20 h-20 rounded-full border border-gray-200 object-cover">
                             <div>
                                 <h3 class="font-bold text-gray-900">製造工場会社 様</h3>
                                 <p class="text-xs text-gray-500">課題解決・提案</p>
@@ -564,38 +575,38 @@
                 </div>
 
                 <div class="space-y-4">
-                    <div class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in">
-                        <button
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 group">
+                    <details class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in group">
+                        <summary
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 cursor-pointer">
                             <span>Q. 助成金の着金まで、どのくらいの期間を見込めば良いですか？</span>
-                            <span class="text-indigo-600 group-hover:rotate-180 transition-transform">▼</span>
-                        </button>
+                            <span class="text-indigo-600 faq-arrow">▼</span>
+                        </summary>
                         <div class="px-6 pb-6 text-gray-600">
                             A. 支給申請が受理されてから、通常4ヶ月から6ヶ月ほどでお振り込みされます。
                         </div>
-                    </div>
+                    </details>
 
-                    <div class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in">
-                        <button
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 group">
+                    <details class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in group">
+                        <summary
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 cursor-pointer">
                             <span>Q. 万が一、研修途中で従業員が退職した場合はどうなりますか？</span>
-                            <span class="text-indigo-600 group-hover:rotate-180 transition-transform">▼</span>
-                        </button>
+                            <span class="text-indigo-600 faq-arrow">▼</span>
+                        </summary>
                         <div class="px-6 pb-6 text-gray-600">
                             A. 助成金は、研修計画を提出した時点での対象人数に基づいて算出されます。そのため、万が一研修期間中にご退職者が出た場合でも、当初の計画通りの助成金を受給できることがほとんどです。
                         </div>
-                    </div>
+                    </details>
 
-                    <div class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in">
-                        <button
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 group">
+                    <details class="border border-gray-100 rounded-2xl overflow-hidden glass fade-in group">
+                        <summary
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-lg text-gray-900 cursor-pointer">
                             <span>Q. AIに全く触れたことがないのですが、参加は可能でしょうか？</span>
-                            <span class="text-indigo-600 group-hover:rotate-180 transition-transform">▼</span>
-                        </button>
+                            <span class="text-indigo-600 faq-arrow">▼</span>
+                        </summary>
                         <div class="px-6 pb-6 text-gray-600">
                             A. はい、全く問題ございません。本研修は、AIに初めて触れる方を対象に設計されております。PCの基本操作ができれば、どなたでも安心してご参加いただけます。
                         </div>
-                    </div>
+                    </details>
                 </div>
             </div>
         </section>
